@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.framework.test
+package org.libspark.gunyarapaint.framework
 {
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.LayerBitmapCollection;

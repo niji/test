@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.framework.test
+package org.libspark.gunyarapaint.framework
 {
     import flash.events.Event;
     

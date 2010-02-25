@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.framework.test.commands.layer
+package org.libspark.gunyarapaint.framework.commands.layer
 {
     import flash.display.BlendMode;
     import flash.utils.ByteArray;
@@ -6,8 +6,8 @@ package org.libspark.gunyarapaint.framework.test.commands.layer
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerBlendModeCommand;
-    import org.libspark.gunyarapaint.framework.test.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.test.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
 
     public class SetLayerBlendModeCommandTest
     {
