@@ -2,6 +2,62 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
                xmlns:s="library://ns.adobe.com/flex/spark" 
                xmlns:mx="library://ns.adobe.com/flex/halo" minWidth="1024" minHeight="768">    
+<fx:Script>
+    <![CDATA[
+
+            import org.libspark.gunyarapaint.framework.module.LineModuleTest;
+
+            private var org_libspark_gunyarapaint_framework_module_LineModuleTest_obj:org.libspark.gunyarapaint.framework.module.LineModuleTest;
+    ]]>
+</fx:Script>    
+<fx:Script>
+    <![CDATA[
+
+            import org.libspark.gunyarapaint.framework.module.FloodFillModuleTest;
+
+            private var org_libspark_gunyarapaint_framework_module_FloodFillModuleTest_obj:org.libspark.gunyarapaint.framework.module.FloodFillModuleTest;
+    ]]>
+</fx:Script>    
+<fx:Script>
+    <![CDATA[
+
+            import org.libspark.gunyarapaint.framework.module.FreeHandModuleTest;
+
+            private var org_libspark_gunyarapaint_framework_module_FreeHandModuleTest_obj:org.libspark.gunyarapaint.framework.module.FreeHandModuleTest;
+    ]]>
+</fx:Script>    
+<fx:Script>
+    <![CDATA[
+
+            import org.libspark.gunyarapaint.framework.module.EraserModuleTest;
+
+            private var org_libspark_gunyarapaint_framework_module_EraserModuleTest_obj:org.libspark.gunyarapaint.framework.module.EraserModuleTest;
+    ]]>
+</fx:Script>    
+<fx:Script>
+    <![CDATA[
+
+            import org.libspark.gunyarapaint.framework.module.DropperModuleTest;
+
+            private var org_libspark_gunyarapaint_framework_module_DropperModuleTest_obj:org.libspark.gunyarapaint.framework.module.DropperModuleTest;
+    ]]>
+</fx:Script>    
+<fx:Script>
+    <![CDATA[
+
+            import org.libspark.gunyarapaint.framework.module.EllipseModuleTest;
+
+            private var org_libspark_gunyarapaint_framework_module_EllipseModuleTest_obj:org.libspark.gunyarapaint.framework.module.EllipseModuleTest;
+    ]]>
+</fx:Script>    
+<fx:Script>
+    <![CDATA[
+
+            import org.libspark.gunyarapaint.framework.module.CircleModuleTest;
+
+            private var org_libspark_gunyarapaint_framework_module_CircleModuleTest_obj:org.libspark.gunyarapaint.framework.module.CircleModuleTest;
+    ]]>
+</fx:Script>    
     <fx:Declarations>
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>

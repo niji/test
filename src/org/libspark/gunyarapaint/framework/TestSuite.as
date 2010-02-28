@@ -22,6 +22,16 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerIndexCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerVisibleCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.SwapLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.module.CircleModuleTest;
+    import org.libspark.gunyarapaint.framework.module.DropperModuleTest;
+    import org.libspark.gunyarapaint.framework.module.EllipseModuleTest;
+    import org.libspark.gunyarapaint.framework.module.EraserModuleTest;
+    import org.libspark.gunyarapaint.framework.module.FloodFillModuleTest;
+    import org.libspark.gunyarapaint.framework.module.FreeHandModuleTest;
+    import org.libspark.gunyarapaint.framework.module.LineModuleTest;
+    import org.libspark.gunyarapaint.framework.module.PixelModuleTest;
+    import org.libspark.gunyarapaint.framework.module.RectModuleTest;
+    import org.libspark.gunyarapaint.framework.module.RoundRectModuleTest;
 
     [Suite]
     [RunWith("org.flexunit.runners.Suite")]
@@ -70,6 +80,26 @@ package org.libspark.gunyarapaint.framework
         public var undoCommand:UndoCommandTest;
         
         public var verticalMirrorCommand:VerticalMirrorCommandTest;
+        
+        public var circleModule:CircleModuleTest;
+        
+        public var dropperModule:DropperModuleTest;
+        
+        public var ellipseModule:EllipseModuleTest;
+        
+        public var eraserModule:EraserModuleTest;
+        
+        public var floodFill:FloodFillModuleTest;
+        
+        public var freeHandModule:FreeHandModuleTest;
+        
+        public var lineModule:LineModuleTest;
+        
+        public var pixelModule:PixelModuleTest;
+        
+        public var rectModule:RectModuleTest;
+        
+        public var roundRectModule:RoundRectModuleTest;
         
         public var layerBitmapContainer:LayerBitmapContainerTest;
         
