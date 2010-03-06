@@ -13,6 +13,8 @@ package org.libspark.gunyarapaint.framework
         {
             var lc:LayerBitmapCollection = layerContainer;
             Assert.assertStrictlyEquals(1, lc.count);
+            Assert.assertStrictlyEquals(WIDTH, lc.width);
+            Assert.assertStrictlyEquals(HEIGHT, lc.height);
             Assert.assertStrictlyEquals(WIDTH, lc.currentLayer.width);
             Assert.assertStrictlyEquals(HEIGHT, lc.currentLayer.height);
         }

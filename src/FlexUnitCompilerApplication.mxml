@@ -5,6 +5,14 @@
 <fx:Script>
     <![CDATA[
 
+            import org.libspark.gunyarapaint.framework.RecorderTest;
+
+            private var org_libspark_gunyarapaint_framework_RecorderTest_obj:org.libspark.gunyarapaint.framework.RecorderTest;
+    ]]>
+</fx:Script>    
+<fx:Script>
+    <![CDATA[
+
             import org.libspark.gunyarapaint.framework.module.LineModuleTest;
 
             private var org_libspark_gunyarapaint_framework_module_LineModuleTest_obj:org.libspark.gunyarapaint.framework.module.LineModuleTest;

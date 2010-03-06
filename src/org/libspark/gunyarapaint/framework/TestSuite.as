@@ -111,6 +111,6 @@ package org.libspark.gunyarapaint.framework
         
         public var player:PlayerTest;
         
-        public var undo:UndoStackTest;
+        public var recorder:RecorderTest;
     }
 }
