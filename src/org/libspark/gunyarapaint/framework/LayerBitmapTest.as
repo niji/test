@@ -34,8 +34,8 @@ package org.libspark.gunyarapaint.framework
             var bmd:BitmapData = bigBitmapData;
             var layer:LayerBitmap = new LayerBitmap(bmd);
             layer.floodFill(5, 5, 0);
-            Assert.assertStrictlyEquals(0, bmd.getPixel32(5, 5));
-            Assert.assertStrictlyEquals(0, bmd.getPixel32(0, 0));
+            Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(5, 5));
+            Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(0, 0));
         }
         
         [Test]
@@ -44,8 +44,8 @@ package org.libspark.gunyarapaint.framework
             var bmd:BitmapData = bigBitmapData;
             var layer:LayerBitmap = new LayerBitmap(bmd);
             layer.setPixel(5, 5, 0);
-            Assert.assertStrictlyEquals(0, bmd.getPixel32(5, 5));
-            Assert.assertStrictlyEquals(uint.MAX_VALUE, bmd.getPixel32(0, 0));
+            Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(5, 5));
+            Assert.assertStrictlyEquals(uint.MAX_VALUE, layer.bitmapData.getPixel32(0, 0));
         }
         
         private function get layerToClone():LayerBitmap

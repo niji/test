@@ -21,7 +21,7 @@ package org.libspark.gunyarapaint.framework
         public function commitCommand():void
         {
             var command:ICommand = new FakeCommand();
-            m_logger.registerCommand(command);
+            m_commands.registerCommand(command);
             m_recorder.addEventListener(CommandEvent.COMMITTED, onCommitCommand);
             m_recorder.commitCommand(FakeCommand.ID, command);
             Assert.assertTrue(FakeCommand.didExecute);
@@ -70,13 +70,13 @@ package org.libspark.gunyarapaint.framework
         [Before]
         public function before():void
         {
+            m_commands = new CommandCollection();
             m_bytes = new ByteArray();
-            m_logger = new Logger(m_bytes);
-            m_recorder = new Recorder(m_logger);
+            m_recorder = new Recorder(m_bytes, m_commands);
         }
         
         private var m_bytes:ByteArray;
-        private var m_logger:Logger;
+        private var m_commands:CommandCollection;
         private var m_recorder:Recorder;
     }
 }
