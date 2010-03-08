@@ -6,7 +6,7 @@ package org.libspark.gunyarapaint.framework.commands
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.PixelCommand;
     import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
 
     public class PixelCommandTest
     {
@@ -22,8 +22,8 @@ package org.libspark.gunyarapaint.framework.commands
             Assert.assertEquals(PixelCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(canvas);
-            Assert.assertEquals(args.x, FakePainter.coordinate.x);
-            Assert.assertEquals(args.y, FakePainter.coordinate.y);
+            Assert.assertEquals(args.x, FakeCanvasContext.coordinate.x);
+            Assert.assertEquals(args.y, FakeCanvasContext.coordinate.y);
             Assert.assertTrue(canvas.didPushUndo);
         }
     }

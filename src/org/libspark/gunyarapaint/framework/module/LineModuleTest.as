@@ -12,7 +12,7 @@ package org.libspark.gunyarapaint.framework.module
         [Test]
         public function createInstance():void
         {
-            var recorder:Recorder = new Recorder(new ByteArray());
+            var recorder:Recorder = Recorder.create(1, 1, 1);
             var module:IDrawable = DrawModuleFactory.create(DrawModuleFactory.LINE, recorder);
             Assert.assertEquals(module.name, DrawModuleFactory.LINE);
         }

@@ -9,21 +9,25 @@ package org.libspark.gunyarapaint.framework
 
     public class RecorderTest
     {
+        
         [Test]
         public function prepare():void
         {
-            m_recorder.prepare(123, 321, 16);
-            Assert.assertStrictlyEquals(123, m_recorder.width);
-            Assert.assertStrictlyEquals(321, m_recorder.height);
+            var recorder:Recorder = Recorder.create(123, 321, 16);
+            Assert.assertStrictlyEquals(123, recorder.width);
+            Assert.assertStrictlyEquals(321, recorder.height);
         }
         
         [Test(async)]
         public function commitCommand():void
         {
+            var commands:CommandCollection = new CommandCollection();
+            var bytes:ByteArray = new ByteArray();
+            var recorder:Recorder = new Recorder(1, 1, bytes, commands);
             var command:ICommand = new FakeCommand();
-            m_commands.registerCommand(command);
-            m_recorder.addEventListener(CommandEvent.COMMITTED, onCommitCommand);
-            m_recorder.commitCommand(FakeCommand.ID, command);
+            commands.registerCommand(command);
+            recorder.addEventListener(CommandEvent.COMMITTED, onCommitCommand);
+            recorder.commitCommand(FakeCommand.ID, command);
             Assert.assertTrue(FakeCommand.didExecute);
             Assert.assertTrue(FakeCommand.didWrite);
             Assert.assertEquals(command, FakeCommand.writeArgument);
@@ -32,13 +36,13 @@ package org.libspark.gunyarapaint.framework
         [Test(async)]
         public function undo():void
         {
-            m_recorder.addEventListener(UndoEvent.UNDO, onUndo);
-            m_recorder.addEventListener(UndoEvent.REDO, onRedo);
-            m_recorder.addEventListener(UndoEvent.PUSH, onPushUndo);
-            m_recorder.prepare(1, 1, 1);
-            m_recorder.pushUndo();
-            m_recorder.undo();
-            m_recorder.redo();
+            var recorder:Recorder = Recorder.create(1, 1, 16);
+            recorder.addEventListener(UndoEvent.UNDO, onUndo);
+            recorder.addEventListener(UndoEvent.REDO, onRedo);
+            recorder.addEventListener(UndoEvent.PUSH, onPushUndo);
+            recorder.pushUndo();
+            recorder.undo();
+            recorder.redo();
         }
         
         private function onCommitCommand(event:CommandEvent):void
@@ -66,17 +70,5 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(1, event.undoCount);
             Assert.assertStrictlyEquals(0, event.redoCount);
         }
-        
-        [Before]
-        public function before():void
-        {
-            m_commands = new CommandCollection();
-            m_bytes = new ByteArray();
-            m_recorder = new Recorder(m_bytes, m_commands);
-        }
-        
-        private var m_bytes:ByteArray;
-        private var m_commands:CommandCollection;
-        private var m_recorder:Recorder;
     }
 }

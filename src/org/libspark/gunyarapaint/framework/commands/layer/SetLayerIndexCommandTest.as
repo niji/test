@@ -6,7 +6,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerIndexCommand;
     import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
 
     public class SetLayerIndexCommandTest
     {
@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             Assert.assertEquals(SetLayerIndexCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(canvas);
-            Assert.assertEquals(args.index, canvas.painter.layers.currentIndex);
+            Assert.assertEquals(args.index, canvas.layers.currentIndex);
             Assert.assertFalse(canvas.didPushUndoIfNeed);
         }
     }

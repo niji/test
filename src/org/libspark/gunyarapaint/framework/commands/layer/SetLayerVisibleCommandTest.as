@@ -6,7 +6,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerVisibleCommand;
     import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
 
     public class SetLayerVisibleCommandTest
     {
@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             Assert.assertEquals(SetLayerVisibleCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(canvas);
-            //Assert.assertEquals(args.visible, FakePainter.layerBitmap.visible);
+            //Assert.assertEquals(args.visible, FakeCanvasContext.layerBitmap.visible);
             Assert.assertTrue(canvas.didPushUndoIfNeed);
         }
     }

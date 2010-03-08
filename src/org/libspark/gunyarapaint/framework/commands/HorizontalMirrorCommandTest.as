@@ -6,7 +6,7 @@ package org.libspark.gunyarapaint.framework.commands
     import org.libspark.gunyarapaint.framework.commands.HorizontalMirrorCommand;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
 
     public class HorizontalMirrorCommandTest
     {
@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework.commands
             Assert.assertEquals(HorizontalMirrorCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(canvas);
-            Assert.assertEquals(args.index, FakePainter.layerIndex);
+            Assert.assertEquals(args.index, FakeCanvasContext.layerIndex);
             Assert.assertFalse(canvas.didPushUndo);
         }
     }

@@ -6,7 +6,7 @@ package org.libspark.gunyarapaint.framework.commands
     import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
 
     public class CompositeCommandTest
     {
@@ -21,8 +21,8 @@ package org.libspark.gunyarapaint.framework.commands
             Assert.assertEquals(CompositeCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(canvas);
-            Assert.assertTrue(FakePainter.didComposite);
-            Assert.assertTrue(FakePainter.didEndDrawing);
+            Assert.assertTrue(FakeCanvasContext.didComposite);
+            Assert.assertTrue(FakeCanvasContext.didEndDrawing);
             Assert.assertTrue(canvas.didPushUndo);
         }
     }

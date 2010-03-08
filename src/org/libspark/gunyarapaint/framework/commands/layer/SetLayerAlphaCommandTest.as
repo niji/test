@@ -6,7 +6,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerAlphaCommand;
     import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
 
     public class SetLayerAlphaCommandTest
     {
@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             Assert.assertEquals(SetLayerAlphaCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(canvas);
-            Assert.assertEquals(args.alpha, FakePainter.layerAlpha);
+            Assert.assertEquals(args.alpha, FakeCanvasContext.layerAlpha);
             Assert.assertTrue(canvas.didPushUndoIfNeed);
         }
     }

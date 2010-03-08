@@ -8,9 +8,6 @@ package org.libspark.gunyarapaint.framework
     import flash.display.Sprite;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.framework.Painter;
-    import org.libspark.gunyarapaint.framework.LayerBitmap;
-    import org.libspark.gunyarapaint.framework.Pen;
 
     public class PainterTest
     {
@@ -25,8 +22,8 @@ package org.libspark.gunyarapaint.framework
             pen.miterLimit = 8;
             pen.pixelHinting = false;
             pen.thickness = 8;
-            var painter:Painter = newPainter;
-            painter.pen = pen;
+            var cc:CanvasContext = newCanvasContext();
+            cc.pen = pen;
             var fakedPen:Pen = FakePaintEngine.fakedPen;
             Assert.assertStrictlyEquals(fakedPen.blendMode, pen.blendMode);
             Assert.assertStrictlyEquals(fakedPen.capsStyle, pen.capsStyle);
@@ -42,8 +39,8 @@ package org.libspark.gunyarapaint.framework
         {
             var x:int = 42;
             var y:int = 124;
-            var painter:Painter = newPainter;
-            painter.moveTo(x, y);
+            var cc:CanvasContext = newCanvasContext();
+            cc.moveTo(x, y);
             Assert.assertStrictlyEquals(x, FakePaintEngine.point.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.point.y);
         }
@@ -52,8 +49,8 @@ package org.libspark.gunyarapaint.framework
         public function 円の描写():void
         {
             var radius:Number = 3.14;
-            var painter:Painter = newPainter;
-            painter.drawCircle(radius);
+            var cc:CanvasContext = newCanvasContext();
+            cc.drawCircle(radius);
             Assert.assertStrictlyEquals(radius, FakePaintEngine.radius);
         }
         
@@ -64,8 +61,8 @@ package org.libspark.gunyarapaint.framework
             var y:int = 124;
             var width:int = 256;
             var height:int = 512;
-            var painter:Painter = newPainter;
-            painter.drawRect(x, y, width, height);
+            var cc:CanvasContext = newCanvasContext();
+            cc.drawRect(x, y, width, height);
             Assert.assertStrictlyEquals(x, FakePaintEngine.rectangle.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.rectangle.y);
             Assert.assertStrictlyEquals(width, FakePaintEngine.rectangle.width);
@@ -79,8 +76,8 @@ package org.libspark.gunyarapaint.framework
             var y:int = 256;
             var width:int = 128;
             var height:int = 64;
-            var painter:Painter = newPainter;
-            painter.drawEllipse(x, y, width, height);
+            var cc:CanvasContext = newCanvasContext();
+            cc.drawEllipse(x, y, width, height);
             Assert.assertStrictlyEquals(x, FakePaintEngine.rectangle.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.rectangle.y);
             Assert.assertStrictlyEquals(width, FakePaintEngine.rectangle.width);
@@ -92,9 +89,9 @@ package org.libspark.gunyarapaint.framework
         {
             var color:uint = uint.MAX_VALUE;
             var alpha:Number = 0.5;
-            var painter:Painter = newPainter;
-            painter.beginFill(color, alpha);
-            painter.endFill();
+            var cc:CanvasContext = newCanvasContext();
+            cc.beginFill(color, alpha);
+            cc.endFill();
             Assert.assertStrictlyEquals(color, FakePaintEngine.color);
             Assert.assertStrictlyEquals(alpha, FakePaintEngine.alpha);
             Assert.assertTrue(FakePaintEngine.filled);
@@ -104,24 +101,24 @@ package org.libspark.gunyarapaint.framework
         public function 描写レイヤーの追加と削除():void
         {
             var child:DisplayObject;
-            var painter:Painter = newPainter;
+            var cc:CanvasContext = newCanvasContext();
             // 描写セッションの開始されると一時 Sprite が作成される
             // その為、上に現在のレイヤーが、下に描写バッファが入る
-            painter.startDrawingSession();
-            child = painter.view.getChildAt(0);
+            cc.startDrawingSession();
+            child = cc.view.getChildAt(0);
             Assert.assertTrue(child is Sprite);
             var sprite:Sprite = Sprite(child);
             Assert.assertTrue(sprite.getChildAt(0) is LayerBitmap);
             Assert.assertTrue(sprite.getChildAt(1) is Shape);
             // 描写セッションが終了すると一時 Sprite が削除され、現在のレイヤーに戻される
-            painter.stopDrawingSession();
-            child = painter.view.getChildAt(0);
+            cc.stopDrawingSession();
+            child = cc.view.getChildAt(0);
             Assert.assertTrue(child is LayerBitmap);
         }
         
-        private function get newPainter():Painter
+        private function newCanvasContext():CanvasContext
         {
-            return new Painter(1, 1, new FakePaintEngine());
+            return new CanvasContext(1, 1, CanvasContext.PAINTER_LOG_VERSION, new FakePaintEngine());
         }
     }
 }
