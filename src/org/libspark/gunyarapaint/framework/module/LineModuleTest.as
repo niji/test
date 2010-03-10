@@ -1,11 +1,10 @@
 package org.libspark.gunyarapaint.framework.module
 {
-    import flash.utils.ByteArray;
-    
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.modules.DrawModuleFactory;
     import org.libspark.gunyarapaint.framework.modules.IDrawable;
+    import org.libspark.gunyarapaint.framework.modules.LineModule;
 
     public class LineModuleTest
     {
@@ -13,8 +12,10 @@ package org.libspark.gunyarapaint.framework.module
         public function createInstance():void
         {
             var recorder:Recorder = Recorder.create(1, 1, 1);
-            var module:IDrawable = DrawModuleFactory.create(DrawModuleFactory.LINE, recorder);
-            Assert.assertEquals(module.name, DrawModuleFactory.LINE);
+            var factory:DrawModuleFactory = new DrawModuleFactory(recorder);
+            var module:IDrawable = factory.create(LineModule.LINE);
+            Assert.assertTrue(module is LineModule);
+            Assert.assertEquals(module.name, LineModule.LINE);
         }
     }
 }

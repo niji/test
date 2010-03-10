@@ -1,9 +1,8 @@
 package org.libspark.gunyarapaint.framework.module
 {
-    import flash.utils.ByteArray;
-    
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.Recorder;
+    import org.libspark.gunyarapaint.framework.modules.CircleModule;
     import org.libspark.gunyarapaint.framework.modules.DrawModuleFactory;
     import org.libspark.gunyarapaint.framework.modules.IDrawable;
 
@@ -13,8 +12,10 @@ package org.libspark.gunyarapaint.framework.module
         public function createInstance():void
         {
             var recorder:Recorder = Recorder.create(1, 1, 1);
-            var module:IDrawable = DrawModuleFactory.create(DrawModuleFactory.CIRCLE, recorder);
-            Assert.assertEquals(module.name, DrawModuleFactory.CIRCLE);
+            var factory:DrawModuleFactory = new DrawModuleFactory(recorder);
+            var module:IDrawable = factory.create(CircleModule.CIRCLE);
+            Assert.assertTrue(module is CircleModule);
+            Assert.assertEquals(module.name, CircleModule.CIRCLE);
         }
     }
 }
