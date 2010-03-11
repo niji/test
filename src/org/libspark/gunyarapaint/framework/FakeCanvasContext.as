@@ -3,7 +3,7 @@ package org.libspark.gunyarapaint.framework
     import flash.display.BlendMode;
     import flash.geom.Point;
     
-    public class FakeCanvasContext extends CanvasContext
+    public class FakeCanvasContext extends Painter
     {
         public function FakeCanvasContext()
         {

@@ -28,7 +28,7 @@ package org.libspark.gunyarapaint.framework
             writeArgument = args;
         }
         
-        public function execute(canvas:CanvasContext):void
+        public function execute(painter:Painter):void
         {
             didExecute = true;
         }

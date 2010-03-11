@@ -2,9 +2,9 @@ package org.libspark.gunyarapaint.framework.module
 {
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.Recorder;
-    import org.libspark.gunyarapaint.framework.modules.DrawModuleFactory;
+    import org.libspark.gunyarapaint.framework.modules.CanvasModuleContext;
     import org.libspark.gunyarapaint.framework.modules.EraserModule;
-    import org.libspark.gunyarapaint.framework.modules.IDrawable;
+    import org.libspark.gunyarapaint.framework.modules.ICanvasModule;
 
     public final class EraserModuleTest
     {
@@ -12,8 +12,8 @@ package org.libspark.gunyarapaint.framework.module
         public function createInstance():void
         {
             var recorder:Recorder = Recorder.create(1, 1, 1);
-            var context:DrawModuleFactory = new DrawModuleFactory(recorder);
-            var module:IDrawable = context.getModule(EraserModule.ERASER);
+            var context:CanvasModuleContext = new CanvasModuleContext(recorder);
+            var module:ICanvasModule = context.getModule(EraserModule.ERASER);
             Assert.assertTrue(module is EraserModule);
             Assert.assertEquals(module.name, EraserModule.ERASER);
         }

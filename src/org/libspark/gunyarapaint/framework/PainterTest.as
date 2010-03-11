@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework
             pen.miterLimit = 8;
             pen.pixelHinting = false;
             pen.thickness = 8;
-            var cc:CanvasContext = newCanvasContext();
+            var cc:Painter = newPainter();
             cc.pen = pen;
             var fakedPen:Pen = FakePaintEngine.fakedPen;
             Assert.assertStrictlyEquals(fakedPen.blendMode, pen.blendMode);
@@ -39,7 +39,7 @@ package org.libspark.gunyarapaint.framework
         {
             var x:int = 42;
             var y:int = 124;
-            var cc:CanvasContext = newCanvasContext();
+            var cc:Painter = newPainter();
             cc.moveTo(x, y);
             Assert.assertStrictlyEquals(x, FakePaintEngine.point.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.point.y);
@@ -49,7 +49,7 @@ package org.libspark.gunyarapaint.framework
         public function 円の描写():void
         {
             var radius:Number = 3.14;
-            var cc:CanvasContext = newCanvasContext();
+            var cc:Painter = newPainter();
             cc.drawCircle(radius);
             Assert.assertStrictlyEquals(radius, FakePaintEngine.radius);
         }
@@ -61,7 +61,7 @@ package org.libspark.gunyarapaint.framework
             var y:int = 124;
             var width:int = 256;
             var height:int = 512;
-            var cc:CanvasContext = newCanvasContext();
+            var cc:Painter = newPainter();
             cc.drawRect(x, y, width, height);
             Assert.assertStrictlyEquals(x, FakePaintEngine.rectangle.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.rectangle.y);
@@ -76,7 +76,7 @@ package org.libspark.gunyarapaint.framework
             var y:int = 256;
             var width:int = 128;
             var height:int = 64;
-            var cc:CanvasContext = newCanvasContext();
+            var cc:Painter = newPainter();
             cc.drawEllipse(x, y, width, height);
             Assert.assertStrictlyEquals(x, FakePaintEngine.rectangle.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.rectangle.y);
@@ -89,7 +89,7 @@ package org.libspark.gunyarapaint.framework
         {
             var color:uint = uint.MAX_VALUE;
             var alpha:Number = 0.5;
-            var cc:CanvasContext = newCanvasContext();
+            var cc:Painter = newPainter();
             cc.beginFill(color, alpha);
             cc.endFill();
             Assert.assertStrictlyEquals(color, FakePaintEngine.color);
@@ -101,7 +101,7 @@ package org.libspark.gunyarapaint.framework
         public function 描写レイヤーの追加と削除():void
         {
             var child:DisplayObject;
-            var cc:CanvasContext = newCanvasContext();
+            var cc:Painter = newPainter();
             // 描写セッションの開始されると一時 Sprite が作成される
             // その為、上に現在のレイヤーが、下に描写バッファが入る
             cc.startDrawingSession();
@@ -116,9 +116,9 @@ package org.libspark.gunyarapaint.framework
             Assert.assertTrue(child is LayerBitmap);
         }
         
-        private function newCanvasContext():CanvasContext
+        private function newPainter():Painter
         {
-            return new CanvasContext(1, 1, CanvasContext.PAINTER_LOG_VERSION, new FakePaintEngine());
+            return new Painter(1, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
         }
     }
 }

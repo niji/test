@@ -21,7 +21,7 @@ package org.libspark.gunyarapaint.framework
         [Test(async)]
         public function commitCommand():void
         {
-            var commands:CommandCollection = new CommandCollection();
+            var commands:CommandContext = new CommandContext();
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = new Recorder(1, 1, bytes, commands);
             var command:ICommand = new FakeCommand();
