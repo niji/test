@@ -12,8 +12,8 @@ package org.libspark.gunyarapaint.framework.module
         public function createInstance():void
         {
             var recorder:Recorder = Recorder.create(1, 1, 1);
-            var factory:DrawModuleFactory = new DrawModuleFactory(recorder);
-            var module:IDrawable = factory.create(FreeHandModule.FREE_HAND);
+            var context:DrawModuleFactory = new DrawModuleFactory(recorder);
+            var module:IDrawable = context.getModule(FreeHandModule.FREE_HAND);
             Assert.assertTrue(module is FreeHandModule);
             Assert.assertEquals(module.name, FreeHandModule.FREE_HAND);
         }
