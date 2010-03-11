@@ -5,8 +5,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerAlphaCommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakePainter;
 
     public class SetLayerAlphaCommandTest
     {
@@ -15,15 +15,15 @@ package org.libspark.gunyarapaint.framework.commands.layer
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new SetLayerAlphaCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             var args:Object = { "alpha": 0.314 };
             command.write(bytes, args);
             bytes.position = 0;
             Assert.assertEquals(SetLayerAlphaCommand.ID, bytes.readByte());
             command.read(bytes);
-            command.execute(canvas);
-            Assert.assertEquals(args.alpha, FakeCanvasContext.layerAlpha);
-            Assert.assertTrue(canvas.didPushUndoIfNeed);
+            command.execute(painter);
+            Assert.assertEquals(args.alpha, FakePainter.layerAlpha);
+            Assert.assertTrue(painter.didPushUndoIfNeed);
         }
     }
 }

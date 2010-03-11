@@ -5,7 +5,7 @@ package org.libspark.gunyarapaint.framework.commands
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.UndoCommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
 
     public class UndoCommandTest
     {
@@ -14,13 +14,13 @@ package org.libspark.gunyarapaint.framework.commands
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new UndoCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
             bytes.position = 0;
             Assert.assertEquals(UndoCommand.ID, bytes.readByte());
             command.read(bytes);
-            command.execute(canvas);
-            Assert.assertTrue(canvas.didUndo);
+            command.execute(painter);
+            Assert.assertTrue(painter.didUndo);
         }
     }
 }

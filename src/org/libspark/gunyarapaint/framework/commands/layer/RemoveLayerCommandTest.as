@@ -5,7 +5,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.layer.RemoveLayerCommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
     import org.libspark.gunyarapaint.framework.FakeLayerBitmapCollection;
 
     public class RemoveLayerCommandTest
@@ -15,14 +15,14 @@ package org.libspark.gunyarapaint.framework.commands.layer
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new RemoveLayerCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
             bytes.position = 0;
             Assert.assertEquals(RemoveLayerCommand.ID, bytes.readByte());
             command.read(bytes);
-            command.execute(canvas);
+            command.execute(painter);
             Assert.assertTrue(FakeLayerBitmapCollection.didRemoveLayer);
-            Assert.assertTrue(canvas.didPushUndoIfNeed);
+            Assert.assertTrue(painter.didPushUndoIfNeed);
         }
     }
 }

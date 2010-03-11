@@ -8,10 +8,8 @@ package org.libspark.gunyarapaint.framework
     
     public class FakePainter extends Painter
     {
-        public function FakePainter(width:int, height:int, engine:PaintEngine)
+        public function FakePainter()
         {
-            super(width, height, engine);
-            m_layers = new FakeLayerBitmapCollection(width, height);
             didComposite = false;
             didFloodFill = false;
             didStartDrawing = false;
@@ -21,6 +19,33 @@ package org.libspark.gunyarapaint.framework
             layerVisible = true;
             layerAlpha = 0.0;
             layerBlendMode = BlendMode.NORMAL;
+            fakePaintEngine = new FakePaintEngine();
+            super(1, 1, PAINTER_LOG_VERSION, fakePaintEngine);
+            m_layers = new FakeLayerBitmapCollection(1, 1);
+            m_didUndo = false;
+            m_didRedo = false;
+            m_didPushUndo = false;
+            m_didPushUndoIfNeed = false;
+        }
+        
+        public override function undo():void
+        {
+            m_didUndo = true;
+        }
+        
+        public override function redo():void
+        {
+            m_didRedo = true;
+        }
+        
+        public override function pushUndo():void
+        {
+            m_didPushUndo = true;
+        }
+        
+        public override function pushUndoIfNeed():void
+        {
+            m_didPushUndoIfNeed = true;
         }
         
         public override function composite():void
@@ -64,6 +89,26 @@ package org.libspark.gunyarapaint.framework
             didEndDrawing = true;
         }
         
+        public function get didUndo():Boolean
+        {
+            return m_didUndo;
+        }
+        
+        public function get didRedo():Boolean
+        {
+            return m_didRedo;
+        }
+        
+        public function get didPushUndo():Boolean
+        {
+            return m_didPushUndo;
+        }
+        
+        public function get didPushUndoIfNeed():Boolean
+        {
+            return m_didPushUndoIfNeed;
+        }
+        
         public override function set currentLayerAlpha(alpha:Number):void
         {
             layerAlpha = alpha;
@@ -83,5 +128,10 @@ package org.libspark.gunyarapaint.framework
         public static var didEndDrawing:Boolean;
         public static var layerAlpha:Number;
         public static var layerBlendMode:String;
+        public static var fakePaintEngine:FakePaintEngine;
+        private var m_didUndo:Boolean;
+        private var m_didRedo:Boolean;
+        private var m_didPushUndo:Boolean;
+        private var m_didPushUndoIfNeed:Boolean;
     }
 }

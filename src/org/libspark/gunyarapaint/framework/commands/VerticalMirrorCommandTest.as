@@ -5,8 +5,8 @@ package org.libspark.gunyarapaint.framework.commands
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.VerticalMirrorCommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakePainter;
 
     public class VerticalMirrorCommandTest
     {
@@ -15,15 +15,15 @@ package org.libspark.gunyarapaint.framework.commands
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new VerticalMirrorCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             var args:Object = { "index": 42 };
             command.write(bytes, args);
             bytes.position = 0;
             Assert.assertEquals(VerticalMirrorCommand.ID, bytes.readByte());
             command.read(bytes);
-            command.execute(canvas);
-            Assert.assertEquals(args.index, FakeCanvasContext.layerIndex);
-            Assert.assertFalse(canvas.didPushUndo);
+            command.execute(painter);
+            Assert.assertEquals(args.index, FakePainter.layerIndex);
+            Assert.assertFalse(painter.didPushUndo);
         }
     }
 }

@@ -8,7 +8,7 @@ package org.libspark.gunyarapaint.framework.commands
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
     import org.libspark.gunyarapaint.framework.FakePaintEngine;
 
     public class PenCommandTest
@@ -65,16 +65,16 @@ package org.libspark.gunyarapaint.framework.commands
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new PenCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             var args:Object = { "type": type };
             args[key] = value;
             command.write(bytes, args);
             bytes.position = 0;
             Assert.assertEquals(PenCommand.ID, bytes.readByte());
             command.read(bytes);
-            command.execute(canvas);
+            command.execute(painter);
             Assert.assertEquals(args[key], FakePaintEngine.fakedPen[key]);
-            Assert.assertFalse(canvas.didPushUndo);
+            Assert.assertFalse(painter.didPushUndo);
         }
     }
 }

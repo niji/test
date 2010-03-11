@@ -5,7 +5,7 @@ package org.libspark.gunyarapaint.framework.commands
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.LineToCommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
     import org.libspark.gunyarapaint.framework.FakePaintEngine;
 
     public class LineToCommandTest
@@ -37,7 +37,7 @@ package org.libspark.gunyarapaint.framework.commands
         {
             var bytes:ByteArray = new ByteArray();
             var command:LineToCommand = new LineToCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             var args:Object = { "x": x, "y": y };
             command.write(bytes, args);
             bytes.position = 0;
@@ -47,7 +47,7 @@ package org.libspark.gunyarapaint.framework.commands
             else
                 Assert.assertEquals(LineToCommand.ID, byte);
             command.read(bytes);
-            command.execute(canvas);
+            command.execute(painter);
             Assert.assertEquals(args.x, FakePaintEngine.point.x);
             Assert.assertEquals(args.y, FakePaintEngine.point.y);
         }

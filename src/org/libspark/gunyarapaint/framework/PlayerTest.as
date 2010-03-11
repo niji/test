@@ -46,20 +46,20 @@ package org.libspark.gunyarapaint.framework
         public function バージョン0_1_0まではPainterV1が使われること():void
         {
             var bytes:ByteArray = createLog("0.1.0");
-            var canvas:Player = Player.load(bytes);
-            Assert.assertEquals(10, canvas.version);
+            var painter:Player = Player.load(bytes);
+            Assert.assertEquals(10, painter.version);
             // internal 参照なので、 オブジェクトを文字列化して比較する
-            // Assert.assertEquals("[object PainterV1]", canvas. + "");
+            // Assert.assertEquals("[object PainterV1]", painter. + "");
         }
         
         [Test]
         public function バージョン0_2_0以降はPainterV2が使われること():void
         {
             var bytes:ByteArray = createLog("0.2.0");
-            var canvas:Player = Player.load(bytes);
-            Assert.assertEquals(20, canvas.version);
+            var painter:Player = Player.load(bytes);
+            Assert.assertEquals(20, painter.version);
             // internal 参照なので、 オブジェクトを文字列化して比較する
-            // Assert.assertEquals("[object PainterV2]", canvas.painter + "");
+            // Assert.assertEquals("[object PainterV2]", painter.painter + "");
         }
         
         private function createLog(version:String):ByteArray

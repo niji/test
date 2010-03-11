@@ -5,7 +5,7 @@ package org.libspark.gunyarapaint.framework.commands
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
     import org.libspark.gunyarapaint.framework.FakePaintEngine;
 
     public class DrawCircleCommandTest
@@ -15,7 +15,7 @@ package org.libspark.gunyarapaint.framework.commands
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new DrawCircleCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             var args:Object = {
                 "radius": Math.PI
             };
@@ -23,9 +23,9 @@ package org.libspark.gunyarapaint.framework.commands
             bytes.position = 0;
             Assert.assertEquals(DrawCircleCommand.ID, bytes.readByte());
             command.read(bytes);
-            command.execute(canvas);
+            command.execute(painter);
             Assert.assertEquals(args.radius, FakePaintEngine.radius);
-            Assert.assertFalse(canvas.didPushUndo);
+            Assert.assertFalse(painter.didPushUndo);
         }
     }
 }

@@ -5,8 +5,8 @@ package org.libspark.gunyarapaint.framework.commands
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.FloodFillCommand;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakePainter;
 
     public class FloodFillCommandTest
     {
@@ -15,15 +15,15 @@ package org.libspark.gunyarapaint.framework.commands
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new FloodFillCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
             bytes.position = 0;
             Assert.assertEquals(FloodFillCommand.ID, bytes.readByte());
             command.read(bytes);
-            command.execute(canvas);
-            Assert.assertTrue(FakeCanvasContext.didFloodFill);
-            Assert.assertTrue(FakeCanvasContext.didEndDrawing);
-            Assert.assertTrue(canvas.didPushUndo);
+            command.execute(painter);
+            Assert.assertTrue(FakePainter.didFloodFill);
+            Assert.assertTrue(FakePainter.didEndDrawing);
+            Assert.assertTrue(painter.didPushUndo);
         }
     }
 }

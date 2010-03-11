@@ -6,8 +6,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerBlendModeCommand;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
-    import org.libspark.gunyarapaint.framework.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.FakePainter;
+    import org.libspark.gunyarapaint.framework.FakePainter;
 
     public class SetLayerBlendModeCommandTest
     {
@@ -16,15 +16,15 @@ package org.libspark.gunyarapaint.framework.commands.layer
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new SetLayerBlendModeCommand();
-            var canvas:FakeCanvasContext = new FakeCanvasContext();
+            var painter:FakePainter = new FakePainter();
             var args:Object = { "blendMode": BlendMode.ADD };
             command.write(bytes, args);
             bytes.position = 0;
             Assert.assertEquals(SetLayerBlendModeCommand.ID, bytes.readByte());
             command.read(bytes);
-            command.execute(canvas);
-            Assert.assertEquals(args.blendMode, FakeCanvasContext.layerBlendMode);
-            Assert.assertTrue(canvas.didPushUndoIfNeed);
+            command.execute(painter);
+            Assert.assertEquals(args.blendMode, FakePainter.layerBlendMode);
+            Assert.assertTrue(painter.didPushUndoIfNeed);
         }
     }
 }
