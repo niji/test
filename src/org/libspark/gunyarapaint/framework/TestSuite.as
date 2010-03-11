@@ -25,7 +25,6 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.module.CircleModuleTest;
     import org.libspark.gunyarapaint.framework.module.DropperModuleTest;
     import org.libspark.gunyarapaint.framework.module.EllipseModuleTest;
-    import org.libspark.gunyarapaint.framework.module.EraserModuleTest;
     import org.libspark.gunyarapaint.framework.module.FloodFillModuleTest;
     import org.libspark.gunyarapaint.framework.module.FreeHandModuleTest;
     import org.libspark.gunyarapaint.framework.module.LineModuleTest;
@@ -86,8 +85,6 @@ package org.libspark.gunyarapaint.framework
         public var dropperModule:DropperModuleTest;
         
         public var ellipseModule:EllipseModuleTest;
-        
-        public var eraserModule:EraserModuleTest;
         
         public var floodFill:FloodFillModuleTest;
         
