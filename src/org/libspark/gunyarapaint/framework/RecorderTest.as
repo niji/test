@@ -13,7 +13,8 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function prepare():void
         {
-            var recorder:Recorder = Recorder.create(123, 321, 16);
+            var bytes:ByteArray = new ByteArray();
+            var recorder:Recorder = Recorder.create(bytes, 123, 321, 16);
             Assert.assertStrictlyEquals(123, recorder.width);
             Assert.assertStrictlyEquals(321, recorder.height);
         }
@@ -23,7 +24,7 @@ package org.libspark.gunyarapaint.framework
         {
             var commands:CommandContext = new CommandContext();
             var bytes:ByteArray = new ByteArray();
-            var recorder:Recorder = new Recorder(1, 1, bytes, commands);
+            var recorder:Recorder = new Recorder(bytes, 1, 1, commands);
             var command:ICommand = new FakeCommand();
             commands.registerCommand(command);
             recorder.addEventListener(CommandEvent.COMMITTED, onCommitCommand);
@@ -36,7 +37,8 @@ package org.libspark.gunyarapaint.framework
         [Test(async)]
         public function undo():void
         {
-            var recorder:Recorder = Recorder.create(1, 1, 16);
+            var bytes:ByteArray = new ByteArray();
+            var recorder:Recorder = Recorder.create(bytes, 1, 1, 16);
             recorder.addEventListener(UndoEvent.UNDO, onUndo);
             recorder.addEventListener(UndoEvent.REDO, onRedo);
             recorder.addEventListener(UndoEvent.PUSH, onPushUndo);
