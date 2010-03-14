@@ -1,12 +1,16 @@
 package org.libspark.gunyarapaint.framework.module
 {
     import flash.errors.IllegalOperationError;
+    import flash.geom.Point;
     import flash.utils.ByteArray;
     
+    import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.FakePainter;
     import org.libspark.gunyarapaint.framework.Parser;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.modules.CanvasModule;
+    import org.libspark.gunyarapaint.framework.modules.ICanvasModule;
 
     internal final class ModuleTestUtil
     {
@@ -37,6 +41,24 @@ package org.libspark.gunyarapaint.framework.module
             } catch (e:Error) {
             }
             return commands;
+        }
+        
+        public static function countCommands(expected:uint, bytes:ByteArray):void
+        {
+            Assert.assertEquals(expected, getCommands(bytes).length);
+        }
+        
+        public static function getLineSegment(module:ICanvasModule):void
+        {
+            var start:Point = new Point();
+            var end:Point = new Point();
+            module.start(12, 34);
+            module.stop(56, 78);
+            CanvasModule(module).getLineSegment(start, end);
+            Assert.assertEquals(start.x, 12);
+            Assert.assertEquals(start.y, 34);
+            Assert.assertEquals(end.x, 56);
+            Assert.assertEquals(end.y, 78);
         }
     }
 }

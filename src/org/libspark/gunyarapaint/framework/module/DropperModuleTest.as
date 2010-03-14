@@ -33,8 +33,13 @@ package org.libspark.gunyarapaint.framework.module
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
-            var commands:Vector.<ICommand> = ModuleTestUtil.getCommands(m_bytes);
-            Assert.assertEquals(3, commands.length);
+            ModuleTestUtil.countCommands(3, m_bytes);
+        }
+        
+        [Test]
+        public function getLineSegment():void
+        {
+            ModuleTestUtil.getLineSegment(m_module);
         }
         
         private var m_bytes:ByteArray;

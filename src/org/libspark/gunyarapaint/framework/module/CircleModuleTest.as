@@ -5,6 +5,7 @@ package org.libspark.gunyarapaint.framework.module
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.modules.CanvasModule;
     import org.libspark.gunyarapaint.framework.modules.CanvasModuleContext;
     import org.libspark.gunyarapaint.framework.modules.CircleModule;
     import org.libspark.gunyarapaint.framework.modules.ICanvasModule;
@@ -32,8 +33,7 @@ package org.libspark.gunyarapaint.framework.module
         {
             m_module.start(1, 1);
             m_module.stop(1, 1);
-            var commands:Vector.<ICommand> = ModuleTestUtil.getCommands(m_bytes);
-            Assert.assertEquals(0, commands.length);
+            ModuleTestUtil.countCommands(0, m_bytes);
         }
         
         [Test]
@@ -42,8 +42,13 @@ package org.libspark.gunyarapaint.framework.module
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
-            var commands:Vector.<ICommand> = ModuleTestUtil.getCommands(m_bytes);
-            Assert.assertEquals(3, commands.length);
+            ModuleTestUtil.countCommands(3, m_bytes);
+        }
+        
+        [Test]
+        public function getLineSegment():void
+        {
+            ModuleTestUtil.getLineSegment(m_module);
         }
         
         private var m_bytes:ByteArray;
