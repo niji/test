@@ -17,25 +17,11 @@ package org.libspark.gunyarapaint.framework
         
         public function reset():void
         {
-            fakedPen = new Pen();
             cleared = false;
             filled = false;
             point = new Point();
             rectangle = new Rectangle();
             radius = 0.0;
-        }
-        
-        override public function set pen(pen:Pen):void
-        {
-            fakedPen.blendMode = pen.blendMode;
-            fakedPen.thickness = pen.thickness;
-            fakedPen.color = pen.color;
-            fakedPen.alpha = pen.alpha;
-            fakedPen.scaleMode = pen.scaleMode;
-            fakedPen.capsStyle = pen.capsStyle;
-            fakedPen.jointStyle = pen.jointStyle;
-            fakedPen.miterLimit = pen.miterLimit;
-            fakedPen.pixelHinting = pen.pixelHinting;
         }
         
         override public function drawCircle(rad:Number):void
@@ -80,7 +66,6 @@ package org.libspark.gunyarapaint.framework
             point = new Point(x, y);
         }
         
-        public static var fakedPen:Pen;
         public static var cleared:Boolean;
         public static var filled:Boolean;
         public static var point:Point;

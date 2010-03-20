@@ -73,7 +73,7 @@ package org.libspark.gunyarapaint.framework.commands
             Assert.assertEquals(PenCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args[key], FakePaintEngine.fakedPen[key]);
+            Assert.assertEquals(args[key], FakePainter.fakePaintEngine.pen[key]);
             Assert.assertFalse(painter.didPushUndo);
         }
     }

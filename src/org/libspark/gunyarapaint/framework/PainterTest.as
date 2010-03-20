@@ -12,29 +12,6 @@ package org.libspark.gunyarapaint.framework
     public class PainterTest
     {
         [Test]
-        public function ペンの設定():void
-        {
-            var pen:Pen = new Pen();
-            pen.blendMode = BlendMode.ADD;
-            pen.capsStyle = CapsStyle.SQUARE;
-            pen.color = 0xffff00;
-            pen.jointStyle = JointStyle.BEVEL;
-            pen.miterLimit = 8;
-            pen.pixelHinting = false;
-            pen.thickness = 8;
-            var cc:Painter = newPainter();
-            cc.pen = pen;
-            var fakedPen:Pen = FakePaintEngine.fakedPen;
-            Assert.assertStrictlyEquals(fakedPen.blendMode, pen.blendMode);
-            Assert.assertStrictlyEquals(fakedPen.capsStyle, pen.capsStyle);
-            Assert.assertStrictlyEquals(fakedPen.color, pen.color);
-            Assert.assertStrictlyEquals(fakedPen.jointStyle, pen.jointStyle);
-            Assert.assertStrictlyEquals(fakedPen.miterLimit, pen.miterLimit);
-            Assert.assertStrictlyEquals(fakedPen.pixelHinting, pen.pixelHinting);
-            Assert.assertStrictlyEquals(fakedPen.thickness, pen.thickness);
-        }
-        
-        [Test]
         public function 座標の移動():void
         {
             var x:int = 42;
