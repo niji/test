@@ -48,15 +48,17 @@ package org.libspark.gunyarapaint.framework.module
             Assert.assertEquals(expected, getCommands(bytes).length);
         }
         
-        public static function getLineSegment(module:ICanvasModule):void
+        public static function getLineSegment(module:ICanvasModule, checkStart:Boolean):void
         {
             var start:Point = new Point();
             var end:Point = new Point();
             module.start(12, 34);
             module.stop(56, 78);
             CanvasModule(module).getLineSegment(start, end);
-            Assert.assertEquals(start.x, 12);
-            Assert.assertEquals(start.y, 34);
+            if (checkStart) {
+                Assert.assertEquals(start.x, 12);
+                Assert.assertEquals(start.y, 34);
+            }
             Assert.assertEquals(end.x, 56);
             Assert.assertEquals(end.y, 78);
         }

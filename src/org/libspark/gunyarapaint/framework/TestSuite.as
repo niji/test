@@ -31,6 +31,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.module.PixelModuleTest;
     import org.libspark.gunyarapaint.framework.module.RectModuleTest;
     import org.libspark.gunyarapaint.framework.module.RoundRectModuleTest;
+    import org.libspark.gunyarapaint.framework.module.TransparentFloodFillTest;
 
     [Suite]
     [RunWith("org.flexunit.runners.Suite")]
@@ -97,6 +98,8 @@ package org.libspark.gunyarapaint.framework
         public var rectModule:RectModuleTest;
         
         public var roundRectModule:RoundRectModuleTest;
+        
+        public var transparentFloodFillModule:TransparentFloodFillTest;
         
         public var layerBitmapContainer:LayerBitmapContainerTest;
         

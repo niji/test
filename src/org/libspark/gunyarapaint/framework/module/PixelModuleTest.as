@@ -47,7 +47,7 @@ package org.libspark.gunyarapaint.framework.module
         [Test]
         public function getLineSegment():void
         {
-            ModuleTestUtil.getLineSegment(m_module);
+            ModuleTestUtil.getLineSegment(m_module, false);
         }
         
         private var m_bytes:ByteArray;
