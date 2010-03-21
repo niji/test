@@ -3,9 +3,6 @@ package org.libspark.gunyarapaint.framework
     import flash.display.BlendMode;
     import flash.geom.Point;
     
-    import org.libspark.gunyarapaint.framework.PaintEngine;
-    import org.libspark.gunyarapaint.framework.Painter;
-    
     public class FakePainter extends Painter
     {
         public function FakePainter()
@@ -77,6 +74,16 @@ package org.libspark.gunyarapaint.framework
         public override function transformWithVerticalMirrorAt(index:int):void
         {
             layerIndex = index;
+        }
+        
+        public override function move(x:int, y:int):void
+        {
+            coordinate = new Point(x, y);
+        }
+        
+        public override function scale(x:int, y:int):void
+        {
+            coordinate = new Point(x, y);
         }
         
         public override function startDrawingSession():void

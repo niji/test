@@ -1,6 +1,7 @@
 package org.libspark.gunyarapaint.framework
 {
     import org.libspark.gunyarapaint.framework.commands.BeginFillCommandTest;
+    import org.libspark.gunyarapaint.framework.commands.BezierCurveCommandTest;
     import org.libspark.gunyarapaint.framework.commands.CompositeCommandTest;
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommandTest;
     import org.libspark.gunyarapaint.framework.commands.EndFillComamndTest;
@@ -16,7 +17,9 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.CreateLayerCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.MergeLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.commands.layer.MoveLayerCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.RemoveLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.commands.layer.ScaleLayerCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerAlphaCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerBlendModeCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerIndexCommandTest;
@@ -37,13 +40,19 @@ package org.libspark.gunyarapaint.framework
     [RunWith("org.flexunit.runners.Suite")]
     public class TestSuite
     {
+        public var bezierCurveCommand:BezierCurveCommandTest;
+        
         public var copyLayerCommand:CopyLayerCommandTest;
         
         public var createLayerCommand:CreateLayerCommandTest;
         
         public var mergeLayerCommand:MergeLayerCommandTest;
         
+        public var moveLayerCommand:MoveLayerCommandTest;
+        
         public var removeLayerCommand:RemoveLayerCommandTest;
+        
+        public var scaleLayerCommand:ScaleLayerCommandTest;
         
         public var setLayerAlphaCommand:SetLayerAlphaCommandTest;
         
