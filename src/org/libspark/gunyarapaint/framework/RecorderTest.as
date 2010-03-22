@@ -39,9 +39,10 @@ package org.libspark.gunyarapaint.framework
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 1, 1, 16);
-            recorder.addEventListener(UndoEvent.UNDO, onUndo);
-            recorder.addEventListener(UndoEvent.REDO, onRedo);
-            recorder.addEventListener(UndoEvent.PUSH, onPushUndo);
+            var undo:UndoStack = recorder.undoStack;
+            undo.addEventListener(UndoEvent.UNDO, onUndo);
+            undo.addEventListener(UndoEvent.REDO, onRedo);
+            undo.addEventListener(UndoEvent.PUSH, onPushUndo);
             recorder.pushUndo();
             recorder.undo();
             recorder.redo();
@@ -54,23 +55,26 @@ package org.libspark.gunyarapaint.framework
         
         private function onUndo(event:UndoEvent):void
         {
+            var undo:UndoStack = UndoStack(event.target);
             Assert.assertStrictlyEquals(UndoEvent.UNDO, event.type);
-            Assert.assertStrictlyEquals(0, event.undoCount);
-            Assert.assertStrictlyEquals(1, event.redoCount);
+            Assert.assertStrictlyEquals(0, undo.undoCount);
+            Assert.assertStrictlyEquals(1, undo.redoCount);
         }
         
         private function onRedo(event:UndoEvent):void
         {
+            var undo:UndoStack = UndoStack(event.target);
             Assert.assertStrictlyEquals(UndoEvent.REDO, event.type);
-            Assert.assertStrictlyEquals(1, event.undoCount);
-            Assert.assertStrictlyEquals(0, event.redoCount);
+            Assert.assertStrictlyEquals(1, undo.undoCount);
+            Assert.assertStrictlyEquals(0, undo.redoCount);
         }
         
         private function onPushUndo(event:UndoEvent):void
         {
+            var undo:UndoStack = UndoStack(event.target);
             Assert.assertStrictlyEquals(UndoEvent.PUSH, event.type);
-            Assert.assertStrictlyEquals(1, event.undoCount);
-            Assert.assertStrictlyEquals(0, event.redoCount);
+            Assert.assertStrictlyEquals(1, undo.undoCount);
+            Assert.assertStrictlyEquals(0, undo.redoCount);
         }
     }
 }

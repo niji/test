@@ -1,9 +1,8 @@
 package org.libspark.gunyarapaint.framework
 {
+    import flash.display.BitmapData;
     import flash.display.BlendMode;
-    import flash.display.CapsStyle;
     import flash.display.DisplayObject;
-    import flash.display.JointStyle;
     import flash.display.Shape;
     import flash.display.Sprite;
     
@@ -91,6 +90,35 @@ package org.libspark.gunyarapaint.framework
             cc.stopDrawingSession();
             child = cc.view.getChildAt(0);
             Assert.assertTrue(child is LayerBitmap);
+        }
+        
+        [Test]
+        public function レイヤー情報の保存と復帰():void
+        {
+            var metadata:Object = {};
+            var cc:Painter = newPainter();
+            var layers:BitmapData = new BitmapData(cc.width, cc.height * 3);
+            cc.layers.add();
+            cc.layers.add();
+            var src:LayerBitmap = cc.layers.at(2);
+            src.alpha = 0.5;
+            src.blendMode = BlendMode.ADD;
+            src.locked = true;
+            src.name = "test012";
+            src.visible = false;
+            cc.save(layers, metadata);
+            Assert.assertEquals(cc.width, metadata.width);
+            Assert.assertEquals(cc.height, metadata.height);
+            Assert.assertEquals(3, metadata.layer_infos.length);
+            var cc2:Painter = newPainter();
+            cc2.load(layers, metadata);
+            Assert.assertEquals(3, cc2.layers.count);
+            var dst:LayerBitmap = cc2.layers.at(2);
+            Assert.assertEquals(src.alpha, dst.alpha);
+            Assert.assertEquals(src.blendMode, dst.blendMode);
+            Assert.assertTrue(dst.locked);
+            Assert.assertEquals(src.name, dst.name);
+            Assert.assertFalse(dst.visible);
         }
         
         private function newPainter():Painter

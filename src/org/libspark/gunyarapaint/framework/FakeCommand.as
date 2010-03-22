@@ -38,6 +38,11 @@ package org.libspark.gunyarapaint.framework
             didReset = true;
         }
         
+        public function toString():String
+        {
+            return "[FakeCommand]";
+        }
+        
         public function get commandID():uint
         {
             return ID;
