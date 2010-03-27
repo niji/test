@@ -1,5 +1,6 @@
 package org.libspark.gunyarapaint.framework
 {
+    import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.BlendMode;
     import flash.display.DisplayObject;
@@ -81,15 +82,15 @@ package org.libspark.gunyarapaint.framework
             // 描写セッションの開始されると一時 Sprite が作成される
             // その為、上に現在のレイヤーが、下に描写バッファが入る
             cc.startDrawingSession();
-            child = cc.view.getChildAt(0);
+            child = cc.layers.view.getChildAt(0);
             Assert.assertTrue(child is Sprite);
             var sprite:Sprite = Sprite(child);
-            Assert.assertTrue(sprite.getChildAt(0) is LayerBitmap);
+            Assert.assertTrue(sprite.getChildAt(0) is Bitmap);
             Assert.assertTrue(sprite.getChildAt(1) is Shape);
             // 描写セッションが終了すると一時 Sprite が削除され、現在のレイヤーに戻される
             cc.stopDrawingSession();
-            child = cc.view.getChildAt(0);
-            Assert.assertTrue(child is LayerBitmap);
+            child = cc.layers.view.getChildAt(0);
+            Assert.assertTrue(child is Bitmap);
         }
         
         [Test]
