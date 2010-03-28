@@ -32,21 +32,21 @@ package org.libspark.gunyarapaint.framework
             // 14bytes は最低でも埋める
             bytes.writeUTFBytes("12345678901234");
             bytes.position = 0;
-            Player.load(bytes);
+            Player.create(bytes);
         }
         
         [Test(expects="org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError")]
         public function サポートしないバージョンのログを読み込むと例外を送出する():void
         {
             var bytes:ByteArray = createLog("0.0.0");
-            Player.load(bytes);
+            Player.create(bytes);
         }
         
         [Test]
         public function バージョン0_1_0まではPainterV1が使われること():void
         {
             var bytes:ByteArray = createLog("0.1.0");
-            var painter:Player = Player.load(bytes);
+            var painter:Player = Player.create(bytes);
             Assert.assertEquals(10, painter.version);
             // internal 参照なので、 オブジェクトを文字列化して比較する
             // Assert.assertEquals("[object PainterV1]", painter. + "");
@@ -56,7 +56,7 @@ package org.libspark.gunyarapaint.framework
         public function バージョン0_2_0以降はPainterV2が使われること():void
         {
             var bytes:ByteArray = createLog("0.2.0");
-            var painter:Player = Player.load(bytes);
+            var painter:Player = Player.create(bytes);
             Assert.assertEquals(20, painter.version);
             // internal 参照なので、 オブジェクトを文字列化して比較する
             // Assert.assertEquals("[object PainterV2]", painter.painter + "");
@@ -88,7 +88,7 @@ package org.libspark.gunyarapaint.framework
             bytes.writeShort(1);
             bytes.writeShort(1);
             bytes.position = 0;
-            var player:Player = Player.load(bytes);
+            var player:Player = Player.create(bytes);
             player.duration = 10000;
             return player;
         }
