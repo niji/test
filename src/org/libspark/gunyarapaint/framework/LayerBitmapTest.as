@@ -7,6 +7,7 @@ package org.libspark.gunyarapaint.framework
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.LayerBitmap;
 
+    // LayerBitmap#compositeTo is tested in PainterTest#レイヤー情報の保存と復帰
     public class LayerBitmapTest
     {
         [Test]
@@ -21,11 +22,10 @@ package org.libspark.gunyarapaint.framework
         {
             var layer:LayerBitmap = layerToClone;
             var newLayer:LayerBitmap = layer.clone();
-            Assert.assertStrictlyEquals(newLayer.alpha, layer.alpha);
-            Assert.assertStrictlyEquals(newLayer.blendMode, layer.blendMode);
-            Assert.assertStrictlyEquals(newLayer.index, layer.index);
-            Assert.assertStrictlyEquals(newLayer.name, layer.name);
-            Assert.assertStrictlyEquals(newLayer.visible, layer.visible);
+            assertLayerMetadata(layer, newLayer);
+            Assert.assertStrictlyEquals(layer.index, newLayer.index);
+            // LayerBitmap#bitmapData is the internal method
+            Assert.assertEquals(0, newLayer.bitmapData.compare(layer.bitmapData));
         }
         
         [Test]
@@ -48,12 +48,31 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(uint.MAX_VALUE, layer.bitmapData.getPixel32(0, 0));
         }
         
+        [Test]
+        public function レイヤーのJSONシリアライズ():void
+        {
+            var layer:LayerBitmap = layerToClone;
+            var newLayer:LayerBitmap = new LayerBitmap(bigBitmapData);
+            newLayer.fromJSON(layer.toJSON());
+            assertLayerMetadata(layer, newLayer);
+            Assert.assertStrictlyEquals(layer.locked, newLayer.locked);
+        }
+        
+        private function assertLayerMetadata(layer:LayerBitmap, newLayer:LayerBitmap):void
+        {
+            Assert.assertStrictlyEquals(layer.alpha, newLayer.alpha);
+            Assert.assertStrictlyEquals(layer.blendMode, newLayer.blendMode);
+            Assert.assertStrictlyEquals(layer.name, newLayer.name);
+            Assert.assertStrictlyEquals(layer.visible, newLayer.visible);
+        }
+        
         private function get layerToClone():LayerBitmap
         {
             var layer:LayerBitmap = new LayerBitmap(bigBitmapData);
             layer.alpha = 0.42;
             layer.blendMode = BlendMode.MULTIPLY;
             layer.index = 42;
+            layer.locked = true;
             layer.name = "test";
             layer.visible = false;
             return layer;

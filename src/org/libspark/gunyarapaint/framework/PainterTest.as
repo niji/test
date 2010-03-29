@@ -97,34 +97,61 @@ package org.libspark.gunyarapaint.framework
         public function レイヤー情報の保存と復帰():void
         {
             var metadata:Object = {};
-            var cc:Painter = newPainter();
-            var layers:BitmapData = new BitmapData(cc.width, cc.height * 3);
-            cc.layers.add();
-            cc.layers.add();
-            var src:LayerBitmap = cc.layers.at(2);
-            src.alpha = 0.5;
-            src.blendMode = BlendMode.ADD;
-            src.locked = true;
-            src.name = "test012";
-            src.visible = false;
-            cc.save(layers, metadata);
-            Assert.assertEquals(cc.width, metadata.width);
-            Assert.assertEquals(cc.height, metadata.height);
+            var painter:Painter = newPainterForSave();
+            var src:LayerBitmap = painter.layers.at(2);
+            var layers:BitmapData = painter.newLayerBitmapData;
+            painter.save(layers, metadata);
+            Assert.assertEquals(metadata.width, painter.width);
+            Assert.assertEquals(metadata.height, painter.height);
             Assert.assertEquals(3, metadata.layer_infos.length);
-            var cc2:Painter = newPainter();
-            cc2.load(layers, metadata);
-            Assert.assertEquals(3, cc2.layers.count);
-            var dst:LayerBitmap = cc2.layers.at(2);
-            Assert.assertEquals(src.alpha, dst.alpha);
-            Assert.assertEquals(src.blendMode, dst.blendMode);
+            var painter2:Painter = new Painter(3, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
+            painter2.load(layers, metadata);
+            Assert.assertEquals(3, painter2.layers.count);
+            var dst:LayerBitmap = painter2.layers.at(2);
+            Assert.assertEquals(dst.alpha, src.alpha);
+            Assert.assertEquals(dst.blendMode, src.blendMode);
             Assert.assertTrue(dst.locked);
-            Assert.assertEquals(src.name, dst.name);
+            Assert.assertEquals(dst.name, src.name);
             Assert.assertFalse(dst.visible);
+            // LayerBitmapCollection#compositeAll is the internal method.
+            painter2.layers.compositeAll();
+            Assert.assertEquals(0xff0000, painter2.getPixel(0, 0));
+            Assert.assertEquals(0x00ff00, painter2.getPixel(1, 0));
+            // layer(test012) is NOT visible
+            Assert.assertEquals(0xffffff, painter2.getPixel(2, 0));
+            // reset alpha, blend mode and visibility
+            dst.blendMode = BlendMode.NORMAL;
+            dst.alpha = 1;
+            dst.visible = true;
+            painter2.layers.compositeAll();
+            var i2:Vector.<uint> = painter2.layers.composited.getVector(painter2.layers.composited.rect);
+            // layer(test012) is now visible
+            Assert.assertEquals(0x0000ff, painter2.getPixel(2, 0));
         }
         
         private function newPainter():Painter
         {
             return new Painter(1, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
+        }
+        
+        private function newPainterForSave():Painter
+        {
+            var painter:Painter = new Painter(3, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
+            painter.pen.color = 0xff0000;
+            painter.setPixel(0, 0);
+            painter.layers.add();
+            painter.pen.color = 0x00ff00;
+            painter.setPixel(1, 0);
+            painter.layers.add();
+            painter.pen.color = 0x0000ff;
+            painter.setPixel(2, 0);
+            var src:LayerBitmap = painter.layers.at(2);
+            src.alpha = 0.5;
+            src.blendMode = BlendMode.ADD;
+            src.locked = true;
+            src.name = "test012";
+            src.visible = false;
+            return painter;
         }
     }
 }
