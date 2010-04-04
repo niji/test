@@ -24,7 +24,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             command.execute(painter);
             Assert.assertEquals(args.from, FakeLayerBitmapCollection.didSwapLayerFrom);
             Assert.assertEquals(args.to, FakeLayerBitmapCollection.didSwapLayerTo);
-            Assert.assertTrue(painter.didPushUndoIfNeed);
+            Assert.assertTrue(painter.didPushUndo);
         }
     }
 }

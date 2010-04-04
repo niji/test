@@ -22,8 +22,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             Assert.assertEquals(SetLayerVisibleCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            //Assert.assertEquals(args.visible, FakePainter.layerBitmap.visible);
-            Assert.assertTrue(painter.didPushUndoIfNeed);
+            Assert.assertEquals(args.visible, FakePainter.layerVisible);
         }
     }
 }

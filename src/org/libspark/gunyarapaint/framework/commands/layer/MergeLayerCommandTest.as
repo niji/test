@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             command.read(bytes);
             command.execute(painter);
             Assert.assertTrue(FakeLayerBitmapCollection.didMergeLayer);
-            Assert.assertTrue(painter.didPushUndoIfNeed);
+            Assert.assertTrue(painter.didPushUndo);
         }
     }
 }

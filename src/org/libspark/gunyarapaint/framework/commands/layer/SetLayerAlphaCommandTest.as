@@ -23,7 +23,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             command.read(bytes);
             command.execute(painter);
             Assert.assertEquals(args.alpha, FakePainter.layerAlpha);
-            Assert.assertTrue(painter.didPushUndoIfNeed);
+            Assert.assertTrue(painter.didPushUndo);
         }
     }
 }
