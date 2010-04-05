@@ -6,6 +6,7 @@ package org.libspark.gunyarapaint.framework
     import flash.display.DisplayObject;
     import flash.display.Shape;
     import flash.display.Sprite;
+    import flash.geom.Point;
     
     import org.flexunit.Assert;
 
@@ -129,9 +130,48 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(0x0000ff, painter2.getPixel(2, 0));
         }
         
+        [Test]
+        public function ペイントエンジンv1の座標補正():void
+        {
+            var engine:PaintEngine = Painter.createPaintEngine(1);
+            assertCorrectedPoint(engine, 1, 1, 1.23, 1.23);
+            assertCorrectedPoint(engine, -1, -1, -1.23, -1.23);
+            assertCorrectedPoint(engine, 2, 2, 1.98, 1.98);
+            assertCorrectedPoint(engine, -2, -2, -1.98, -1.98);
+        }
+        
+        [Test]
+        public function ペイントエンジンv2の座標補正():void
+        {
+            var engine:PaintEngine = Painter.createPaintEngine(11);
+            engine.pen.thickness = 8;
+            assertCorrectedPoint(engine, 1, 1, 1.23, 1.23);
+            assertCorrectedPoint(engine, -2, -2, -1.23, -1.23);
+            assertCorrectedPoint(engine, 1, 1, 1.98, 1.98);
+            assertCorrectedPoint(engine, -2, -2, -1.98, -1.98);
+            engine.pen.thickness = 15;
+            assertCorrectedPoint(engine, 1.5, 1.5, 1.23, 1.23);
+            assertCorrectedPoint(engine, -1.5, -1.5, -1.23, -1.23);
+            assertCorrectedPoint(engine, 1.5, 1.5, 1.98, 1.98);
+            assertCorrectedPoint(engine, -1.5, -1.5, -1.98, -1.98);
+        }
+        
         private function newPainter():Painter
         {
             return new Painter(1, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
+        }
+        
+        private function assertCorrectedPoint(engine:PaintEngine,
+                                              expectedX:Number,
+                                              expectedY:Number,
+                                              inputX:Number,
+                                              inputY:Number):void
+        {
+            input.x = inputX;
+            input.y = inputY;
+            engine.correctCoordinate(input);
+            Assert.assertEquals(expectedX, input.x);
+            Assert.assertEquals(expectedY, input.x);
         }
         
         private function newPainterForSave():Painter
@@ -153,5 +193,7 @@ package org.libspark.gunyarapaint.framework
             src.visible = false;
             return painter;
         }
+        
+        private static var input:Point = new Point();
     }
 }
