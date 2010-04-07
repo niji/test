@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework
 {
+    import flash.display.BitmapData;
+    
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
 
@@ -66,6 +68,44 @@ package org.libspark.gunyarapaint.framework
             lc.at(0).visible = false;
             lc.at(1).visible = false;
             lc.merge();
+        }
+        
+        [Test(expects="org.libspark.gunyarapaint.framework.errors.MergeLayersError")]
+        public function レイヤーがひとつしか無ければ失敗する():void
+        {
+            var lc:LayerBitmapCollection = layerContainer;
+            lc.merge();
+        }
+        
+        [Test(expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
+        public function 規定数以上のレイヤーを作成すると例外を送出する():void
+        {
+            var lc:LayerBitmapCollection = layerContainer;
+            var max:uint = LayerBitmapCollection.MAX;
+            for (var i:uint = 0; i < max; i++) {
+                lc.add();
+            }
+        }
+        
+        [Test(expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
+        public function 規定数以上のレイヤーを追加すると例外を送出する():void
+        {
+            var lc:LayerBitmapCollection = layerContainer;
+            var max:uint = LayerBitmapCollection.MAX;
+            for (var i:uint = 0; i < max; i++) {
+                var layer:LayerBitmap = new LayerBitmap(new BitmapData(WIDTH, HEIGHT));
+                lc.addLayer(layer);
+            }
+        }
+        
+        [Test(expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
+        public function 規定数以上のレイヤーをコピーすると例外を送出する():void
+        {
+            var lc:LayerBitmapCollection = layerContainer;
+            var max:uint = LayerBitmapCollection.MAX ;
+            for (var i:uint = 0; i < max; i++) {
+                lc.copy();
+            }
         }
         
         [Test]

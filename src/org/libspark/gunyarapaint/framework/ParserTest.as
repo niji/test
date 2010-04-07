@@ -42,7 +42,7 @@ package org.libspark.gunyarapaint.framework
             bytes.writeByte(RedoCommand.ID);
             bytes.writeByte(UndoCommand.ID);
             var parser:Parser = new Parser(bytes);
-            parser.preload();
+            parser.preparse();
             Assert.assertEquals(4, parser.maxUndoCount);
             Assert.assertEquals(7, parser.count);
         }
