@@ -17,8 +17,8 @@ package org.libspark.gunyarapaint.framework
         {
             var x:int = 42;
             var y:int = 124;
-            var cc:Painter = newPainter();
-            cc.moveTo(x, y);
+            var painter:Painter = newPainter();
+            painter.moveTo(x, y);
             Assert.assertStrictlyEquals(x, FakePaintEngine.point.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.point.y);
         }
@@ -27,8 +27,8 @@ package org.libspark.gunyarapaint.framework
         public function 円の描写():void
         {
             var radius:Number = 3.14;
-            var cc:Painter = newPainter();
-            cc.drawCircle(radius);
+            var painter:Painter = newPainter();
+            painter.drawCircle(radius);
             Assert.assertStrictlyEquals(radius, FakePaintEngine.radius);
         }
         
@@ -39,8 +39,8 @@ package org.libspark.gunyarapaint.framework
             var y:int = 124;
             var width:int = 256;
             var height:int = 512;
-            var cc:Painter = newPainter();
-            cc.drawRect(x, y, width, height);
+            var painter:Painter = newPainter();
+            painter.drawRect(x, y, width, height);
             Assert.assertStrictlyEquals(x, FakePaintEngine.rectangle.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.rectangle.y);
             Assert.assertStrictlyEquals(width, FakePaintEngine.rectangle.width);
@@ -54,8 +54,8 @@ package org.libspark.gunyarapaint.framework
             var y:int = 256;
             var width:int = 128;
             var height:int = 64;
-            var cc:Painter = newPainter();
-            cc.drawEllipse(x, y, width, height);
+            var painter:Painter = newPainter();
+            painter.drawEllipse(x, y, width, height);
             Assert.assertStrictlyEquals(x, FakePaintEngine.rectangle.x);
             Assert.assertStrictlyEquals(y, FakePaintEngine.rectangle.y);
             Assert.assertStrictlyEquals(width, FakePaintEngine.rectangle.width);
@@ -67,9 +67,9 @@ package org.libspark.gunyarapaint.framework
         {
             var color:uint = uint.MAX_VALUE;
             var alpha:Number = 0.5;
-            var cc:Painter = newPainter();
-            cc.beginFill(color, alpha);
-            cc.endFill();
+            var painter:Painter = newPainter();
+            painter.beginFill(color, alpha);
+            painter.endFill();
             Assert.assertStrictlyEquals(color, FakePaintEngine.color);
             Assert.assertStrictlyEquals(alpha, FakePaintEngine.alpha);
             Assert.assertTrue(FakePaintEngine.filled);
@@ -79,18 +79,18 @@ package org.libspark.gunyarapaint.framework
         public function 描写レイヤーの追加と削除():void
         {
             var child:DisplayObject;
-            var cc:Painter = newPainter();
+            var painter:Painter = newPainter();
             // 描写セッションの開始されると一時 Sprite が作成される
             // その為、上に現在のレイヤーが、下に描写バッファが入る
-            cc.startDrawingSession();
-            child = cc.layers.view.getChildAt(0);
+            painter.startDrawingSession();
+            child = painter.layers.view.getChildAt(0);
             Assert.assertTrue(child is Sprite);
             var sprite:Sprite = Sprite(child);
             Assert.assertTrue(sprite.getChildAt(0) is Bitmap);
             Assert.assertTrue(sprite.getChildAt(1) is Shape);
             // 描写セッションが終了すると一時 Sprite が削除され、現在のレイヤーに戻される
-            cc.stopDrawingSession();
-            child = cc.layers.view.getChildAt(0);
+            painter.stopDrawingSession();
+            child = painter.layers.view.getChildAt(0);
             Assert.assertTrue(child is Bitmap);
         }
         
@@ -154,6 +154,32 @@ package org.libspark.gunyarapaint.framework
             assertCorrectedPoint(engine, -1.5, -1.5, -1.23, -1.23);
             assertCorrectedPoint(engine, 1.5, 1.5, 1.98, 1.98);
             assertCorrectedPoint(engine, -1.5, -1.5, -1.98, -1.98);
+        }
+        
+        [Test]
+        public function enableUndoLayerが設定されていればpushUndoIfでもUndoStackが積まれる():void
+        {
+            var painter:Painter = newPainter();
+            var undo:UndoStack = new UndoStack(painter.layers);
+            painter.setUndoStack(undo);
+            painter.pushUndoIfNeed();
+            Assert.assertEquals(0, undo.undoCount);
+            painter.enableUndoLayer = true;
+            painter.pushUndoIfNeed();
+            Assert.assertEquals(1, undo.undoCount);
+        }
+        
+        [Test]
+        public function versionが21以下であればpushUndoIfでもUndoStackが積まれる():void
+        {
+            var painter:Painter = newPainter();
+            var undo:UndoStack = new UndoStack(painter.layers);
+            painter.setUndoStack(undo);
+            painter.pushUndoIfNeed();
+            Assert.assertEquals(0, undo.undoCount);
+            painter.setVersion(21);
+            painter.pushUndoIfNeed();
+            Assert.assertEquals(1, undo.undoCount);
         }
         
         private function newPainter():Painter

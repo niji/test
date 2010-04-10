@@ -2,6 +2,7 @@ package org.libspark.gunyarapaint.framework
 {
     import org.libspark.gunyarapaint.framework.commands.BeginFillCommandTest;
     import org.libspark.gunyarapaint.framework.commands.BezierCurveCommandTest;
+    import org.libspark.gunyarapaint.framework.commands.CompatibilityCommandTest;
     import org.libspark.gunyarapaint.framework.commands.CompositeCommandTest;
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommandTest;
     import org.libspark.gunyarapaint.framework.commands.EndFillComamndTest;
@@ -65,6 +66,8 @@ package org.libspark.gunyarapaint.framework
         public var swapLayerCommand:SwapLayerCommandTest;
         
         public var beginFillCommand:BeginFillCommandTest;
+        
+        public var compatibilityCommand:CompatibilityCommandTest;
         
         public var compositeCommand:CompositeCommandTest;
         
