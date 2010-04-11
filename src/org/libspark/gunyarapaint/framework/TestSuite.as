@@ -26,6 +26,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerIndexCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerVisibleCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.SwapLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorTest;
     import org.libspark.gunyarapaint.framework.module.CircleModuleTest;
     import org.libspark.gunyarapaint.framework.module.DropperModuleTest;
     import org.libspark.gunyarapaint.framework.module.EllipseModuleTest;
@@ -92,6 +93,8 @@ package org.libspark.gunyarapaint.framework
         public var undoCommand:UndoCommandTest;
         
         public var verticalMirrorCommand:VerticalMirrorCommandTest;
+        
+        public var translator:TranslatorTest;
         
         public var circleModule:CircleModuleTest;
         
