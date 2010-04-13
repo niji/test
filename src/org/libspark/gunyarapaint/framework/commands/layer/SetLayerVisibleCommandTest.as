@@ -18,6 +18,10 @@ package org.libspark.gunyarapaint.framework.commands.layer
             var painter:FakePainter = new FakePainter();
             var args:Object = { "index": 0, "visible": false };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[SetLayerVisibleCommand index=0, visible=false]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(SetLayerVisibleCommand.ID, bytes.readByte());
             command.read(bytes);

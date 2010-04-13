@@ -27,6 +27,7 @@ package org.libspark.gunyarapaint.framework
             var lc:LayerBitmapCollection = layerContainer;
             lc.add();
             Assert.assertStrictlyEquals(2, lc.count);
+            Assert.assertStrictlyEquals("Layer1", lc.currentLayer.name);
         }
         
         [Test]
@@ -35,6 +36,7 @@ package org.libspark.gunyarapaint.framework
             var lc:LayerBitmapCollection = layerContainer;
             lc.copy();
             Assert.assertStrictlyEquals(2, lc.count);
+            Assert.assertStrictlyEquals("Background's copy", lc.currentLayer.name);
         }
         
         [Test]

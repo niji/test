@@ -18,6 +18,10 @@ package org.libspark.gunyarapaint.framework.commands.layer
             var painter:FakePainter = new FakePainter();
             var args:Object = { "alpha": 0.314 };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[SetLayerAlphaCommand alpha=0.3140]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(SetLayerAlphaCommand.ID, bytes.readByte());
             command.read(bytes);

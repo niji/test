@@ -17,6 +17,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             var command:ICommand = new RemoveLayerCommand();
             var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
+            Assert.assertStrictlyEquals("[RemoveLayerCommand]", command.toString());
             bytes.position = 0;
             Assert.assertEquals(RemoveLayerCommand.ID, bytes.readByte());
             command.read(bytes);

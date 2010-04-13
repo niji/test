@@ -18,6 +18,10 @@ package org.libspark.gunyarapaint.framework.commands
             var painter:FakePainter = new FakePainter();
             var args:Object = { "x": 1234, "y": 4321 };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[PixelCommand x=1234, y=4321]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(PixelCommand.ID, bytes.readByte());
             command.read(bytes);

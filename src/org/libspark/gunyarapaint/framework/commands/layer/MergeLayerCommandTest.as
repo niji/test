@@ -17,6 +17,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             var command:ICommand = new MergeLayerCommand();
             var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
+            Assert.assertStrictlyEquals("[MergeLayerCommand]", command.toString());
             bytes.position = 0;
             Assert.assertEquals(MergeLayerCommand.ID, bytes.readByte());
             command.read(bytes);

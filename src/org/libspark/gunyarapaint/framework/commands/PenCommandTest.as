@@ -6,10 +6,10 @@ package org.libspark.gunyarapaint.framework.commands
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
+    import org.libspark.gunyarapaint.framework.FakePaintEngine;
+    import org.libspark.gunyarapaint.framework.FakePainter;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
-    import org.libspark.gunyarapaint.framework.FakePainter;
-    import org.libspark.gunyarapaint.framework.FakePaintEngine;
 
     public class PenCommandTest
     {
@@ -69,6 +69,15 @@ package org.libspark.gunyarapaint.framework.commands
             var args:Object = { "type": type };
             args[key] = value;
             command.write(bytes, args);
+            // ugly
+            if (value == 0xffffffff)
+                value = "0xffffffff";
+            else if (value is Number && value != 42)
+                value = value.toPrecision(4);
+            Assert.assertStrictlyEquals(
+                "[PenCommand " + key + "=" + value + "]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(PenCommand.ID, bytes.readByte());
             command.read(bytes);

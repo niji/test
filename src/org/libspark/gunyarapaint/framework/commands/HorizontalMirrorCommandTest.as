@@ -18,6 +18,10 @@ package org.libspark.gunyarapaint.framework.commands
             var painter:FakePainter = new FakePainter();
             var args:Object = { "index": 42 };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[HorizontalMirrorCommand index=42]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(HorizontalMirrorCommand.ID, bytes.readByte());
             command.read(bytes);

@@ -16,6 +16,7 @@ package org.libspark.gunyarapaint.framework.commands
             var command:ICommand = new UndoCommand();
             var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
+            Assert.assertStrictlyEquals("[UndoCommand]", command.toString());
             bytes.position = 0;
             Assert.assertEquals(UndoCommand.ID, bytes.readByte());
             command.read(bytes);

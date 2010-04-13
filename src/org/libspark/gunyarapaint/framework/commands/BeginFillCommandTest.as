@@ -21,6 +21,10 @@ package org.libspark.gunyarapaint.framework.commands
             var command:ICommand = new BeginFillCommand();
             var painter:FakePainter = new FakePainter();
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[BeginFillCommand alpha=1.000, color=0xffffff]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(BeginFillCommand.ID, bytes.readByte());
             command.read(bytes);

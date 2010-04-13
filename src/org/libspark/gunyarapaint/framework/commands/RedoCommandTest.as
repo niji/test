@@ -16,6 +16,7 @@ package org.libspark.gunyarapaint.framework.commands
             var command:ICommand = new RedoCommand();
             var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
+            Assert.assertStrictlyEquals("[RedoCommand]", command.toString());
             bytes.position = 0;
             Assert.assertEquals(RedoCommand.ID, bytes.readByte());
             command.read(bytes);

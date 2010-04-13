@@ -19,6 +19,10 @@ package org.libspark.gunyarapaint.framework.commands.layer
             var painter:FakePainter = new FakePainter();
             var args:Object = { "blendMode": BlendMode.ADD };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[SetLayerBlendModeCommand blendMode=" + BlendMode.ADD + "]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(SetLayerBlendModeCommand.ID, bytes.readByte());
             command.read(bytes);

@@ -17,6 +17,7 @@ package org.libspark.gunyarapaint.framework.commands
             var command:ICommand = new CompositeCommand();
             var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
+            Assert.assertStrictlyEquals("[CompositeCommand]", command.toString());
             bytes.position = 0;
             Assert.assertEquals(CompositeCommand.ID, bytes.readByte());
             command.read(bytes);

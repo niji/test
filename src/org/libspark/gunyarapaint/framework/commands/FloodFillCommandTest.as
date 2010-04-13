@@ -17,6 +17,7 @@ package org.libspark.gunyarapaint.framework.commands
             var command:ICommand = new FloodFillCommand();
             var painter:FakePainter = new FakePainter();
             command.write(bytes, {});
+            Assert.assertStrictlyEquals("[FloodFillCommand]", command.toString());
             bytes.position = 0;
             Assert.assertEquals(FloodFillCommand.ID, bytes.readByte());
             command.read(bytes);

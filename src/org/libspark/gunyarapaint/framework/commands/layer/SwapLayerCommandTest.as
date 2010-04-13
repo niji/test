@@ -18,6 +18,10 @@ package org.libspark.gunyarapaint.framework.commands.layer
             var painter:FakePainter = new FakePainter();
             var args:Object = { "from": 42, "to": 24 };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[SwapLayerCommand from=42, to=24]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(SwapLayerCommand.ID, bytes.readByte());
             command.read(bytes);

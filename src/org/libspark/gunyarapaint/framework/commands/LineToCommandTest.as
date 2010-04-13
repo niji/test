@@ -40,6 +40,10 @@ package org.libspark.gunyarapaint.framework.commands
             var painter:FakePainter = new FakePainter();
             var args:Object = { "x": x, "y": y };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[LineToCommand x=" + x + ", y=" + y + "]",
+                command.toString()
+            );
             bytes.position = 0;
             var byte:uint = bytes.readUnsignedByte();
             if (byte & 0x80 || byte & 0x40)

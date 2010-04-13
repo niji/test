@@ -20,6 +20,10 @@ package org.libspark.gunyarapaint.framework.commands
                 "radius": Math.PI
             };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[DrawCircleCommand radius=3.142]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(DrawCircleCommand.ID, bytes.readByte());
             command.read(bytes);

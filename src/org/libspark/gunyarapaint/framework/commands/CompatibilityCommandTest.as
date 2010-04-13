@@ -20,6 +20,10 @@ package org.libspark.gunyarapaint.framework.commands
                 "type": Painter.COMPATIBILITY_UNDO_LAYER,
                 "value": true
             });
+            Assert.assertStrictlyEquals(
+                "[CompatibilityCommand undoLayer=true]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(CompatibilityCommand.ID, bytes.readByte());
             command.read(bytes);
@@ -39,6 +43,10 @@ package org.libspark.gunyarapaint.framework.commands
                 "type": Painter.COMPATIBILITY_BIG_PIXEL,
                 "value": false
             });
+            Assert.assertStrictlyEquals(
+                "[CompatibilityCommand bigPixel=false]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(CompatibilityCommand.ID, bytes.readByte());
             command.read(bytes);

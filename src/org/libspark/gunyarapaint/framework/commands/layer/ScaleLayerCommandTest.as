@@ -18,6 +18,10 @@ package org.libspark.gunyarapaint.framework.commands.layer
             var point:Point = new Point(63, -64);
             var args:Object = { "x": point.x, "y": point.y };
             command.write(bytes, args);
+            Assert.assertStrictlyEquals(
+                "[ScaleLayerCommand x=63, y=-64]",
+                command.toString()
+            );
             bytes.position = 0;
             Assert.assertEquals(ScaleLayerCommand.ID, bytes.readByte());
             command.read(bytes);
