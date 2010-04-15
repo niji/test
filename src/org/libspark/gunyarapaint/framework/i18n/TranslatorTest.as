@@ -4,16 +4,21 @@ package org.libspark.gunyarapaint.framework.i18n
 
     public class TranslatorTest
     {
+        [After]
+        public function tearDown():void
+        {
+            // should remove FakeTranslator and set default
+            TranslatorRegistry.install(new NullTranslator());
+        }
+        
         [Test]
-        public function test1():void
-        //public function TranslatorRegistryはNullTranslatorが入っていること():void
+        public function TranslatorRegistryはNullTranslatorが入っていること():void
         {
             Assert.assertTrue(TranslatorRegistry.translator is NullTranslator);
         }
         
         [Test]
-        public function test2():void
-        //public function TranslatorRegistry#installで上書きするとtranslatorはそのクラスを返す():void
+        public function installで上書きするとtranslatorはそのクラスを返す():void
         {
             var translator:FakeTranslator = new FakeTranslator();
             TranslatorRegistry.install(translator);
@@ -21,8 +26,7 @@ package org.libspark.gunyarapaint.framework.i18n
         }
         
         [Test]
-        public function test3():void
-        //public function NullTranslatorは少なくともgettext形式の引数を置換する能力を持つ
+        public function NullTranslatorは少なくともgettext形式の引数を置換する能力を持つ():void
         {
             Assert.assertEquals(
                 "This is a test, test2 and test3",
