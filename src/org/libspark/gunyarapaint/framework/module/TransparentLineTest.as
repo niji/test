@@ -1,5 +1,6 @@
 package org.libspark.gunyarapaint.framework.module
 {
+    import flash.display.BlendMode;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
@@ -14,8 +15,8 @@ package org.libspark.gunyarapaint.framework.module
         public function setup():void
         {
             m_bytes = new ByteArray();
-            var recorder:Recorder = ModuleTestUtil.createRecorder(m_bytes);
-            var context:CanvasModuleContext = new CanvasModuleContext(recorder);
+            m_recorder = ModuleTestUtil.createRecorder(m_bytes);
+            var context:CanvasModuleContext = new CanvasModuleContext(m_recorder);
             m_module = context.getModule(TransparentLineModule.TRANSPARENT_LINE);
         }
         
@@ -29,18 +30,22 @@ package org.libspark.gunyarapaint.framework.module
         [Test]
         public function drawWithoutMoving():void
         {
+            m_recorder.pen.blendMode = BlendMode.ADD;
             m_module.start(1, 1);
             m_module.stop(1, 1);
             ModuleTestUtil.countCommands(0, m_bytes);
+            Assert.assertStrictlyEquals(BlendMode.ADD, m_recorder.pen.blendMode);
         }
         
         [Test]
         public function drawWithMoving():void
         {
+            m_recorder.pen.blendMode = BlendMode.DARKEN;
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
             ModuleTestUtil.countCommands(5, m_bytes);
+            Assert.assertStrictlyEquals(BlendMode.DARKEN, m_recorder.pen.blendMode);
         }
         
         [Test]
@@ -50,6 +55,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         private var m_bytes:ByteArray;
+        private var m_recorder:Recorder;
         private var m_module:ICanvasModule;
     }
 }
