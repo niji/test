@@ -13,6 +13,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.PenCommandTest;
     import org.libspark.gunyarapaint.framework.commands.PixelCommandTest;
     import org.libspark.gunyarapaint.framework.commands.RedoCommandTest;
+    import org.libspark.gunyarapaint.framework.commands.ResetAllCommandTest;
     import org.libspark.gunyarapaint.framework.commands.UndoCommandTest;
     import org.libspark.gunyarapaint.framework.commands.VerticalMirrorCommandTest;
     import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommandTest;
@@ -89,6 +90,8 @@ package org.libspark.gunyarapaint.framework
         public var pixelCommand:PixelCommandTest;
         
         public var redoCommand:RedoCommandTest;
+        
+        public var resetAllCommand:ResetAllCommandTest;
         
         public var undoCommand:UndoCommandTest;
         
