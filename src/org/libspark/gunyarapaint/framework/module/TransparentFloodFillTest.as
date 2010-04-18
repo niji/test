@@ -42,6 +42,19 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
+        public function shouldRecoverAlphaAndColorIfInterrupted():void
+        {
+            var pen:Pen = m_recorder.pen;
+            pen.alpha = 0.5;
+            pen.color = 0x123456;
+            m_module.start(1, 1);
+            m_module.interrupt(2, 2);
+            ModuleTestUtil.countCommands(6, m_bytes);
+            Assert.assertStrictlyEquals(0.5, pen.alpha);
+            Assert.assertStrictlyEquals(0x123456, pen.color);
+        }
+        
+        [Test]
         public function getLineSegment():void
         {
             ModuleTestUtil.getLineSegment(m_module, false);
