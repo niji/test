@@ -82,14 +82,14 @@ package org.libspark.gunyarapaint.framework
             var painter:Painter = newPainter();
             // 描写セッションの開始されると一時 Sprite が作成される
             // その為、上に現在のレイヤーが、下に描写バッファが入る
-            painter.startDrawingSession();
+            painter.startDrawing();
             child = painter.layers.view.getChildAt(0);
             Assert.assertTrue(child is Sprite);
             var sprite:Sprite = Sprite(child);
             Assert.assertTrue(sprite.getChildAt(0) is Bitmap);
             Assert.assertTrue(sprite.getChildAt(1) is Shape);
             // 描写セッションが終了すると一時 Sprite が削除され、現在のレイヤーに戻される
-            painter.stopDrawingSession();
+            painter.stopDrawing();
             child = painter.layers.view.getChildAt(0);
             Assert.assertTrue(child is Bitmap);
         }

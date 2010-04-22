@@ -86,12 +86,12 @@ package org.libspark.gunyarapaint.framework
             coordinate = new Point(x, y);
         }
         
-        public override function startDrawingSession():void
+        public override function startDrawing():void
         {
             didStartDrawing = true;
         }
         
-        public override function stopDrawingSession():void
+        public override function stopDrawing():void
         {
             didEndDrawing = true;
         }
