@@ -90,17 +90,6 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
-        public function 規定数以上のレイヤーを追加すると例外を送出する():void
-        {
-            var lc:LayerBitmapCollection = layerContainer;
-            var max:uint = LayerBitmapCollection.MAX;
-            for (var i:uint = 0; i < max; i++) {
-                var layer:LayerBitmap = new LayerBitmap(new BitmapData(WIDTH, HEIGHT));
-                lc.addLayer(layer);
-            }
-        }
-        
-        [Test(expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
         public function 規定数以上のレイヤーをコピーすると例外を送出する():void
         {
             var lc:LayerBitmapCollection = layerContainer;
