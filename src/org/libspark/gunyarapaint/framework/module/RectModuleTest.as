@@ -21,14 +21,14 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function isRectModule():void
+        public function RectModuleであること():void
         {
             Assert.assertTrue(m_module is RectModule);
             Assert.assertEquals(m_module.name, RectModule.RECT);
         }
         
         [Test]
-        public function drawWithoutMoving():void
+        public function 移動せずに描画すると何も起こらないこと():void
         {
             m_module.start(1, 1);
             m_module.stop(1, 1);
@@ -36,12 +36,13 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function drawWithMoving():void
+        public function 移動して描画すると():void
         {
+            // TODO: implement this
         }
         
         [Test]
-        public function getLineSegment():void
+        public function 移動位置が保存されること():void
         {
             ModuleTestUtil.getLineSegment(m_module, true);
         }

@@ -21,14 +21,14 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function isFreeHandModule():void
+        public function FreeHandModuleであること():void
         {
             Assert.assertTrue(m_module is FreeHandModule);
             Assert.assertEquals(m_module.name, FreeHandModule.FREE_HAND);
         }
         
         [Test]
-        public function drawWithoutMoving():void
+        public function 移動せずに描画すると7つのコマンドが実行されること():void
         {
             m_module.start(1, 1);
             m_module.stop(1, 1);
@@ -36,7 +36,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function drawWithMoving():void
+        public function 移動して描画すると3つのコマンドが実行されること():void
         {
             m_module.start(1, 1);
             m_module.move(2, 2);
@@ -45,7 +45,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function getLineSegment():void
+        public function 移動位置が保存されること():void
         {
             ModuleTestUtil.getLineSegment(m_module, true);
         }

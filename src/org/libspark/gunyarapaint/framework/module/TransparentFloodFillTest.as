@@ -21,14 +21,14 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function isFloodFillModule():void
+        public function TransparentFloodFillModuleであること():void
         {
             Assert.assertTrue(m_module is TransparentFloodFill);
             Assert.assertEquals(m_module.name, TransparentFloodFill.TRANSPARENT_FLOOD_FILL);
         }
         
         [Test]
-        public function floodFill():void
+        public function 透明塗りつぶしを実行すると6つのコマンドが実行された上で色情報が復帰されること():void
         {
             var pen:Pen = m_recorder.pen;
             pen.alpha = 0.5;
@@ -42,7 +42,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function shouldRecoverAlphaAndColorIfInterrupted():void
+        public function 途中で中断したとしても色情報が復帰されること():void
         {
             var pen:Pen = m_recorder.pen;
             pen.alpha = 0.5;
@@ -55,7 +55,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function getLineSegment():void
+        public function 移動位置が保存されること():void
         {
             ModuleTestUtil.getLineSegment(m_module, false);
         }

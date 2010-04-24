@@ -100,7 +100,7 @@ package org.libspark.gunyarapaint.framework
             var metadata:Object = {};
             var painter:Painter = newPainterForSave();
             var src:LayerBitmap = painter.layers.at(2);
-            var layers:BitmapData = painter.newLayerBitmapData;
+            var layers:BitmapData = painter.layers.newLayerBitmapData;
             painter.layers.save(layers, metadata);
             Assert.assertEquals(metadata.width, painter.width);
             Assert.assertEquals(metadata.height, painter.height);

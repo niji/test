@@ -13,7 +13,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function レイヤーコンテナの作成():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             Assert.assertStrictlyEquals(1, lc.count);
             Assert.assertStrictlyEquals(WIDTH, lc.width);
             Assert.assertStrictlyEquals(HEIGHT, lc.height);
@@ -24,7 +24,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function レイヤーの追加():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
             Assert.assertStrictlyEquals(2, lc.count);
             Assert.assertStrictlyEquals("Layer1", lc.currentLayer.name);
@@ -33,7 +33,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function レイヤーのコピー():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.copy();
             Assert.assertStrictlyEquals(2, lc.count);
             Assert.assertStrictlyEquals("Background's copy", lc.currentLayer.name);
@@ -42,7 +42,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function レイヤーの交換():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
             lc.at(0).name = "foo";
             lc.at(1).name = "bar";
@@ -54,7 +54,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function レイヤーの統合():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
             lc.at(0).alpha = 0.5;
             lc.merge();
@@ -65,7 +65,7 @@ package org.libspark.gunyarapaint.framework
         [Test(expects="org.libspark.gunyarapaint.framework.errors.MergeLayersError")]
         public function 両方のレイヤーが可視でなければ統合が失敗する():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
             lc.at(0).visible = false;
             lc.at(1).visible = false;
@@ -75,14 +75,14 @@ package org.libspark.gunyarapaint.framework
         [Test(expects="org.libspark.gunyarapaint.framework.errors.MergeLayersError")]
         public function レイヤーがひとつしか無ければ失敗する():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.merge();
         }
         
         [Test(expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
         public function 規定数以上のレイヤーを作成すると例外を送出する():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             var max:uint = LayerBitmapCollection.MAX;
             for (var i:uint = 0; i < max; i++) {
                 lc.add();
@@ -92,7 +92,7 @@ package org.libspark.gunyarapaint.framework
         [Test(expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
         public function 規定数以上のレイヤーをコピーすると例外を送出する():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             var max:uint = LayerBitmapCollection.MAX ;
             for (var i:uint = 0; i < max; i++) {
                 lc.copy();
@@ -102,13 +102,13 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function レイヤーの削除():void
         {
-            var lc:LayerBitmapCollection = layerContainer;
+            var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
             lc.remove();
             Assert.assertStrictlyEquals(1, lc.count);
         }
         
-        private function get layerContainer():LayerBitmapCollection
+        private function newLayerBitmapCollection():LayerBitmapCollection
         {
             return new LayerBitmapCollection(WIDTH, HEIGHT);
         }

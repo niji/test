@@ -13,14 +13,14 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function レイヤーの作成():void
         {
-            var layer:LayerBitmap = new LayerBitmap(smallBitmapData);
+            var layer:LayerBitmap = new LayerBitmap(newSmallBitmapData());
             Assert.assertTrue(layer is LayerBitmap);
         }
         
         [Test]
         public function レイヤーのクローン():void
         {
-            var layer:LayerBitmap = layerToClone;
+            var layer:LayerBitmap = newLayerToClone();
             var newLayer:LayerBitmap = layer.clone();
             assertLayerMetadata(layer, newLayer);
             Assert.assertStrictlyEquals(layer.index, newLayer.index);
@@ -31,7 +31,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function 塗りつぶし():void
         {
-            var bmd:BitmapData = bigBitmapData;
+            var bmd:BitmapData = newBigBitmapData();
             var layer:LayerBitmap = new LayerBitmap(bmd);
             layer.floodFill(5, 5, 0);
             Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(5, 5));
@@ -41,7 +41,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function ドットうち():void
         {
-            var bmd:BitmapData = bigBitmapData;
+            var bmd:BitmapData = newBigBitmapData();
             var layer:LayerBitmap = new LayerBitmap(bmd);
             layer.setPixel(5, 5, 0);
             Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(5, 5));
@@ -51,8 +51,8 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function レイヤーのJSONシリアライズ():void
         {
-            var layer:LayerBitmap = layerToClone;
-            var newLayer:LayerBitmap = new LayerBitmap(bigBitmapData);
+            var layer:LayerBitmap = newLayerToClone();
+            var newLayer:LayerBitmap = new LayerBitmap(newBigBitmapData());
             newLayer.fromJSON(layer.toJSON());
             assertLayerMetadata(layer, newLayer);
             Assert.assertStrictlyEquals(layer.locked, newLayer.locked);
@@ -66,9 +66,9 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(layer.visible, newLayer.visible);
         }
         
-        private function get layerToClone():LayerBitmap
+        private function newLayerToClone():LayerBitmap
         {
-            var layer:LayerBitmap = new LayerBitmap(bigBitmapData);
+            var layer:LayerBitmap = new LayerBitmap(newBigBitmapData());
             layer.alpha = 0.42;
             layer.blendMode = BlendMode.MULTIPLY;
             layer.index = 42;
@@ -78,12 +78,12 @@ package org.libspark.gunyarapaint.framework
             return layer;
         }
         
-        private function get smallBitmapData():BitmapData
+        private function newSmallBitmapData():BitmapData
         {
             return new BitmapData(1, 1);
         }
         
-        private function get bigBitmapData():BitmapData
+        private function newBigBitmapData():BitmapData
         {
             return new BitmapData(10, 10);
         }

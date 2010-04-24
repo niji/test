@@ -21,14 +21,14 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function isFloodFillModule():void
+        public function FloodFillModuleであること():void
         {
             Assert.assertTrue(m_module is FloodFillModule);
             Assert.assertEquals(m_module.name, FloodFillModule.FLOOD_FILL);
         }
         
         [Test]
-        public function floodFill():void
+        public function 塗潰を実行すると2つのコマンドが実行されること():void
         {
             m_module.start(1, 1);
             m_module.move(2, 2);
@@ -37,7 +37,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function getLineSegment():void
+        public function 移動位置が保存されること():void
         {
             ModuleTestUtil.getLineSegment(m_module, false);
         }

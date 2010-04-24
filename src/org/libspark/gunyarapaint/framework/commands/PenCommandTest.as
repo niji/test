@@ -32,7 +32,7 @@ package org.libspark.gunyarapaint.framework.commands
         }
         
         [Test]
-        public function ペンのぶイター値を調整():void
+        public function ペンのマイター値を調整():void
         {
             test(PenCommand.MITER_LIMIT, "miterLimit", 0.314);
         }

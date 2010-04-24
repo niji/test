@@ -21,14 +21,14 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function isDropperModule():void
+        public function DropperModuleであること():void
         {
             Assert.assertTrue(m_module is DropperModule);
             Assert.assertEquals(m_module.name, DropperModule.DROPPER);
         }
         
         [Test]
-        public function drop():void
+        public function スポイトを実行すると1つのコマンドが実行されること():void
         {
             m_module.start(1, 1);
             m_module.move(2, 2);
@@ -37,7 +37,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function getLineSegment():void
+        public function 移動位置が保存されること():void
         {
             ModuleTestUtil.getLineSegment(m_module, false);
         }

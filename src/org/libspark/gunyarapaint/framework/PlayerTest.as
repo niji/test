@@ -10,7 +10,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function プレイヤーが再生されるとplayingがtrueになる():void
         {
-            var player:Player = player;
+            var player:Player = newPlayer();
             player.start();
             Assert.assertTrue(player.playing);
             player.stop();
@@ -19,7 +19,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function プレイヤーが停止されるとplayingがfalseになる():void
         {
-            var player:Player = player;
+            var player:Player = newPlayer();
             player.start();
             player.stop();
             Assert.assertFalse(player.playing);
@@ -38,14 +38,14 @@ package org.libspark.gunyarapaint.framework
         [Test(expects="org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError")]
         public function サポートしないバージョンのログを読み込むと例外を送出する():void
         {
-            var bytes:ByteArray = createLog("0.0.0");
+            var bytes:ByteArray = newPlayerLog("0.0.0");
             Player.create(bytes);
         }
         
         [Test]
         public function バージョン0_1_0まではPainterV1が使われること():void
         {
-            var bytes:ByteArray = createLog("0.1.0");
+            var bytes:ByteArray = newPlayerLog("0.1.0");
             var painter:Player = Player.create(bytes);
             Assert.assertEquals(10, painter.version);
             // internal 参照なので、 オブジェクトを文字列化して比較する
@@ -55,14 +55,14 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function バージョン0_2_0以降はPainterV2が使われること():void
         {
-            var bytes:ByteArray = createLog("0.2.0");
+            var bytes:ByteArray = newPlayerLog("0.2.0");
             var painter:Player = Player.create(bytes);
             Assert.assertEquals(20, painter.version);
             // internal 参照なので、 オブジェクトを文字列化して比較する
             // Assert.assertEquals("[object PainterV2]", painter.painter + "");
         }
         
-        private function createLog(version:String):ByteArray
+        private function newPlayerLog(version:String):ByteArray
         {
             var bytes:ByteArray = new ByteArray();
             // シグネチャ
@@ -80,7 +80,7 @@ package org.libspark.gunyarapaint.framework
             return bytes;
         }
         
-        private function get player():Player
+        private function newPlayer():Player
         {
             var bytes:ByteArray = new ByteArray();
             bytes.writeUTFBytes("GUNYARA_PAINT:0.1.0:");

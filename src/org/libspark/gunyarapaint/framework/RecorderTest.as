@@ -11,7 +11,7 @@ package org.libspark.gunyarapaint.framework
     {
         
         [Test]
-        public function prepare():void
+        public function createでwidthとheightが設定されること():void
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 123, 321, 16);
@@ -20,7 +20,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(async)]
-        public function commitCommand():void
+        public function commitCommandでコマンド及びCOMMITTEDイベントが実行されること():void
         {
             var commands:CommandContext = new CommandContext();
             var bytes:ByteArray = new ByteArray();
@@ -35,7 +35,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(async)]
-        public function undo():void
+        public function undoの追加と巻き戻しとやり直しを行うとそれぞれ対応するイベントが実行されること():void
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 1, 1, 16);

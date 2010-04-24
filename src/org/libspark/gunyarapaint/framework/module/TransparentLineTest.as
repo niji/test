@@ -21,14 +21,14 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function isTransparentLineModule():void
+        public function TransparentLineModuleであること():void
         {
             Assert.assertTrue(m_module is TransparentLineModule);
             Assert.assertEquals(m_module.name, TransparentLineModule.TRANSPARENT_LINE);
         }
         
         [Test]
-        public function drawWithoutMoving():void
+        public function 移動せずに描画すると何も起こならないがブレンドモードは復帰されること():void
         {
             m_recorder.pen.blendMode = BlendMode.ADD;
             m_module.start(1, 1);
@@ -38,7 +38,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function drawWithMoving():void
+        public function 移動して描画すると5つのコマンドが実行された上でブレンドモードが復帰されること():void
         {
             m_recorder.pen.blendMode = BlendMode.DARKEN;
             m_module.start(1, 1);
@@ -49,7 +49,7 @@ package org.libspark.gunyarapaint.framework.module
         }
         
         [Test]
-        public function getLineSegment():void
+        public function 移動位置が保存されること():void
         {
             ModuleTestUtil.getLineSegment(m_module, true);
         }

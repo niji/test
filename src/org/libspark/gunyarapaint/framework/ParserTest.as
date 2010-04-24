@@ -23,7 +23,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function ログをヘッダーを読み込んだ後の位置に変更する():void
         {
-            var parser:Parser = new Parser(bytesWithDummyHeader);
+            var parser:Parser = new Parser(newBytesWithDummyHeader());
             parser.rewind();
             Assert.assertEquals(Parser.EOH, parser.bytes.position);
         }
@@ -31,7 +31,7 @@ package org.libspark.gunyarapaint.framework
         [Test]
         public function 先読みを行う():void
         {
-            var bytes:ByteArray = bytesWithDummyHeader;
+            var bytes:ByteArray = newBytesWithDummyHeader();
             // 連続して巻き戻し及びやり直しが発生するのは4回
             bytes.writeByte(UndoCommand.ID);
             bytes.writeByte(RedoCommand.ID);
@@ -47,7 +47,7 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(7, parser.count);
         }
         
-        private function get bytesWithDummyHeader():ByteArray
+        private function newBytesWithDummyHeader():ByteArray
         {
             var bytes:ByteArray = new ByteArray();
             // シグネチャ
