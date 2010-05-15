@@ -3,6 +3,7 @@ package org.libspark.gunyarapaint.framework
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
+    import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
     import org.libspark.gunyarapaint.framework.events.UndoEvent;
@@ -10,8 +11,8 @@ package org.libspark.gunyarapaint.framework
     public class RecorderTest
     {
         
-        [Test]
-        public function createでwidthとheightが設定されること():void
+        [Test(description="widthとheightが設定されること")]
+        public function should_set_width_and_height_after_create():void
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 123, 321, 16);
@@ -19,8 +20,18 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(321, recorder.height);
         }
         
-        [Test(async)]
-        public function commitCommandでコマンド及びCOMMITTEDイベントが実行されること():void
+        [Test(description="bytesでコピーを取ることが出来ること")]
+        public function should_copy_bytes():void
+        {
+            var bytes:ByteArray = new ByteArray();
+            var recorder:Recorder = Recorder.create(bytes, 123, 321, 16);
+            var length:uint = recorder.bytes.length;
+            recorder.commitCommand(CompositeCommand.ID, {});
+            Assert.assertEquals(34, length);
+        }
+        
+        [Test(async, description="commitCommandでコマンド及びCOMMITTEDイベントが実行されること")]
+        public function should_dispatch_committed_event():void
         {
             var commands:CommandContext = new CommandContext();
             var bytes:ByteArray = new ByteArray();
@@ -34,8 +45,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(command, FakeCommand.writeArgument);
         }
         
-        [Test(async)]
-        public function undoの追加と巻き戻しとやり直しを行うとそれぞれ対応するイベントが実行されること():void
+        [Test(async, description="undoの追加と巻き戻しとやり直しを行うとそれぞれ対応するイベントが実行されること")]
+        public function should_dispatch_undo_events_after_push_or_undo_or_redo():void
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 1, 1, 16);
