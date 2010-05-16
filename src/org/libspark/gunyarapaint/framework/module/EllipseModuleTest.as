@@ -2,8 +2,6 @@ package org.libspark.gunyarapaint.framework.module
 {
     import flash.utils.ByteArray;
     
-    import flashx.textLayout.debug.assert;
-    
     import org.flexunit.Assert;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
