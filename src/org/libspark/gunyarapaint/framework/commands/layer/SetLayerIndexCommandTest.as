@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public class SetLayerIndexCommandTest
     {
-        [Test]
-        public function レイヤーのインデックスを設定するコマンドの実行():void
+        [Test(description="レイヤーのインデックスを設定するコマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new SetLayerIndexCommand();
@@ -27,7 +27,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             command.read(bytes);
             command.execute(painter);
             Assert.assertEquals(args.index, painter.layers.currentIndex);
-            Assert.assertFalse(painter.didPushUndoIfNeed);
+            Assert.assertTrue(painter.didPushUndoIfNeed);
         }
     }
 }

@@ -108,12 +108,12 @@ package org.libspark.gunyarapaint.framework
         
         public function get didPushUndo():Boolean
         {
-            return m_didPushUndo;
+            return m_didPushUndo && !m_didPushUndoIfNeed;
         }
         
         public function get didPushUndoIfNeed():Boolean
         {
-            return m_didPushUndoIfNeed;
+            return m_didPushUndoIfNeed && !m_didPushUndo;
         }
         
         public override function set currentLayerAlpha(alpha:Number):void

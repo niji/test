@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public class CreateLayerCommandTest
     {
-        [Test]
-        public function レイヤー作成コマンドの実行():void
+        [Test(description="レイヤー作成コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new CreateLayerCommand();
@@ -23,7 +23,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             command.read(bytes);
             command.execute(painter);
             Assert.assertTrue(FakeLayerBitmapCollection.didAddLayer);
-            Assert.assertTrue(painter.didPushUndoIfNeed);
+            Assert.assertTrue(painter.didPushUndo);
         }
     }
 }

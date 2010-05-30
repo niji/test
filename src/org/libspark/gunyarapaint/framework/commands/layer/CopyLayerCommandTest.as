@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public class CopyLayerCommandTest
     {
-        [Test]
-        public function レイヤーコピーコマンドの実行():void
+        [Test(description="レイヤーコピーコマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new CopyLayerCommand();
@@ -23,7 +23,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
             command.read(bytes);
             command.execute(painter);
             Assert.assertTrue(FakeLayerBitmapCollection.didCopyLayer);
-            Assert.assertTrue(painter.didPushUndoIfNeed);
+            Assert.assertTrue(painter.didPushUndo);
         }
     }
 }
