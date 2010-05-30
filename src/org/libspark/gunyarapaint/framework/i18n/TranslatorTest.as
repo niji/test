@@ -11,22 +11,22 @@ package org.libspark.gunyarapaint.framework.i18n
             TranslatorRegistry.install(new NullTranslator());
         }
         
-        [Test]
-        public function TranslatorRegistryはNullTranslatorが入っていること():void
+        [Test(description="TranslatorRegistryはNullTranslatorが入っていること")]
+        public function shouldNullTranslatorIsInstalled():void
         {
             Assert.assertTrue(TranslatorRegistry.translator is NullTranslator);
         }
         
-        [Test]
-        public function installで上書きするとtranslatorはそのクラスを返す():void
+        [Test(description="installで上書きするとtranslatorはそのクラスを返す")]
+        public function shouldOverrideTranslator():void
         {
             var translator:FakeTranslator = new FakeTranslator();
             TranslatorRegistry.install(translator);
             Assert.assertTrue(TranslatorRegistry.translator is FakeTranslator);
         }
         
-        [Test]
-        public function NullTranslatorは少なくともgettext形式の引数を置換する能力を持つ():void
+        [Test(description="NullTranslatorは少なくともgettext形式の引数を置換する能力を持つ")]
+        public function shouldNullTranslatorIsAbleToSubstitute():void
         {
             Assert.assertEquals(
                 "This is a test, test2 and test3",

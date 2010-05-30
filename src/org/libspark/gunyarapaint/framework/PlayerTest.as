@@ -7,8 +7,8 @@ package org.libspark.gunyarapaint.framework
 
     public class PlayerTest
     {
-        [Test]
-        public function プレイヤーが再生されるとplayingがtrueになる():void
+        [Test(desription="プレイヤーが再生されるとplayingがtrueになること")]
+        public function shouldPlayingBeTrueIfPlayed():void
         {
             var player:Player = newPlayer();
             player.start();
@@ -16,17 +16,18 @@ package org.libspark.gunyarapaint.framework
             player.stop();
         }
         
-        [Test]
-        public function プレイヤーが停止されるとplayingがfalseになる():void
+        [Test(description="プレイヤーが停止されるとplayingがfalseになること")]
+        public function shouldPlayingBeFalseIfStopped():void
         {
             var player:Player = newPlayer();
             player.start();
             player.stop();
             Assert.assertFalse(player.playing);
         }
-        
-        [Test(expects="org.libspark.gunyarapaint.framework.errors.InvalidSignatureError")]
-        public function 正しい署名が入っていないログを読み込むと例外を送出する():void
+		
+		[Test(description="正しい署名が入っていないログを読み込むと例外を送出すること",
+              expects="org.libspark.gunyarapaint.framework.errors.InvalidSignatureError")]
+        public function shouldThrowInvalidSignatureErrorIfLogInvalid():void
         {
             var bytes:ByteArray = new ByteArray();
             // 14bytes は最低でも埋める
@@ -35,15 +36,16 @@ package org.libspark.gunyarapaint.framework
             Player.create(bytes);
         }
         
-        [Test(expects="org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError")]
-        public function サポートしないバージョンのログを読み込むと例外を送出する():void
+        [Test(description="サポートしないバージョンのログを読み込むと例外を送出する",
+              expects="org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError")]
+        public function shouldThrowNotSupportedVersionErrorIfNotSupportedVersionSeen():void
         {
             var bytes:ByteArray = newPlayerLog("0.0.0");
             Player.create(bytes);
         }
         
-        [Test]
-        public function バージョン0_1_0まではPainterV1が使われること():void
+        [Test(description="バージョン0_1_0まではPaintEngineV1が使われること")]
+        public function shouldUsePaintEngineV1():void
         {
             var bytes:ByteArray = newPlayerLog("0.1.0");
             var painter:Player = Player.create(bytes);
@@ -52,8 +54,8 @@ package org.libspark.gunyarapaint.framework
             // Assert.assertEquals("[object PainterV1]", painter. + "");
         }
         
-        [Test]
-        public function バージョン0_2_0以降はPainterV2が使われること():void
+        [Test(description="バージョン0_2_0以降はPaintEngineV2が使われること")]
+        public function shouldUsePaintEngineV2():void
         {
             var bytes:ByteArray = newPlayerLog("0.2.0");
             var painter:Player = Player.create(bytes);

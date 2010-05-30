@@ -13,23 +13,23 @@ package org.libspark.gunyarapaint.framework
 
     public class ParserTest
     {
-        [Test(expects="ArgumentError")]
-        public function ログデータが26bytes未満の場合例外を送出する():void
+        [Test(description="ログデータが26bytes未満の場合例外を送出すること", expects="ArgumentError")]
+        public function shouldThrowArgumentErrorIfLengthIsLessThan26bytes():void
         {
             var parser:Parser = new Parser(new ByteArray());
             parser.rewind();
         }
         
-        [Test]
-        public function ログをヘッダーを読み込んだ後の位置に変更する():void
+        [Test(description="ログデータをヘッダーを読み込んだ後の位置に変更すること")]
+        public function shouldBeAtHeadOfBody():void
         {
             var parser:Parser = new Parser(newBytesWithDummyHeader());
             parser.rewind();
             Assert.assertEquals(Parser.EOH, parser.bytes.position);
         }
         
-        [Test]
-        public function 先読みを行う():void
+        [Test(description="対象のログデータが先読みでコマンドが7個で、最大巻き戻し回数が4回であることを確認すること")]
+        public function shouldTargetIs4UndoCountAnd7CommandCount():void
         {
             var bytes:ByteArray = newBytesWithDummyHeader();
             // 連続して巻き戻し及びやり直しが発生するのは4回

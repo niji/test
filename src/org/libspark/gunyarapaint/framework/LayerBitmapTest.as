@@ -10,15 +10,15 @@ package org.libspark.gunyarapaint.framework
     // LayerBitmap#compositeTo is tested in PainterTest#レイヤー情報の保存と復帰
     public class LayerBitmapTest
     {
-        [Test]
-        public function レイヤーの作成():void
+        [Test(description="レイヤーが作成されること")]
+        public function shouldCreateLayer():void
         {
             var layer:LayerBitmap = new LayerBitmap(newSmallBitmapData());
             Assert.assertTrue(layer is LayerBitmap);
         }
         
-        [Test]
-        public function レイヤーのクローン():void
+        [Test(description="レイヤーがクローンされること")]
+        public function shouldCloneLayer():void
         {
             var layer:LayerBitmap = newLayerToClone();
             var newLayer:LayerBitmap = layer.clone();
@@ -28,8 +28,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(0, newLayer.bitmapData.compare(layer.bitmapData));
         }
         
-        [Test]
-        public function 塗りつぶし():void
+        [Test(description="塗りつぶしが出来ること")]
+        public function shouldBeAbleToFloodFill():void
         {
             var bmd:BitmapData = newBigBitmapData();
             var layer:LayerBitmap = new LayerBitmap(bmd);
@@ -38,8 +38,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(0, 0));
         }
         
-        [Test]
-        public function ドットうち():void
+        [Test(description="ドット打ちが出来ること")]
+        public function shouldBeAbleToSetPixel():void
         {
             var bmd:BitmapData = newBigBitmapData();
             var layer:LayerBitmap = new LayerBitmap(bmd);
@@ -48,8 +48,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(uint.MAX_VALUE, layer.bitmapData.getPixel32(0, 0));
         }
         
-        [Test]
-        public function レイヤーのJSONシリアライズ():void
+        [Test(description="JSONのシリアライズが出来ること")]
+        public function shouldSerializeFromAndToJSON():void
         {
             var layer:LayerBitmap = newLayerToClone();
             var newLayer:LayerBitmap = new LayerBitmap(newBigBitmapData());

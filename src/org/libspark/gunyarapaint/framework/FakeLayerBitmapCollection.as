@@ -5,6 +5,12 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.LayerBitmap;
     import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
     
+	/**
+	 * LayerBitmapCollection を継承したスタブクラス。実行したかのフラグ管理を行う。
+	 * 
+	 * レイヤー関連のコマンドのテストで使う。本当は継承ではなく、インターフェースの実装とするべきではあるが、
+	 * 再設計が必要になってしまうので継承とした。
+	 */	
     public class FakeLayerBitmapCollection extends LayerBitmapCollection
     {
         public function FakeLayerBitmapCollection(width:int, height:int)

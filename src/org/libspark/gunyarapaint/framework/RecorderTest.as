@@ -12,7 +12,7 @@ package org.libspark.gunyarapaint.framework
     {
         
         [Test(description="widthとheightが設定されること")]
-        public function should_set_width_and_height_after_create():void
+        public function shouldSetWidthAndHeightAfterCreate():void
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 123, 321, 16);
@@ -21,7 +21,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(description="bytesでコピーを取ることが出来ること")]
-        public function should_copy_bytes():void
+        public function shouldCopyBytes():void
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 123, 321, 16);
@@ -31,7 +31,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(async, description="commitCommandでコマンド及びCOMMITTEDイベントが実行されること")]
-        public function should_dispatch_committed_event():void
+        public function shouldDispatchCommittedEvent():void
         {
             var commands:CommandContext = new CommandContext();
             var bytes:ByteArray = new ByteArray();
@@ -46,7 +46,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(async, description="undoの追加と巻き戻しとやり直しを行うとそれぞれ対応するイベントが実行されること")]
-        public function should_dispatch_undo_events_after_push_or_undo_or_redo():void
+        public function shouldDispatchUndoEventsAfterPushOrUndoOrRedo():void
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 1, 1, 16);

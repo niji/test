@@ -3,7 +3,11 @@ package org.libspark.gunyarapaint.framework
     import flash.utils.ByteArray;
     
     import org.libspark.gunyarapaint.framework.commands.ICommand;
-
+	
+	/**
+	 * ICommand を実装したスタブクラス。実行したかのフラグを管理する
+	 * 
+	 */
     public class FakeCommand implements ICommand
     {
         public static const ID:int = 63;

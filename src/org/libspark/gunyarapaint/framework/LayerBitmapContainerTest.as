@@ -11,7 +11,7 @@ package org.libspark.gunyarapaint.framework
         public const HEIGHT:int = 321;
         
         [Test(description="画像の大きさを指定するとLayerCollectionが作成されること")]
-        public function should_create_LayerCollection():void
+        public function shouldCreateLayerCollection():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             Assert.assertStrictlyEquals(1, lc.count);
@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(description="レイヤーが追加されること")]
-        public function should_add_layer():void
+        public function shouldAddLayer():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
@@ -31,7 +31,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(description="レイヤーのコピーが作成されること")]
-        public function should_copy_layer():void
+        public function shouldCopyLayer():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.copy();
@@ -40,7 +40,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(description="レイヤーの交換が行われること")]
-        public function should_swap_layers():void
+        public function shouldSwapLayers():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
@@ -52,7 +52,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(description="レイヤーが統合されて、統合後のAlpha値が1.0になること")]
-        public function should_merge_layers():void
+        public function shouldMergeLayers():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
@@ -64,7 +64,7 @@ package org.libspark.gunyarapaint.framework
         
         [Test(description="両方のレイヤーが可視でなければ統合が失敗すること",
               expects="org.libspark.gunyarapaint.framework.errors.MergeLayersError")]
-        public function should_throw_MergeLayersError_if_invisible_layer_found():void
+        public function shouldThrowMergeLayersErrorIfInvisibleLayerFound():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
@@ -75,7 +75,7 @@ package org.libspark.gunyarapaint.framework
         
         [Test(description="レイヤーがひとつしか無ければ失敗すること",
               expects="org.libspark.gunyarapaint.framework.errors.MergeLayersError")]
-        public function should_throw_MergeLayersError_if_only_one_layer_found():void
+        public function shouldThrowMergeLayersErrorIfOnlyOneLayerFound():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.merge();
@@ -83,7 +83,7 @@ package org.libspark.gunyarapaint.framework
         
         [Test(description="規定数以上のレイヤーを作成すると例外を送出すること",
               expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
-        public function should_throw_AddLayerError_if_create_layer_over_max():void
+        public function shouldThrowAddLayerErrorIfCreateLayerOverMax():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             var max:uint = LayerBitmapCollection.MAX;
@@ -94,7 +94,7 @@ package org.libspark.gunyarapaint.framework
         
         [Test(description="規定数以上のレイヤーをコピーすると例外を送出すること",
               expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
-        public function should_throw_AddLayerError_if_copy_layer_over_max():void
+        public function shouldThrowAddLayerErrorIfCopyLayerOverMax():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             var max:uint = LayerBitmapCollection.MAX ;
@@ -104,7 +104,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         [Test(description="レイヤーが削除されること")]
-        public function should_remove_layer():void
+        public function shouldRemoveLayer():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.add();
@@ -114,7 +114,7 @@ package org.libspark.gunyarapaint.framework
         
         [Test(description="レイヤーが1枚しか無い状態で削除すると例外を送出すること",
               expects="org.libspark.gunyarapaint.framework.errors.RemoveLayerError")]
-        public function should_throw_RemoveLayerErro_if_remove_bottom_layer():void
+        public function shouldThrowRemoveLayerErroIfRemoveBottomLayer():void
         {
             var lc:LayerBitmapCollection = newLayerBitmapCollection();
             lc.remove();
@@ -122,7 +122,7 @@ package org.libspark.gunyarapaint.framework
         
         [Test(description="投稿時にレイヤー画像が一定のピクセル数以上だと例外を送出すること",
               expects="org.libspark.gunyarapaint.framework.errors.TooManyLayersError")]
-        public function should_throw_TooManyLayersErorr_if_layer_have_many():void
+        public function shouldThrowTooManyLayersErorrIfLayerHaveMany():void
         {
             var lc:LayerBitmapCollection = new LayerBitmapCollection(12, 34);
             var bitmap:BitmapData = new BitmapData(lc.width, LayerBitmapCollection.MAX_PIXEL + 1);

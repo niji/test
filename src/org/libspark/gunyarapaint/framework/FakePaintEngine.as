@@ -7,6 +7,12 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.PaintEngine;
     import org.libspark.gunyarapaint.framework.Pen;
 
+	/**
+	 * PaintEngine を継承したスタブクラス。実行したかのフラグ及び描写位置を管理する。FakePainter に包括される。
+	 * 
+	 * もともと PaintEngine を作ったきっかけは flash.display.Graphics がサブクラスとして作れないので、
+	 * これをラップするクラスを必要としたため。PaintEngine のおかげで少なくとも実行したかのテストは出来るようになった。
+	 */	
     public class FakePaintEngine extends PaintEngine
     {
         public function FakePaintEngine()

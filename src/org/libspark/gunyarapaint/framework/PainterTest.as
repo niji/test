@@ -12,8 +12,8 @@ package org.libspark.gunyarapaint.framework
 
     public class PainterTest
     {
-        [Test]
-        public function 座標の移動():void
+        [Test(description="moveToは座標を移動すること")]
+        public function shouldMoveCoordinates():void
         {
             var x:int = 42;
             var y:int = 124;
@@ -23,8 +23,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(y, FakePaintEngine.point.y);
         }
         
-        [Test]
-        public function 円の描写():void
+        [Test(description="drawCircleは半径を元に円を描写すること")]
+        public function shouldDrawCircleByRadius():void
         {
             var radius:Number = 3.14;
             var painter:Painter = newPainter();
@@ -32,8 +32,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(radius, FakePaintEngine.radius);
         }
         
-        [Test]
-        public function 長方形の描写():void
+        [Test(description="drawRectは長方形の大きさに従って描写すること")]
+        public function shouldDrawRectByRectangle():void
         {
             var x:int = 42;
             var y:int = 124;
@@ -47,8 +47,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(height, FakePaintEngine.rectangle.height);
         }
         
-        [Test]
-        public function 楕円の描写():void
+        [Test(description="drawEllipseは長方形の大きさに従って描写すること")]
+        public function shouldDrawEllipseByRectangle():void
         {
             var x:int = 512;
             var y:int = 256;
@@ -62,8 +62,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(height, FakePaintEngine.rectangle.height);
         }
         
-        [Test]
-        public function 塗りつぶし():void
+        [Test(description="floodFillは色と不透明度によって描写すること")]
+        public function shouldFloodFillByColorAndAlpha():void
         {
             var color:uint = uint.MAX_VALUE;
             var alpha:Number = 0.5;
@@ -75,8 +75,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertTrue(FakePaintEngine.filled);
         }
         
-        [Test]
-        public function 描写レイヤーの追加と削除():void
+        [Test(description="startDrawingによって描写レイヤーの追加、stopDrawingで削除が行われること")]
+        public function shouldStartDrawingAddsDrawingLayerAndStopDrawingRemovesIt():void
         {
             var child:DisplayObject;
             var painter:Painter = newPainter();
@@ -94,8 +94,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertTrue(child is Bitmap);
         }
         
-        [Test]
-        public function レイヤー情報の保存と復帰():void
+        [Test(description="saveによってレイヤーの情報の保存、loadでそれを復元すること")]
+        public function shouldRestoreLayersAfterSaving():void
         {
             var metadata:Object = {};
             var painter:Painter = newPainterForSave();
@@ -130,8 +130,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(0x0000ff, painter2.getPixel(2, 0));
         }
         
-        [Test]
-        public function ペイントエンジンv1の座標補正():void
+        [Test(description="PaintEngineV1の座標補正が正しく行われていること")]
+        public function shouldCorrectCoordinatesWithPaintEngineV1():void
         {
             var engine:PaintEngine = Painter.createPaintEngine(1);
             assertCorrectedPoint(engine, 1, 1, 1.23, 1.23);
@@ -139,9 +139,9 @@ package org.libspark.gunyarapaint.framework
             assertCorrectedPoint(engine, 2, 2, 1.98, 1.98);
             assertCorrectedPoint(engine, -2, -2, -1.98, -1.98);
         }
-        
-        [Test]
-        public function ペイントエンジンv2の座標補正():void
+		
+		[Test(description="PaintEngineV2の座標補正が正しく行われていること")]
+        public function shouldCorrectCoordinatesWithPaintEngineV2():void
         {
             var engine:PaintEngine = Painter.createPaintEngine(11);
             engine.pen.thickness = 8;
@@ -156,8 +156,8 @@ package org.libspark.gunyarapaint.framework
             assertCorrectedPoint(engine, -1.5, -1.5, -1.98, -1.98);
         }
         
-        [Test]
-        public function enableUndoLayerが設定されていればpushUndoIfでもUndoStackが積まれる():void
+        [Test(description="enableUndoLayerが設定されていればpushUndoIfでもUndoStackが積まれること")]
+        public function shouldPushUndoIfEnableUndoLayerIsTrue():void
         {
             var painter:Painter = newPainter();
             var undo:UndoStack = new UndoStack(painter.layers);
@@ -169,8 +169,8 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(1, undo.undoCount);
         }
         
-        [Test]
-        public function versionが21以下であればpushUndoIfでもUndoStackが積まれる():void
+        [Test(description="versionが21以上であればpushUndoIfでもUndoStackが積まれること")]
+        public function shouldPushUndoIfVersionIsGreaterThan21():void
         {
             var painter:Painter = newPainter();
             var undo:UndoStack = new UndoStack(painter.layers);

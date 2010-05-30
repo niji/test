@@ -6,8 +6,8 @@ package org.libspark.gunyarapaint.framework
 
     public class UndoStackTest
     {
-        [Test]
-        public function UndoStackの情報を保存して後から読み込んで復元出来ること():void
+        [Test(description="UndoStackの情報を保存して後から読み込んで復元出来ること")]
+        public function shouldUndoStackIsAbleToRestoreAfterSaving():void
         {
             var layers:LayerBitmapCollection = new LayerBitmapCollection(100, 100);
             var undo:UndoStack = new UndoStack(layers);

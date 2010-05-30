@@ -3,6 +3,14 @@ package org.libspark.gunyarapaint.framework
     import flash.display.BlendMode;
     import flash.geom.Point;
     
+	/**
+	 * Painter を継承するスタブクラス。実行したかのフラグ管理及び代入された値、描写位置を担当する。
+	 * 
+	 * コマンドのテストで使う。巻き戻し及びやり直しをしたかについては例外でインスタンスから呼び出す必要がある。
+	 * これは単にそうしたほうが楽だからという事情である。
+	 * FakeLayerBitmapCollection と同じく、インターフェース実装が望ましいのだが、
+	 * 再設計が必要になるので仕方なく継承とした。
+	 */	
     public class FakePainter extends Painter
     {
         public function FakePainter()
