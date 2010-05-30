@@ -27,7 +27,23 @@ package org.libspark.gunyarapaint.framework.commands.layer
             command.read(bytes);
             command.execute(painter);
             Assert.assertEquals(args.index, painter.layers.currentIndex);
-            Assert.assertTrue(painter.didPushUndoIfNeed);
+            Assert.assertTrue(painter.didPushUndo);
         }
+		
+		[Test(description="互換設定が入っている場合アンドゥに含めないこと")]
+		public function shouldNotIncludeUndoIfCompatibilityEnabled():void
+		{
+			var bytes:ByteArray = new ByteArray();
+			var command:ICommand = new SetLayerIndexCommand();
+			var painter:FakePainter = new FakePainter();
+			var args:Object = { "index": 42 };
+			command.write(bytes, args);
+			bytes.position = 0;
+			bytes.readByte();
+			painter.enableUndoLayer = true;
+			command.read(bytes);
+			command.execute(painter);
+			Assert.assertFalse(painter.didPushUndo);
+		}
     }
 }
