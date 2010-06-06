@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class CompositeCommandTest
     {
-        [Test]
-        public function 描写コマンドの実行():void
+        [Test(description="描写コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new CompositeCommand();

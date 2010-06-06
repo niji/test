@@ -20,15 +20,15 @@ package org.libspark.gunyarapaint.framework.module
             m_module = context.getModule(TransparentFloodFill.TRANSPARENT_FLOOD_FILL);
         }
         
-        [Test]
-        public function TransparentFloodFillModuleであること():void
+        [Test(description="TransparentFloodFillModuleであること")]
+        public function shouldBeTransparentFloodFillModule():void
         {
             Assert.assertTrue(m_module is TransparentFloodFill);
             Assert.assertEquals(m_module.name, TransparentFloodFill.TRANSPARENT_FLOOD_FILL);
         }
         
-        [Test]
-        public function 透明塗りつぶしを実行すると6つのコマンドが実行された上で色情報が復帰されること():void
+        [Test(description="透明塗りつぶしを実行すると6つのコマンドが実行された上で色情報が復帰されること")]
+        public function shouldExecuteSixCommandsAndRestoreColorAndAlpha():void
         {
             var pen:Pen = m_recorder.pen;
             pen.alpha = 0.5;
@@ -36,28 +36,28 @@ package org.libspark.gunyarapaint.framework.module
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
-            ModuleTestUtil.countCommands(6, m_bytes);
+            ModuleTestUtil.assertCommands(6, m_bytes);
             Assert.assertStrictlyEquals(0.5, pen.alpha);
             Assert.assertStrictlyEquals(0x123456, pen.color);
         }
         
-        [Test]
-        public function 途中で中断したとしても色情報が復帰されること():void
+        [Test(description="途中で中断したとしても色情報が復帰されること")]
+        public function shouldRestoreColorAndAlphaIfInterrupted():void
         {
             var pen:Pen = m_recorder.pen;
             pen.alpha = 0.5;
             pen.color = 0x123456;
             m_module.start(1, 1);
             m_module.interrupt(2, 2);
-            ModuleTestUtil.countCommands(6, m_bytes);
+            ModuleTestUtil.assertCommands(6, m_bytes);
             Assert.assertStrictlyEquals(0.5, pen.alpha);
             Assert.assertStrictlyEquals(0x123456, pen.color);
         }
         
-        [Test]
-        public function 移動位置が保存されること():void
+        [Test(description="移動位置が保存されること")]
+        public function shouldSaveCoordinates():void
         {
-            ModuleTestUtil.getLineSegment(m_module, false);
+            ModuleTestUtil.assertLineSegment(m_module, false);
         }
         
         private var m_bytes:ByteArray;

@@ -20,26 +20,26 @@ package org.libspark.gunyarapaint.framework.module
             m_module = context.getModule(DropperModule.DROPPER);
         }
         
-        [Test]
-        public function DropperModuleであること():void
+        [Test(description="DropperModuleであること")]
+        public function shouldBeDropperModule():void
         {
             Assert.assertTrue(m_module is DropperModule);
             Assert.assertEquals(m_module.name, DropperModule.DROPPER);
         }
         
-        [Test]
-        public function スポイトを実行すると1つのコマンドが実行されること():void
+        [Test(description="スポイトを実行すると1つのコマンドが実行されること")]
+        public function shouldExecuteOneCommand():void
         {
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
-            ModuleTestUtil.countCommands(1, m_bytes);
+            ModuleTestUtil.assertCommands(1, m_bytes);
         }
         
-        [Test]
-        public function 移動位置が保存されること():void
+        [Test(description="移動位置が保存されること")]
+        public function shouldSaveCoordinates():void
         {
-            ModuleTestUtil.getLineSegment(m_module, false);
+            ModuleTestUtil.assertLineSegment(m_module, false);
         }
         
         private var m_bytes:ByteArray;

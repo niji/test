@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class FloodFillCommandTest
     {
-        [Test]
-        public function 塗りつぶしコマンドの実行():void
+        [Test(description="塗りつぶしコマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new FloodFillCommand();

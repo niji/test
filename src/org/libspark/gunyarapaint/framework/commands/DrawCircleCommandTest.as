@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class DrawCircleCommandTest
     {
-        [Test]
-        public function 円弧を描写するコマンドの実行():void
+        [Test(description="円弧を描写するコマンドが正しく実行されること")]
+        public function shouldExecuteCorrctly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new DrawCircleCommand();

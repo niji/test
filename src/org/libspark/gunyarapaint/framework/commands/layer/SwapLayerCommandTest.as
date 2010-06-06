@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public class SwapLayerCommandTest
     {
-        [Test]
-        public function レイヤー交換コマンドの実行():void
+        [Test(description="レイヤー交換コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new SwapLayerCommand();

@@ -9,21 +9,21 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class MoveToCommandTest
     {
-        [Test]
-        public function xまたはyが7ビットを超えているなら圧縮を実行しない():void
+        [Test(description="xまたはyが7ビットを超えているなら圧縮しないこと")]
+        public function shouldNotCompressIfArgsHasMoreThanSevenBits():void
         {
-            assert(64, -65);
-            assert(-65, 64);
+            assertCoordinates(64, -65);
+            assertCoordinates(-65, 64);
         }
         
-        [Test]
-        public function xまたはyが7ビット以下であればshortに圧縮():void
+        [Test(description="xまたはyが7ビット以下であればshortに圧縮すること")]
+        public function shouldCompressToShortIfArgsHasUnderSevenBits():void
         {
-            assert(63, -64);
-            assert(-64, 63);
+            assertCoordinates(63, -64);
+            assertCoordinates(-64, 63);
         }
         
-        private function assert(x:int, y:int):void
+        private function assertCoordinates(x:int, y:int):void
         {
             var bytes:ByteArray = new ByteArray();
             var command:MoveToCommand = new MoveToCommand();

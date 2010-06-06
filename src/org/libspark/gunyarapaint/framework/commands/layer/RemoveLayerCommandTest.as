@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public class RemoveLayerCommandTest
     {
-        [Test]
-        public function レイヤー削除コマンドの実行():void
+        [Test(description="レイヤー削除コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new RemoveLayerCommand();

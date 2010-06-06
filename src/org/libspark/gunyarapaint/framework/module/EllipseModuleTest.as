@@ -20,31 +20,25 @@ package org.libspark.gunyarapaint.framework.module
             m_module = context.getModule(EllipseModule.ELLIPSE);
         }
         
-        [Test]
-        public function EllipseModuleであること():void
+        [Test(description="EllipseModuleであること")]
+        public function shouldBeEllipseModule():void
         {
             Assert.assertTrue(m_module is EllipseModule);
             Assert.assertEquals(m_module.name, EllipseModule.ELLIPSE);
         }
         
-        [Test]
-        public function 移動せずに描画すると何も起こらないこと():void
+        [Test(description="移動せずに描画すると何も起こらないこと")]
+        public function shouldDoNothingWithoutMoving():void
         {
             m_module.start(1, 1);
             m_module.stop(1, 1);
-            ModuleTestUtil.countCommands(0, m_bytes);
+            ModuleTestUtil.assertCommands(0, m_bytes);
         }
         
-        [Test]
-        public function 移動して描画する():void
+        [Test(description="移動位置が保存されること")]
+        public function shouldSaveCoordinates():void
         {
-            // TODO: implement this
-        }
-        
-        [Test]
-        public function 移動位置が保存されること():void
-        {
-            ModuleTestUtil.getLineSegment(m_module, true);
+            ModuleTestUtil.assertLineSegment(m_module, true);
         }
         
         private var m_bytes:ByteArray;

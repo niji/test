@@ -9,8 +9,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class UndoCommandTest
     {
-        [Test]
-        public function 巻き戻しコマンドの実行():void
+        [Test(description="巻き戻しコマンドの実行")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new UndoCommand();

@@ -20,26 +20,26 @@ package org.libspark.gunyarapaint.framework.module
             m_module = context.getModule(FloodFillModule.FLOOD_FILL);
         }
         
-        [Test]
-        public function FloodFillModuleであること():void
+        [Test(description="FloodFillModuleであること")]
+        public function shouldBeFloodFillModule():void
         {
             Assert.assertTrue(m_module is FloodFillModule);
             Assert.assertEquals(m_module.name, FloodFillModule.FLOOD_FILL);
         }
         
-        [Test]
-        public function 塗潰を実行すると2つのコマンドが実行されること():void
+        [Test(description="塗り潰しを実行すると2つのコマンドが実行されること")]
+        public function shouldExecuteTwoCommands():void
         {
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
-            ModuleTestUtil.countCommands(2, m_bytes);
+            ModuleTestUtil.assertCommands(2, m_bytes);
         }
         
-        [Test]
-        public function 移動位置が保存されること():void
+        [Test(description="移動位置が保存されること")]
+        public function shouldSaveCoordinates():void
         {
-            ModuleTestUtil.getLineSegment(m_module, false);
+            ModuleTestUtil.assertLineSegment(m_module, false);
         }
         
         private var m_bytes:ByteArray;

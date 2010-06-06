@@ -7,8 +7,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public final class BezierCurveCommandTest
     {
-        [Test]
-        public function ベジエ曲線描写コマンドの実行():void
+        [Test(description="ベジエ曲線描写コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var args:Object = {

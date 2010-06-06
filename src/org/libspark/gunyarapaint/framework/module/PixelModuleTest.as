@@ -20,34 +20,34 @@ package org.libspark.gunyarapaint.framework.module
             m_module = context.getModule(PixelModule.PIXEL);
         }
         
-        [Test]
-        public function PixelModuleであること():void
+        [Test(description="PixelModuleであること")]
+        public function shouldBePixelModule():void
         {
             Assert.assertTrue(m_module is PixelModule);
             Assert.assertEquals(m_module.name, PixelModule.PIXEL);
         }
         
-        [Test]
-        public function 移動せずに描画すると1つのコマンドが実行されること():void
+        [Test(description="移動せずに描画すると1つのコマンドが実行されること")]
+        public function shouldExecuteOneCommandWithoutMoving():void
         {
             m_module.start(1, 1);
             m_module.stop(1, 1);
-            ModuleTestUtil.countCommands(1, m_bytes);
+            ModuleTestUtil.assertCommands(1, m_bytes);
         }
         
-        [Test]
-        public function 移動して描画すると2つのコマンドが実行されること():void
+        [Test(description="移動して描画すると2つのコマンドが実行されること")]
+        public function shouldExecuteTwoCommandsWithMoving():void
         {
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
-            ModuleTestUtil.countCommands(2, m_bytes);
+            ModuleTestUtil.assertCommands(2, m_bytes);
         }
         
-        [Test]
-        public function 移動位置が保存されること():void
+        [Test(description="移動位置が保存されること")]
+        public function shouldSaveCoordinates():void
         {
-            ModuleTestUtil.getLineSegment(m_module, false);
+            ModuleTestUtil.assertLineSegment(m_module, false);
         }
         
         private var m_bytes:ByteArray;

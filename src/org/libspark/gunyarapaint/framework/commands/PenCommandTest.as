@@ -13,50 +13,50 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class PenCommandTest
     {
-        [Test]
-        public function ペンの太さを調整():void
+        [Test(description="ペンの太さが正しく変更されること")]
+        public function shouldChangeThicknessCorrectly():void
         {
             test(PenCommand.THICKNESS, "thickness", 42);
         }
         
-        [Test]
-        public function ペンの色を調整():void
+        [Test(description="ペンの色が正しく変更されること")]
+        public function shouldChangeColorCorrectly():void
         {
             test(PenCommand.COLOR, "color", 0xffffffff);
         }
         
-        [Test]
-        public function ペンの透明度を調整():void
+        [Test(description="ペンの不透明度が正しく変更されること")]
+        public function shouldChangeAlphaCorrectly():void
         {
             test(PenCommand.ALPHA, "alpha", 0.314);
         }
         
-        [Test]
-        public function ペンのマイター値を調整():void
+        [Test(description="ペンのマイター値が正しく変更されること")]
+        public function shouldChangeMiterLimitCorrectly():void
         {
             test(PenCommand.MITER_LIMIT, "miterLimit", 0.314);
         }
         
-        [Test]
-        public function ペンのスケールモードを調整():void
+        [Test(description="ペンのスケールモードが正しく変更されること")]
+        public function shouldChangeScaleModeCorrectly():void
         {
             test(PenCommand.SCALE_MODE, "scaleMode", LineScaleMode.VERTICAL);
         }
         
-        [Test]
-        public function ペンのキャップを調整():void
+        [Test(description="ペンのキャップモードが正しく変更されること")]
+        public function shouldChangeCapsStyleCorrectly():void
         {
             test(PenCommand.CAPS, "capsStyle", CapsStyle.SQUARE);
         }
         
-        [Test]
-        public function ペンのジョイントを調整():void
+        [Test(description="ペンのジョイントを調整")]
+        public function shouldChangeJointStyleCorrectly():void
         {
             test(PenCommand.JOINTS, "jointStyle", JointStyle.BEVEL);
         }
         
-        [Test]
-        public function ペンのピクセルヒンティングを調整():void
+        [Test(description="ペンのピクセルヒンティングを調整")]
+        public function shouldChangePixelHintingCorrectly():void
         {
             test(PenCommand.PIXEL_HINTING, "pixelHinting", false);
         }

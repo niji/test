@@ -7,8 +7,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class ResetAllCommandTest
     {
-        [Test]
-        public function 初期化コマンドの実行():void
+        [Test(description="初期化コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new ResetAllCommand();

@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class PixelCommandTest
     {
-        [Test]
-        public function ピクセルコマンドの実行():void
+        [Test(description="ピクセルコマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new PixelCommand();

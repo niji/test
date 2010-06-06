@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class EndFillComamndTest
     {
-        [Test]
-        public function 塗り終了コマンドの実行():void
+        [Test(description="塗り終了コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new EndFillCommand();

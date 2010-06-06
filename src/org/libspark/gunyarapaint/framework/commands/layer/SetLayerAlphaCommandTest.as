@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public class SetLayerAlphaCommandTest
     {
-        [Test]
-        public function レイヤーの透明度を設定するコマンドの実行():void
+        [Test(description="レイヤーの透明度を設定するコマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new SetLayerAlphaCommand();

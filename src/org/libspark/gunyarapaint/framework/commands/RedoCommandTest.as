@@ -9,8 +9,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class RedoCommandTest
     {
-        [Test]
-        public function やり直しコマンドの実行():void
+        [Test(description="やり直しコマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new RedoCommand();

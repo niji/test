@@ -43,12 +43,12 @@ package org.libspark.gunyarapaint.framework.module
             return commands;
         }
         
-        public static function countCommands(expected:uint, bytes:ByteArray):void
+        public static function assertCommands(expected:uint, bytes:ByteArray):void
         {
             Assert.assertEquals(expected, getCommands(bytes).length);
         }
         
-        public static function getLineSegment(module:ICanvasModule, checkStart:Boolean):void
+        public static function assertLineSegment(module:ICanvasModule, checkStart:Boolean):void
         {
             var start:Point = new Point();
             var end:Point = new Point();

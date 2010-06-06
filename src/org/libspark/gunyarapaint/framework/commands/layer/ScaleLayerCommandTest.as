@@ -9,8 +9,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public final class ScaleLayerCommandTest
     {
-        [Test]
-        public function レイヤー拡大縮小コマンドの実行():void
+        [Test(description="レイヤー拡大縮小コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new ScaleLayerCommand();

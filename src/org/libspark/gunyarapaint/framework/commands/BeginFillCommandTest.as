@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class BeginFillCommandTest
     {
-        [Test]
-        public function 塗り開始コマンドの実行():void
+        [Test(description="塗り開始コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var args:Object = {

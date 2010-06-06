@@ -10,30 +10,30 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class LineToCommandTest
     {
-        [Test]
-        public function xまたはyが7ビットを超えているなら圧縮を実行しない():void
+        [Test(description="xまたはyが7ビットを超えているなら圧縮しないこと")]
+        public function shouldNotCompressIfArgsHasMoreThanSevenBits():void
         {
-            assert(64, -65);
-            assert(-65, 64);
+            assertCoordinates(64, -65);
+            assertCoordinates(-65, 64);
         }
         
-        [Test]
-        public function xまたはyが7ビット以下であればshortに圧縮():void
+        [Test(description="xまたはyが7ビット以下であればshortに圧縮すること")]
+        public function shouldCompressToShortIfArgsHasUnderSevenBits():void
         {
-            assert(63, -64);
-            assert(-64, 63);
-            assert(4, -5);
-            assert(-5, 4);
+            assertCoordinates(63, -64);
+            assertCoordinates(-64, 63);
+            assertCoordinates(4, -5);
+            assertCoordinates(-5, 4);
         }
         
-        [Test]
-        public function xまたはyが3ビット以下であればbyteに圧縮():void
+        [Test(description="xまたはyが3ビット以下であればbyteに圧縮すること")]
+        public function shouldCompressToByteIfArgsHasUnderThreeBits():void
         {
-            assert(3, -4);
-            assert(-4, 3);
+            assertCoordinates(3, -4);
+            assertCoordinates(-4, 3);
         }
         
-        private function assert(x:int, y:int):void
+        private function assertCoordinates(x:int, y:int):void
         {
             var bytes:ByteArray = new ByteArray();
             var command:LineToCommand = new LineToCommand();

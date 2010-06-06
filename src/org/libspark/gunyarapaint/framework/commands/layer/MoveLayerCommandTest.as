@@ -9,8 +9,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public final class MoveLayerCommandTest
     {
-        [Test]
-        public function レイヤー移動コマンドの実行():void
+        [Test(description="レイヤー移動コマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new MoveLayerCommand();

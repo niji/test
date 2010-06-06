@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class VerticalMirrorCommandTest
     {
-        [Test]
-        public function 垂直ミラー作成コマンドの実行():void
+        [Test(description="垂直ミラー作成コマンドの実行")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new VerticalMirrorCommand();

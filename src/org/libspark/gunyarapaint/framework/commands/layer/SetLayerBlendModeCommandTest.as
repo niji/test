@@ -11,8 +11,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public class SetLayerBlendModeCommandTest
     {
-        [Test]
-        public function レイヤーのブレンドモードを設定するコマンドの実行():void
+        [Test(description="レイヤーのブレンドモードを設定するコマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new SetLayerBlendModeCommand();

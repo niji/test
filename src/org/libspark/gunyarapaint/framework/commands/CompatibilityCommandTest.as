@@ -8,8 +8,8 @@ package org.libspark.gunyarapaint.framework.commands
 
     public class CompatibilityCommandTest
     {
-        [Test]
-        public function 互換性オプションのうちレイヤーのアンドゥを有効にする設定の実行():void
+        [Test(description="互換性オプションのうちレイヤーのアンドゥを有効にする設定が正しく実行されること")]
+        public function shouldExecuteUndoLayerCompatibilityCorrectly():void
         {
             // default is false
             var bytes:ByteArray = new ByteArray();
@@ -31,8 +31,8 @@ package org.libspark.gunyarapaint.framework.commands
             Assert.assertTrue(painter.enableUndoLayer);
         }
         
-        [Test]
-        public function 互換性オプションのうち大きなピクセルを無効にする設定の実行():void
+        [Test(description="互換性オプションのうち大きなピクセルを無効にする設定が正しく実行されること")]
+        public function shouldExecuteBigPixelCompatibilityCorrectly():void
         {
             // default is true
             var bytes:ByteArray = new ByteArray();

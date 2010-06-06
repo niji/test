@@ -10,8 +10,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
 
     public class SetLayerVisibleCommandTest
     {
-        [Test]
-        public function レイヤーのインデックスを設定するコマンドの実行():void
+        [Test(description="レイヤーのインデックスを設定するコマンドが正しく実行されること")]
+        public function shouldExecuteCorrectly():void
         {
             var bytes:ByteArray = new ByteArray();
             var command:ICommand = new SetLayerVisibleCommand();
