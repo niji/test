@@ -3,6 +3,7 @@
 	<name>test</name>
 	<comment></comment>
 	<projects>
+		<project>compat</project>
 		<project>framework</project>
 	</projects>
 	<buildSpec>
@@ -16,4 +17,11 @@
 		<nature>com.adobe.flexbuilder.project.flexnature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] src</name>
+			<type>2</type>
+			<locationURI>GP_COMPAT_PATH/src</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
