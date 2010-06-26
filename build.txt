@@ -7,9 +7,9 @@ colorpicker へのパス。SVN 上では /as3/gunyarapaint/trunk/colorpicker
 * GP_COMPAT_PATH
 compat へのパス。SVN 上では /as3/gunyarapaint/branches/gunyarapaint/compat
 
-* GP_FLEXUNIT_PATH
-FlexUnit4 へのパス。flexunit-4.x.x.swc があるディレクトリのパスを指定する
-
 * GP_FRAMEWORK_PATH
 framework へのパス。SVN 上では /as3/gunyarapaint/branches/gunyarapaint/framework
 
+FlashDevelopの場合は「環境設定」 -> 「AS3 Context」 -> 「Flex SDK Location」 を
+Flex 4.0 の SDK があるパスに指定する必要があります。これはバンドル済みの FlexUnit が
+Flex 4.0 対応のものを使っているためです。

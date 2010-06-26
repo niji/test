@@ -14,6 +14,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="..\framework\src" />
+    <class path="..\compat\src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -46,10 +47,11 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="libs\FlexUnit1Lib.swc" />
-    <element path="libs\FlexUnit4.swc" />
-    <element path="libs\FlexUnit4UIListener.swc" />
-    <element path="libs\hamcrest-1.0.2.swc" />
+    <element path="libs\flexunit-4.0.0.swc" />
+    <element path="libs\flexunit-aircilistener-4.0.0.swc" />
+    <element path="libs\flexunit-cilistener-4.0.0.swc" />
+    <element path="libs\flexunit-flexcoverlistener-4.0.0.swc" />
+    <element path="libs\flexunit-uilistener-4.0.0.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
