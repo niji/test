@@ -7,7 +7,7 @@
 	<description>ぐにゃらペインターの単体テストを実行するためのアプリケーションです</description>
 	<copyright>hkrn</copyright>
 	<initialWindow>
-		<content>[この値は Flash Builder の出力ファイル app.xml に上書きされます。]</content>
+        <content>FlexUnitRunner.swf</content>
 		<title>ぐにゃらペインターのテスト</title>
 		<systemChrome>none</systemChrome>
 	</initialWindow>

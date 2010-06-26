@@ -1,4 +1,7 @@
+air
+bin
 bin-debug
 bin-release
 obj
+SelfSigned.pfx
 
