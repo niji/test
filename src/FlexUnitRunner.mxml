@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml"
                 xmlns:flexUnitUIRunner="http://www.adobe.com/2009/flexUnitUIRunner" 
                 width="1024" height="600" creationComplete="onCreationComplete(event)">
     <mx:Script>
@@ -20,4 +20,4 @@
         ]]>
     </mx:Script>
     <flexUnitUIRunner:TestRunnerBase id="testRunner" width="100%" height="100%" />	
-</mx:Application>
+</mx:WindowedApplication>

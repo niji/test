@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/2.0">
+	<id>org.libspark.gunyarapaint.test.FlexUnitRunner</id>
+	<filename>FlexUnitRunner</filename>
+	<name>FlexUnitRunner</name>
+	<version>1.0.0</version>
+	<description>ぐにゃらペインターの単体テストを実行するためのアプリケーションです</description>
+	<copyright>hkrn</copyright>
+	<initialWindow>
+		<content>[この値は Flash Builder の出力ファイル app.xml に上書きされます。]</content>
+		<title>ぐにゃらペインターのテスト</title>
+		<systemChrome>none</systemChrome>
+	</initialWindow>
+</application>
