@@ -3,6 +3,7 @@ package org.libspark.gunyarapaint.framework
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
+    import org.flexunit.async.Async;
     import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
@@ -38,33 +39,53 @@ package org.libspark.gunyarapaint.framework
             var recorder:Recorder = new Recorder(bytes, 1, 1, commands);
             var command:ICommand = new FakeCommand();
             commands.registerCommand(command);
-            recorder.addEventListener(CommandEvent.COMMITTED, onCommitCommand);
+            recorder.addEventListener(CommandEvent.COMMITTED,
+                Async.asyncHandler(this, onCommitCommand, 100));
             recorder.commitCommand(FakeCommand.ID, command);
             Assert.assertTrue(FakeCommand.didExecute);
             Assert.assertTrue(FakeCommand.didWrite);
             Assert.assertEquals(command, FakeCommand.writeArgument);
         }
         
-        [Test(async, description="undoの追加と巻き戻しとやり直しを行うとそれぞれ対応するイベントが実行されること")]
-        public function shouldDispatchUndoEventsAfterPushOrUndoOrRedo():void
+        [Test(async, description="巻き戻しを追加するとUndoEvent.PUSHが呼ばれること")]
+        public function shouldDispatchPushEventAfterPushUndo():void
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 1, 1, 16);
-            var undo:UndoStack = recorder.undoStack;
-            undo.addEventListener(UndoEvent.UNDO, onUndo);
-            undo.addEventListener(UndoEvent.REDO, onRedo);
-            undo.addEventListener(UndoEvent.PUSH, onPushUndo);
+            recorder.undoStack.addEventListener(UndoEvent.PUSH,
+                Async.asyncHandler(this, onPushUndo, 100));
+            recorder.pushUndo();
+        }
+        
+        [Test(async, description="巻き戻しされるとUndoEvent.UNDOが呼ばれること")]
+        public function shouldDispatchUndoEventAfterUndo():void
+        {
+            var bytes:ByteArray = new ByteArray();
+            var recorder:Recorder = Recorder.create(bytes, 1, 1, 16);
+            recorder.undoStack.addEventListener(UndoEvent.UNDO,
+                Async.asyncHandler(this, onUndo, 100));
+            recorder.pushUndo();
+            recorder.undo();
+        }
+        
+        [Test(async, description="やり直しされるとUndoEvent.REDOが呼ばれること")]
+        public function shouldDispatchRedoEventAfterRedo():void
+        {
+            var bytes:ByteArray = new ByteArray();
+            var recorder:Recorder = Recorder.create(bytes, 1, 1, 16);
+            recorder.undoStack.addEventListener(UndoEvent.REDO,
+                Async.asyncHandler(this, onRedo, 100));
             recorder.pushUndo();
             recorder.undo();
             recorder.redo();
         }
         
-        private function onCommitCommand(event:CommandEvent):void
+        private function onCommitCommand(event:CommandEvent, ignore:Object):void
         {
             Assert.assertEquals(FakeCommand.ID, event.command.commandID);
         }
         
-        private function onUndo(event:UndoEvent):void
+        private function onUndo(event:UndoEvent, ignore:Object):void
         {
             var undo:UndoStack = UndoStack(event.target);
             Assert.assertStrictlyEquals(UndoEvent.UNDO, event.type);
@@ -72,7 +93,7 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(1, undo.redoCount);
         }
         
-        private function onRedo(event:UndoEvent):void
+        private function onRedo(event:UndoEvent, ignore:Object):void
         {
             var undo:UndoStack = UndoStack(event.target);
             Assert.assertStrictlyEquals(UndoEvent.REDO, event.type);
@@ -80,7 +101,7 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(0, undo.redoCount);
         }
         
-        private function onPushUndo(event:UndoEvent):void
+        private function onPushUndo(event:UndoEvent, ignore:Object):void
         {
             var undo:UndoStack = UndoStack(event.target);
             Assert.assertStrictlyEquals(UndoEvent.PUSH, event.type);

@@ -3,7 +3,11 @@ package org.libspark.gunyarapaint.framework
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
+    import org.flexunit.async.Async;
     import org.libspark.gunyarapaint.framework.Player;
+    import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
+    import org.libspark.gunyarapaint.framework.events.CommandEvent;
+    import org.libspark.gunyarapaint.framework.events.PlayerEvent;
 
     public class PlayerTest
     {
@@ -16,6 +20,16 @@ package org.libspark.gunyarapaint.framework
             player.stop();
         }
         
+        [Test(async, desription="プレイヤーが再生されるとPlayerEvent.STARTEDが呼ばれること")]
+        public function shouldDispatchStartEventAfterPlay():void
+        {
+            var player:Player = newPlayer();
+            player.addEventListener(PlayerEvent.STARTED,
+                Async.asyncHandler(this, onPlayerStarted, 100));
+            player.start();
+            player.stop();
+        }
+        
         [Test(description="プレイヤーが停止されるとplayingがfalseになること")]
         public function shouldPlayingBeFalseIfStopped():void
         {
@@ -24,7 +38,27 @@ package org.libspark.gunyarapaint.framework
             player.stop();
             Assert.assertFalse(player.playing);
         }
-		
+        
+        [Test(async, desription="プレイヤーが停止されるとPlayerEvent.STOPPEDが呼ばれること")]
+        public function shouldDispatchStopEventAfterStop():void
+        {
+            var player:Player = newPlayer();
+            player.addEventListener(PlayerEvent.STOPPED,
+                Async.asyncHandler(this, onPlayerStopped, 100));
+            player.start();
+            player.stop();
+        }
+        
+        [Test(async, desription="プレイヤーが一時停止されるとPlayerEvent.PAUSEDが呼ばれること")]
+        public function shouldDispatchPauseEventAfterPause():void
+        {
+            var player:Player = newPlayer();
+            player.addEventListener(PlayerEvent.PAUSED,
+                Async.asyncHandler(this, onPlayerPaused, 100));
+            player.start();
+            player.pause();
+        }
+        
 		[Test(description="正しい署名が入っていないログを読み込むと例外を送出すること",
               expects="org.libspark.gunyarapaint.framework.errors.InvalidSignatureError")]
         public function shouldThrowInvalidSignatureErrorIfLogInvalid():void
@@ -48,8 +82,8 @@ package org.libspark.gunyarapaint.framework
         public function shouldUsePaintEngineV1():void
         {
             var bytes:ByteArray = newPlayerLog("0.1.0");
-            var painter:Player = Player.create(bytes);
-            Assert.assertEquals(10, painter.version);
+            var player:Player = Player.create(bytes);
+            Assert.assertEquals(10, player.version);
             // internal 参照なので、 オブジェクトを文字列化して比較する
             // Assert.assertEquals("[object PainterV1]", painter. + "");
         }
@@ -58,10 +92,46 @@ package org.libspark.gunyarapaint.framework
         public function shouldUsePaintEngineV2():void
         {
             var bytes:ByteArray = newPlayerLog("0.2.0");
-            var painter:Player = Player.create(bytes);
-            Assert.assertEquals(20, painter.version);
+            var player:Player = Player.create(bytes);
+            Assert.assertEquals(20, player.version);
             // internal 参照なので、 オブジェクトを文字列化して比較する
             // Assert.assertEquals("[object PainterV2]", painter.painter + "");
+        }
+        
+        [Test(async, description="コマンドが解析されるとCommandEvent.PARSEDが呼ばれること")]
+        public function shouldDispatchParseEventAfterPlay():void
+        {
+            var player:Player = Player.create(newPlayerLogWithComposite());
+            player.addEventListener(CommandEvent.PARSE,
+                Async.asyncHandler(this, onCommandParsed, 500));
+            player.start();
+        }
+        
+        [Test(async, description="コマンドが実行されるとPlayerEvent.UPDATEDが呼ばれること")]
+        public function shouldDispatchUpdateEventAfterPlay():void
+        {
+            var player:Player = Player.create(newPlayerLogWithComposite());
+            player.addEventListener(PlayerEvent.UPDATED,
+                Async.asyncHandler(this, onPlayerUpdated, 500));
+            player.start();
+        }
+        
+        [Test(async, description="再生が完了するとPlayerEvent.FINISHEDが呼ばれること")]
+        public function shouldDispatchFinishEventAfterPlayFinished():void
+        {
+            var player:Player = Player.create(newPlayerLogWithComposite());
+            player.addEventListener(PlayerEvent.FINISHED,
+                Async.asyncHandler(this, onPlayerFinished, 1000));
+            player.start();
+        }
+        
+        private function newPlayerLogWithComposite():ByteArray
+        {
+            var bytes:ByteArray = newPlayerLog("0.1.0");
+            // ログ位置が0に設定されてしまうので最後尾に戻す
+            bytes.position = bytes.bytesAvailable;
+            bytes.writeByte(CompositeCommand.ID);
+            return bytes;
         }
         
         private function newPlayerLog(version:String):ByteArray
@@ -93,6 +163,38 @@ package org.libspark.gunyarapaint.framework
             var player:Player = Player.create(bytes);
             player.duration = 10000;
             return player;
+        }
+        
+        private function onPlayerStarted(event:PlayerEvent, ignore:Object):void
+        {
+            Assert.assertStrictlyEquals(PlayerEvent.STARTED, event.type);
+        }
+        
+        private function onPlayerStopped(event:PlayerEvent, ignore:Object):void
+        {
+            Assert.assertStrictlyEquals(PlayerEvent.STOPPED, event.type);
+        }
+        
+        private function onPlayerPaused(event:PlayerEvent, ignore:Object):void
+        {
+            Assert.assertStrictlyEquals(PlayerEvent.PAUSED, event.type);
+        }
+        
+        private function onPlayerUpdated(event:PlayerEvent, ignore:Object):void
+        {
+            Assert.assertStrictlyEquals(PlayerEvent.UPDATED, event.type);
+        }
+        
+        private function onPlayerFinished(event:PlayerEvent, ignore:Object):void
+        {
+            Assert.assertStrictlyEquals(PlayerEvent.FINISHED, event.type);
+            Assert.assertFalse(Player(event.target).playing);
+        }
+        
+        private function onCommandParsed(event:CommandEvent, ignore:Object):void
+        {
+            Assert.assertStrictlyEquals(CommandEvent.PARSE, event.type);
+            Assert.assertTrue(event.command is CompositeCommand);
         }
     }
 }
