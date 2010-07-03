@@ -6,7 +6,10 @@ package org.libspark.gunyarapaint.framework
     import org.flexunit.async.Async;
     import org.libspark.gunyarapaint.framework.Player;
     import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
+    import org.libspark.gunyarapaint.framework.commands.UndoCommand;
+    import org.libspark.gunyarapaint.framework.errors.UndoError;
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
+    import org.libspark.gunyarapaint.framework.events.PlayerErrorEvent;
     import org.libspark.gunyarapaint.framework.events.PlayerEvent;
 
     public class PlayerTest
@@ -125,6 +128,19 @@ package org.libspark.gunyarapaint.framework
             player.start();
         }
         
+        [Test(async, description="再生エラーが発生するとPlayerErrorEvent.ERRORが呼ばれること")]
+        public function shouldDispatchErrorEventWithPlayError():void
+        {
+            var bytes:ByteArray = newPlayerLog("0.1.0");
+            // ログ位置が0に設定されてしまうので最後尾に戻す
+            bytes.position = bytes.bytesAvailable;
+            bytes.writeByte(UndoCommand.ID);
+            var player:Player = Player.create(bytes);
+            player.addEventListener(PlayerErrorEvent.ERROR,
+                Async.asyncHandler(this, onPlayerError, 500));
+            player.start();
+        }
+        
         private function newPlayerLogWithComposite():ByteArray
         {
             var bytes:ByteArray = newPlayerLog("0.1.0");
@@ -189,6 +205,12 @@ package org.libspark.gunyarapaint.framework
         {
             Assert.assertStrictlyEquals(PlayerEvent.FINISHED, event.type);
             Assert.assertFalse(Player(event.target).playing);
+        }
+        
+        private function onPlayerError(event:PlayerErrorEvent, ignore:Object):void
+        {
+            Assert.assertStrictlyEquals(PlayerErrorEvent.ERROR, event.type);
+            Assert.assertTrue(event.cause is UndoError);
         }
         
         private function onCommandParsed(event:CommandEvent, ignore:Object):void
