@@ -5,11 +5,16 @@ Flex 4 に対応した FlexUnit4 が予めバンドルされています。
 Flash Builder を使ってテストを実行するには予め変数を定義しておく必要があります。
 「一般」->「ワークスペース」->「リンクされたリソース」
 
-* GP_COMPAT_PATH
+- GP_COMPAT_PATH
 compat へのパス。SVN 上では /as3/gunyarapaint/branches/gunyarapaint/compat
 
-* GP_FRAMEWORK_PATH
+- GP_FRAMEWORK_PATH
 framework へのパス。SVN 上では /as3/gunyarapaint/branches/gunyarapaint/framework
 
 FlashDevelopの場合は「環境設定」 -> 「AS3 Context」 -> 「Flex SDK Location」 を
 Flex 4.0 の SDK があるパスに指定する必要があります。
+
+* 実行するには
+FlexUnitRunner.mxml を実行対象にして実行します。緑色のチェックマークが出れば
+全ての単体テストが成功しています。もし失敗していれば赤いバツ印が出て、失敗箇所が
+"TEST CASES" の下に表示されます。
