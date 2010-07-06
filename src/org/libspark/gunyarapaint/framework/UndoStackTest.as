@@ -32,5 +32,20 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(undo.undoCount, undo2.undoCount);
             Assert.assertEquals(undo.redoCount, undo2.redoCount);
         }
+        
+        [Test(description="UndoStack#saveを2回呼び出しても例外が発生しないこと")]
+        public function shouldNotThrowExceptionAfterSaveTwice():void
+        {
+            var layers:LayerBitmapCollection = new LayerBitmapCollection(100, 100);
+            var undo:UndoStack = new UndoStack(layers);
+            var data:Object = {};
+            undo.save(data);
+            try {
+                var data2:Object = {};
+                undo.save(data2);
+            } catch (e:Error) {
+                Assert.fail(e.getStackTrace());
+            }
+        }
     }
 }
