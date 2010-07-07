@@ -71,10 +71,10 @@ package org.libspark.gunyarapaint.framework
             var layer:LayerBitmap = new LayerBitmap(newBigBitmapData());
             layer.alpha = 0.42;
             layer.blendMode = BlendMode.MULTIPLY;
-            layer.index = 42;
             layer.locked = true;
             layer.name = "test";
             layer.visible = false;
+            layer.setIndex(42);
             return layer;
         }
         

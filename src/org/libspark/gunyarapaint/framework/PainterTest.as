@@ -107,6 +107,10 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(3, metadata.layer_infos.length);
             var painter2:Painter = new Painter(3, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
             painter2.layers.load(layers, metadata);
+            var count:uint = painter2.layers.count;
+            for (var i:uint = 0; i < count; i++) {
+                Assert.assertEquals(i, painter2.layers.at(i).index);
+            }
             Assert.assertEquals(3, painter2.layers.count);
             var dst:LayerBitmap = painter2.layers.at(2);
             Assert.assertEquals(dst.alpha, src.alpha);
