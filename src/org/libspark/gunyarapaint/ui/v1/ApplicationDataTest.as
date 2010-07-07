@@ -3,7 +3,10 @@ package org.libspark.gunyarapaint.ui.v1
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
+    import org.libspark.gunyarapaint.framework.FakePaintEngine;
     import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
+    import org.libspark.gunyarapaint.framework.Painter;
+    import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.UndoStack;
 
     public class ApplicationDataTest
@@ -34,18 +37,14 @@ package org.libspark.gunyarapaint.ui.v1
         
         private function newApplicationData(data:Object):ApplicationData
         {
-            var layers:LayerBitmapCollection = data.layers
-                || new LayerBitmapCollection(1, 1);
-            var undo:UndoStack = data.undo
-                || new UndoStack(layers);
+            var recorder:Recorder = Recorder.create(new ByteArray(), 1, 1, 1);
             var controllers:Vector.<IController> = data.controllers
                 || new Vector.<IController>(1, true);
             var controller:FakeController = new FakeController();
             controllers[0] = controller;
-            data.layers = layers;
-            data.undo = undo;
+            data.painter = recorder;
             data.controllers = controllers;
-            return new ApplicationData(layers, undo, controllers);
+            return new ApplicationData(recorder, controllers);
         }
         
         private static const VALUE:String = "This is a test.";
