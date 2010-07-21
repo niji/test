@@ -127,6 +127,8 @@ package org.libspark.gunyarapaint.framework
         
         public var layerBitmap:LayerBitmapTest;
         
+        public var marshal:MarshalTest;
+        
         public var painter:PainterTest;
         
         public var parser:ParserTest;

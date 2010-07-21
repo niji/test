@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.ui.v1
+package org.libspark.gunyarapaint.framework
 {
     import flash.utils.ByteArray;
     
@@ -8,22 +8,24 @@ package org.libspark.gunyarapaint.ui.v1
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.UndoStack;
+    import org.libspark.gunyarapaint.framework.ui.IController;
+    import org.libspark.gunyarapaint.ui.v1.FakeController;
 
-    public class ApplicationDataTest
+    public class MarshalTest
     {
         [Test]
         public function shouldBeSymmetrical():void
         {
-            var saverData:Object = {};
-            var saver:ApplicationData = newApplicationData(saverData);
+            var marshalData:Object = {};
+            var marshal:Marshal = newMarshal(marshalData);
             var bytes:ByteArray = new ByteArray();
             var fromBytes:ByteArray = new ByteArray();
             var toBytes:ByteArray = new ByteArray();
             fromBytes.writeUTFBytes(VALUE);
-            saver.save(bytes, fromBytes);
+            marshal.save(bytes, fromBytes);
             bytes.position = 0;
             var loaderData:Object = {};
-            var loader:ApplicationData = newApplicationData(loaderData);
+            var loader:Marshal = newMarshal(loaderData);
             var controller:FakeController = loaderData.controllers[0];
             loader.load(bytes, toBytes);
             // should set the end of log after ApplicationData#load
@@ -35,7 +37,7 @@ package org.libspark.gunyarapaint.ui.v1
             Assert.assertEquals(controller.name, controller.value);
         }
         
-        private function newApplicationData(data:Object):ApplicationData
+        private function newMarshal(data:Object):Marshal
         {
             var recorder:Recorder = Recorder.create(new ByteArray(), 1, 1, 1);
             var controllers:Vector.<IController> = data.controllers
@@ -44,7 +46,7 @@ package org.libspark.gunyarapaint.ui.v1
             controllers[0] = controller;
             data.painter = recorder;
             data.controllers = controllers;
-            return new ApplicationData(recorder, controllers);
+            return new Marshal(recorder, controllers);
         }
         
         private static const VALUE:String = "This is a test.";

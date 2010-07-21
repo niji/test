@@ -7,8 +7,6 @@ package org.libspark.gunyarapaint.ui.v1
     [RunWith("org.flexunit.runners.Suite")]
     public class UITestSuite
     {
-        public var applicationData:ApplicationDataTest;
-        
         public var parameters:ParametersTest;
         
         public var request:RequestTest;

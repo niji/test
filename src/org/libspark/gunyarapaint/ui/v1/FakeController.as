@@ -1,8 +1,9 @@
 package org.libspark.gunyarapaint.ui.v1
 {
     import org.libspark.gunyarapaint.framework.ui.IApplication;
+    import org.libspark.gunyarapaint.framework.ui.IController;
     
-    internal final class FakeController implements IController
+    public final class FakeController implements IController
     {
         public function FakeController()
         {
