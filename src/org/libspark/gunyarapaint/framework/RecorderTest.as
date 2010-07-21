@@ -26,7 +26,7 @@ package org.libspark.gunyarapaint.framework
         {
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = Recorder.create(bytes, 123, 321, 16);
-            var length:uint = recorder.bytes.length;
+            var length:uint = recorder.newBytes().length;
             recorder.commitCommand(CompositeCommand.ID, {});
             Assert.assertEquals(34, length);
         }
