@@ -13,7 +13,7 @@ package org.libspark.gunyarapaint.framework
 
     public class MarshalTest
     {
-        [Test]
+        [Test(description="保存したあと読み込んで値が復元されること")]
         public function shouldBeSymmetrical():void
         {
             var marshalData:Object = {};
@@ -35,6 +35,19 @@ package org.libspark.gunyarapaint.framework
             toBytes.position = 0;
             Assert.assertEquals(VALUE, toBytes.readUTFBytes(VALUE.length));
             Assert.assertEquals(controller.name, controller.value);
+        }
+        
+        [Test(description = "指定されたバージョンよりも大きいバージョンを読み込むと例外を送出すること",
+              expects="org.libspark.gunyarapaint.framework.errors.MarshalVersionError")]
+        public function shouldThrowMarshalVersionError():void
+        {
+            var marshalData:Object = {};
+            var marshal:Marshal = newMarshal(marshalData);
+            var bytes:ByteArray = new ByteArray();
+            var toBytes:ByteArray = new ByteArray();
+            bytes.writeByte(Marshal.VERSION + 1);
+            bytes.deflate();
+            marshal.load(bytes, toBytes);
         }
         
         private function newMarshal(data:Object):Marshal
