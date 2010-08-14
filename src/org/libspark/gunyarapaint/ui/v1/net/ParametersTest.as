@@ -28,6 +28,7 @@ package org.libspark.gunyarapaint.ui.v1.net
             parameter.serialize();
         }
         
+        [Ignore]
         [Test(async, timeout="3000",
               description="パラメータがserialize()によってByteArrayに変換されること")]
         public function shouldBeSerialized():void
