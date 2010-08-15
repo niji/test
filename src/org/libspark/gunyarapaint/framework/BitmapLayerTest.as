@@ -5,26 +5,26 @@ package org.libspark.gunyarapaint.framework
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.framework.LayerBitmap;
+    import org.libspark.gunyarapaint.framework.BitmapLayer;
 
-    // LayerBitmap#compositeTo is tested in PainterTest#レイヤー情報の保存と復帰
-    public class LayerBitmapTest
+    // BitmapLayer#compositeTo is tested in PainterTest#レイヤー情報の保存と復帰
+    public class BitmapLayerTest
     {
         [Test(description="レイヤーが作成されること")]
         public function shouldCreateLayer():void
         {
-            var layer:LayerBitmap = new LayerBitmap(newSmallBitmapData());
-            Assert.assertTrue(layer is LayerBitmap);
+            var layer:BitmapLayer = new BitmapLayer(newSmallBitmapData());
+            Assert.assertTrue(layer is BitmapLayer);
         }
         
         [Test(description="レイヤーがクローンされること")]
         public function shouldCloneLayer():void
         {
-            var layer:LayerBitmap = newLayerToClone();
-            var newLayer:LayerBitmap = layer.clone();
+            var layer:BitmapLayer = newLayerToClone();
+            var newLayer:BitmapLayer = BitmapLayer(layer.clone());
             assertLayerMetadata(layer, newLayer);
             Assert.assertStrictlyEquals(layer.index, newLayer.index);
-            // LayerBitmap#bitmapData is the internal method
+            // BitmapLayer#bitmapData is the internal method
             Assert.assertEquals(0, newLayer.bitmapData.compare(layer.bitmapData));
         }
         
@@ -32,7 +32,7 @@ package org.libspark.gunyarapaint.framework
         public function shouldBeAbleToFloodFill():void
         {
             var bmd:BitmapData = newBigBitmapData();
-            var layer:LayerBitmap = new LayerBitmap(bmd);
+            var layer:BitmapLayer = new BitmapLayer(bmd);
             layer.floodFill(5, 5, 0);
             Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(5, 5));
             Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(0, 0));
@@ -42,7 +42,7 @@ package org.libspark.gunyarapaint.framework
         public function shouldBeAbleToSetPixel():void
         {
             var bmd:BitmapData = newBigBitmapData();
-            var layer:LayerBitmap = new LayerBitmap(bmd);
+            var layer:BitmapLayer = new BitmapLayer(bmd);
             layer.setPixel(5, 5, 0);
             Assert.assertStrictlyEquals(0, layer.bitmapData.getPixel32(5, 5));
             Assert.assertStrictlyEquals(uint.MAX_VALUE, layer.bitmapData.getPixel32(0, 0));
@@ -51,14 +51,14 @@ package org.libspark.gunyarapaint.framework
         [Test(description="JSONのシリアライズが出来ること")]
         public function shouldSerializeFromAndToJSON():void
         {
-            var layer:LayerBitmap = newLayerToClone();
-            var newLayer:LayerBitmap = new LayerBitmap(newBigBitmapData());
+            var layer:BitmapLayer = newLayerToClone();
+            var newLayer:BitmapLayer = new BitmapLayer(newBigBitmapData());
             newLayer.fromJSON(layer.toJSON());
             assertLayerMetadata(layer, newLayer);
             Assert.assertStrictlyEquals(layer.locked, newLayer.locked);
         }
         
-        private function assertLayerMetadata(layer:LayerBitmap, newLayer:LayerBitmap):void
+        private function assertLayerMetadata(layer:ILayer, newLayer:ILayer):void
         {
             Assert.assertStrictlyEquals(layer.alpha, newLayer.alpha);
             Assert.assertStrictlyEquals(layer.blendMode, newLayer.blendMode);
@@ -66,9 +66,9 @@ package org.libspark.gunyarapaint.framework
             Assert.assertStrictlyEquals(layer.visible, newLayer.visible);
         }
         
-        private function newLayerToClone():LayerBitmap
+        private function newLayerToClone():BitmapLayer
         {
-            var layer:LayerBitmap = new LayerBitmap(newBigBitmapData());
+            var layer:BitmapLayer = new BitmapLayer(newBigBitmapData());
             layer.alpha = 0.42;
             layer.blendMode = BlendMode.MULTIPLY;
             layer.locked = true;

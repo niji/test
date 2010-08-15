@@ -2,8 +2,7 @@ package org.libspark.gunyarapaint.framework
 {
     import flash.display.BitmapData;
     
-    import org.libspark.gunyarapaint.framework.LayerBitmap;
-    import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
+    import org.libspark.gunyarapaint.framework.LayerCollection;
     
 	/**
 	 * LayerBitmapCollection を継承したスタブクラス。実行したかのフラグ管理を行う。
@@ -11,7 +10,7 @@ package org.libspark.gunyarapaint.framework
 	 * レイヤー関連のコマンドのテストで使う。本当は継承ではなく、インターフェースの実装とするべきではあるが、
 	 * 再設計が必要になってしまうので継承とした。
 	 */	
-    public class FakeLayerBitmapCollection extends LayerBitmapCollection
+    public class FakeLayerBitmapCollection extends LayerCollection
     {
         public function FakeLayerBitmapCollection(width:int, height:int)
         {
@@ -22,7 +21,7 @@ package org.libspark.gunyarapaint.framework
             didSwapLayerTo = 0;
             didMergeLayer = false;
             didRemoveLayer = false;
-            layerBitmap = new LayerBitmap(new BitmapData(1, 1));
+            layerBitmap = new BitmapLayer(new BitmapData(1, 1));
         }
         
         public override function add():void
@@ -51,7 +50,7 @@ package org.libspark.gunyarapaint.framework
             didRemoveLayer = true;
         }
         
-        public override function get currentLayer():LayerBitmap
+        public override function get currentLayer():ILayer
         {
             return layerBitmap;
         }
@@ -62,6 +61,6 @@ package org.libspark.gunyarapaint.framework
         public static var didSwapLayerTo:uint;
         public static var didMergeLayer:Boolean;
         public static var didRemoveLayer:Boolean;
-        public static var layerBitmap:LayerBitmap;
+        public static var layerBitmap:BitmapLayer;
     }
 }

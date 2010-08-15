@@ -9,7 +9,7 @@ package org.libspark.gunyarapaint.framework
         [Test(description="UndoStackの情報を保存して後から読み込んで復元出来ること")]
         public function shouldUndoStackIsAbleToRestoreAfterSaving():void
         {
-            var layers:LayerBitmapCollection = new LayerBitmapCollection(100, 100);
+            var layers:LayerCollection = new LayerCollection(100, 100);
             var undo:UndoStack = new UndoStack(layers);
             for (var i:uint = 0; i < 4; i++) {
                 undo.push(layers);
@@ -36,7 +36,7 @@ package org.libspark.gunyarapaint.framework
         [Test(description="UndoStack#saveを2回呼び出しても例外が発生しないこと")]
         public function shouldNotThrowExceptionAfterSaveTwice():void
         {
-            var layers:LayerBitmapCollection = new LayerBitmapCollection(100, 100);
+            var layers:LayerCollection = new LayerCollection(100, 100);
             var undo:UndoStack = new UndoStack(layers);
             var data:Object = {};
             undo.save(data);

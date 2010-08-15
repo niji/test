@@ -99,7 +99,7 @@ package org.libspark.gunyarapaint.framework
         {
             var metadata:Object = {};
             var painter:Painter = newPainterForSave();
-            var src:LayerBitmap = painter.layers.at(2);
+            var src:BitmapLayer = BitmapLayer(painter.layers.at(2));
             var layers:BitmapData = painter.layers.newLayerBitmapData;
             painter.layers.save(layers, metadata);
             Assert.assertEquals(metadata.width, painter.width);
@@ -112,13 +112,13 @@ package org.libspark.gunyarapaint.framework
                 Assert.assertEquals(i, painter2.layers.at(i).index);
             }
             Assert.assertEquals(3, painter2.layers.count);
-            var dst:LayerBitmap = painter2.layers.at(2);
+            var dst:BitmapLayer = BitmapLayer(painter2.layers.at(2));
             Assert.assertEquals(dst.alpha, src.alpha);
             Assert.assertEquals(dst.blendMode, src.blendMode);
             Assert.assertTrue(dst.locked);
             Assert.assertEquals(dst.name, src.name);
             Assert.assertFalse(dst.visible);
-            // LayerBitmapCollection#compositeAll is the internal method.
+            // BitmapLayerCollection#compositeAll is the internal method.
             painter2.layers.compositeAll();
             Assert.assertEquals(0xff0000, painter2.getPixel(0, 0));
             Assert.assertEquals(0x00ff00, painter2.getPixel(1, 0));
@@ -215,7 +215,7 @@ package org.libspark.gunyarapaint.framework
             painter.layers.add();
             painter.pen.color = 0x0000ff;
             painter.setPixel(2, 0);
-            var src:LayerBitmap = painter.layers.at(2);
+            var src:BitmapLayer = BitmapLayer(painter.layers.at(2));
             src.alpha = 0.5;
             src.blendMode = BlendMode.ADD;
             src.locked = true;

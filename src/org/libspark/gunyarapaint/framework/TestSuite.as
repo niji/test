@@ -123,9 +123,9 @@ package org.libspark.gunyarapaint.framework
         
         public var transparentLineModule:TransparentLineTest;
         
-        public var layerBitmapContainer:LayerBitmapContainerTest;
+        public var layerBitmapContainer:LayerContainerTest;
         
-        public var layerBitmap:LayerBitmapTest;
+        public var layerBitmap:BitmapLayerTest;
         
         public var marshal:MarshalTest;
         
