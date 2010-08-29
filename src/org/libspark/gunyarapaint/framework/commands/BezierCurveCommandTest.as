@@ -7,6 +7,7 @@ package org.libspark.gunyarapaint.framework.commands
 
     public final class BezierCurveCommandTest
     {
+        [Ignore]
         [Test(description="ベジエ曲線描写コマンドが正しく実行されること")]
         public function shouldExecuteCorrectly():void
         {
