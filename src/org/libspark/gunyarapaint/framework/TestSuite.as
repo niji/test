@@ -138,5 +138,7 @@ package org.libspark.gunyarapaint.framework
         public var recorder:RecorderTest;
         
         public var undoStack:UndoStackTest;
+        
+        public var version:VersionTest;
     }
 }

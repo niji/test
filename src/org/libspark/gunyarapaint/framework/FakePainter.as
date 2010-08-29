@@ -25,7 +25,7 @@ package org.libspark.gunyarapaint.framework
             layerAlpha = 0.0;
             layerBlendMode = BlendMode.NORMAL;
             fakePaintEngine = new FakePaintEngine();
-            super(1, 1, PAINTER_LOG_VERSION, fakePaintEngine);
+            super(1, 1, Version.LOG_VERSION, fakePaintEngine);
             m_layers = new FakeLayerBitmapCollection(1, 1);
             m_didUndo = false;
             m_didRedo = false;

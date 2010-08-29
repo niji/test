@@ -105,7 +105,7 @@ package org.libspark.gunyarapaint.framework
             Assert.assertEquals(metadata.width, painter.width);
             Assert.assertEquals(metadata.height, painter.height);
             Assert.assertEquals(3, metadata.layer_infos.length);
-            var painter2:Painter = new Painter(3, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
+            var painter2:Painter = new Painter(3, 1, Version.LOG_VERSION, new FakePaintEngine());
             painter2.layers.load(layers, metadata);
             var count:uint = painter2.layers.count;
             for (var i:uint = 0; i < count; i++) {
@@ -188,7 +188,7 @@ package org.libspark.gunyarapaint.framework
         
         private function newPainter():Painter
         {
-            return new Painter(1, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
+            return new Painter(1, 1, Version.LOG_VERSION, new FakePaintEngine());
         }
         
         private function assertCorrectedPoint(engine:PaintEngine,
@@ -206,7 +206,7 @@ package org.libspark.gunyarapaint.framework
         
         private function newPainterForSave():Painter
         {
-            var painter:Painter = new Painter(3, 1, Painter.PAINTER_LOG_VERSION, new FakePaintEngine());
+            var painter:Painter = new Painter(3, 1, Version.LOG_VERSION, new FakePaintEngine());
             painter.pen.color = 0xff0000;
             painter.setPixel(0, 0);
             painter.layers.add();
