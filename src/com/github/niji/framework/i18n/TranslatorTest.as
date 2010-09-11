@@ -1,8 +1,8 @@
 package com.github.niji.framework.i18n
 {
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.framework.i18n.NullTranslator;
-    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+    import com.github.niji.framework.i18n.NullTranslator;
+    import com.github.niji.framework.i18n.TranslatorRegistry;
 
     public class TranslatorTest
     {

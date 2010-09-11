@@ -8,7 +8,6 @@ package com.github.niji.gunyarapaint.ui.v1.net
     
     import org.flexunit.Assert;
     import org.flexunit.async.Async;
-    import org.libspark.gunyarapaint.ui.v1.net.Parameters;
 
     public class ParametersTest
     {

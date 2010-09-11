@@ -8,9 +8,9 @@ package com.github.niji.framework
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.events.CommandEvent;
     import com.github.niji.framework.events.UndoEvent;
-    import org.libspark.gunyarapaint.framework.CommandContext;
-    import org.libspark.gunyarapaint.framework.Recorder;
-    import org.libspark.gunyarapaint.framework.UndoStack;
+    import com.github.niji.framework.CommandContext;
+    import com.github.niji.framework.Recorder;
+    import com.github.niji.framework.UndoStack;
 
     public class RecorderTest
     {

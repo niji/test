@@ -10,7 +10,6 @@ package com.github.niji.gunyarapaint.ui.v1.net
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.ui.v1.net.Request;
 
     public class RequestTest
     {

@@ -3,8 +3,8 @@ package com.github.niji.framework
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.framework.LayerCollection;
-    import org.libspark.gunyarapaint.framework.UndoStack;
+    import com.github.niji.framework.LayerCollection;
+    import com.github.niji.framework.UndoStack;
 
     public class UndoStackTest
     {

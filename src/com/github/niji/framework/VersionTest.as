@@ -1,7 +1,7 @@
 package com.github.niji.framework
 {
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.framework.Version;
+    import com.github.niji.framework.Version;
     
     public final class VersionTest
     {

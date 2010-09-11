@@ -6,7 +6,7 @@ package com.github.niji.framework.commands.layer
     import org.flexunit.Assert;
     import com.github.niji.framework.FakePainter;
     import com.github.niji.framework.commands.ICommand;
-    import org.libspark.gunyarapaint.framework.commands.layer.MoveLayerCommand;
+    import com.github.niji.framework.commands.layer.MoveLayerCommand;
 
     public final class MoveLayerCommandTest
     {

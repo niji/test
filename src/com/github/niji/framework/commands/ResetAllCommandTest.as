@@ -4,9 +4,9 @@ package com.github.niji.framework.commands
     
     import org.flexunit.Assert;
     import com.github.niji.framework.FakePainter;
-    import org.libspark.gunyarapaint.framework.commands.ICommand;
-    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
-    import org.libspark.gunyarapaint.framework.commands.ResetAllCommand;
+    import com.github.niji.framework.commands.ICommand;
+    import com.github.niji.framework.commands.MoveToCommand;
+    import com.github.niji.framework.commands.ResetAllCommand;
 
     public class ResetAllCommandTest
     {

@@ -4,7 +4,7 @@ package com.github.niji.framework
     import flash.utils.IDataOutput;
     
     import com.github.niji.framework.commands.ICommand;
-    import org.libspark.gunyarapaint.framework.Painter;
+    import com.github.niji.framework.Painter;
 	
 	/**
 	 * ICommand を実装したスタブクラス。実行したかのフラグを管理する

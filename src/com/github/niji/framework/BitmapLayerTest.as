@@ -5,8 +5,8 @@ package com.github.niji.framework
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.framework.BitmapLayer;
-    import org.libspark.gunyarapaint.framework.ILayer;
+    import com.github.niji.framework.BitmapLayer;
+    import com.github.niji.framework.ILayer;
 
     // BitmapLayer#compositeTo is tested in PainterTest#レイヤー情報の保存と復帰
     public class BitmapLayerTest

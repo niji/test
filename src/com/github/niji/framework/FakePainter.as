@@ -2,8 +2,8 @@ package com.github.niji.framework
 {
     import flash.display.BlendMode;
     import flash.geom.Point;
-    import org.libspark.gunyarapaint.framework.Painter;
-    import org.libspark.gunyarapaint.framework.Version;
+    import com.github.niji.framework.Painter;
+    import com.github.niji.framework.Version;
     
 	/**
 	 * Painter を継承するスタブクラス。実行したかのフラグ管理及び代入された値、描写位置を担当する。

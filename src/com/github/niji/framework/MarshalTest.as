@@ -6,8 +6,8 @@ package com.github.niji.framework
     import com.github.niji.framework.FakePaintEngine;
     import com.github.niji.framework.ui.IController;
     import com.github.niji.gunyarapaint.ui.v1.FakeController;
-    import org.libspark.gunyarapaint.framework.Marshal;
-    import org.libspark.gunyarapaint.framework.Recorder;
+    import com.github.niji.framework.Marshal;
+    import com.github.niji.framework.Recorder;
 
     public class MarshalTest
     {
@@ -36,7 +36,7 @@ package com.github.niji.framework
         }
         
         [Test(description = "指定されたバージョンよりも大きいバージョンを読み込むと例外を送出すること",
-              expects="org.libspark.gunyarapaint.framework.errors.MarshalVersionError")]
+              expects="com.github.niji.framework.errors.MarshalVersionError")]
         public function shouldThrowMarshalVersionError():void
         {
             var marshalData:Object = {};

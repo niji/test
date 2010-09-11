@@ -4,7 +4,7 @@ package com.github.niji.framework
     import flash.geom.Point;
     import flash.geom.Rectangle;
     
-    import org.libspark.gunyarapaint.framework.PaintEngine;
+    import com.github.niji.framework.PaintEngine;
 
 	/**
 	 * PaintEngine を継承したスタブクラス。実行したかのフラグ及び描写位置を管理する。FakePainter に包括される。

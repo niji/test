@@ -6,7 +6,7 @@ package com.github.niji.framework.commands.layer
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.FakePainter;
     import com.github.niji.framework.FakeLayerBitmapCollection;
-    import org.libspark.gunyarapaint.framework.commands.layer.CreateLayerCommand;
+    import com.github.niji.framework.commands.layer.CreateLayerCommand;
 
     public class CreateLayerCommandTest
     {

@@ -5,8 +5,8 @@ package com.github.niji.framework.commands
     import org.flexunit.Assert;
     import com.github.niji.framework.FakePainter;
     import com.github.niji.framework.FakePaintEngine;
-    import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
-    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import com.github.niji.framework.commands.DrawCircleCommand;
+    import com.github.niji.framework.commands.ICommand;
 
     public class DrawCircleCommandTest
     {

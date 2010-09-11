@@ -1,6 +1,6 @@
 package com.github.niji.framework.i18n
 {
-    import org.libspark.gunyarapaint.framework.i18n.ITranslator;
+    import com.github.niji.framework.i18n.ITranslator;
 
 	/**
 	 * ITranslator を実装したスタブクラス。TranslatorRegistry#install で使うために作られたので、

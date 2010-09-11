@@ -6,7 +6,7 @@ package com.github.niji.framework.commands.layer
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.FakePainter;
     import com.github.niji.framework.FakePainter;
-    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerVisibleCommand;
+    import com.github.niji.framework.commands.layer.SetLayerVisibleCommand;
 
     public class SetLayerVisibleCommandTest
     {

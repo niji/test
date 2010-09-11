@@ -2,9 +2,9 @@ package com.github.niji.framework
 {
     import flash.display.BitmapData;
     
-    import org.libspark.gunyarapaint.framework.BitmapLayer;
-    import org.libspark.gunyarapaint.framework.ILayer;
-    import org.libspark.gunyarapaint.framework.LayerCollection;
+    import com.github.niji.framework.BitmapLayer;
+    import com.github.niji.framework.ILayer;
+    import com.github.niji.framework.LayerCollection;
     
 	/**
 	 * LayerBitmapCollection を継承したスタブクラス。実行したかのフラグ管理を行う。

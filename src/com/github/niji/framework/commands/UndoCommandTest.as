@@ -4,8 +4,8 @@ package com.github.niji.framework.commands
     
     import org.flexunit.Assert;
     import com.github.niji.framework.FakePainter;
-    import org.libspark.gunyarapaint.framework.commands.ICommand;
-    import org.libspark.gunyarapaint.framework.commands.UndoCommand;
+    import com.github.niji.framework.commands.ICommand;
+    import com.github.niji.framework.commands.UndoCommand;
 
     public class UndoCommandTest
     {

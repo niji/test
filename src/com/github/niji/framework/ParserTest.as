@@ -11,7 +11,7 @@ package com.github.niji.framework
     import com.github.niji.framework.commands.UndoCommand;
     import com.github.niji.framework.commands.layer.CopyLayerCommand;
     import com.github.niji.framework.events.CommandEvent;
-    import org.libspark.gunyarapaint.framework.Parser;
+    import com.github.niji.framework.Parser;
 
     public class ParserTest
     {

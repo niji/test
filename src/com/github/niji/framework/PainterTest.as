@@ -9,11 +9,11 @@ package com.github.niji.framework
     import flash.geom.Point;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.framework.BitmapLayer;
-    import org.libspark.gunyarapaint.framework.PaintEngine;
-    import org.libspark.gunyarapaint.framework.Painter;
-    import org.libspark.gunyarapaint.framework.UndoStack;
-    import org.libspark.gunyarapaint.framework.Version;
+    import com.github.niji.framework.BitmapLayer;
+    import com.github.niji.framework.PaintEngine;
+    import com.github.niji.framework.Painter;
+    import com.github.niji.framework.UndoStack;
+    import com.github.niji.framework.Version;
 
     public class PainterTest
     {

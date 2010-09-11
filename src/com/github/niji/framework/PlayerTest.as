@@ -10,7 +10,7 @@ package com.github.niji.framework
     import com.github.niji.framework.events.CommandEvent;
     import com.github.niji.framework.events.PlayerErrorEvent;
     import com.github.niji.framework.events.PlayerEvent;
-    import org.libspark.gunyarapaint.framework.Player;
+    import com.github.niji.framework.Player;
 
     public class PlayerTest
     {
@@ -63,7 +63,7 @@ package com.github.niji.framework
         }
         
 		[Test(description="正しい署名が入っていないログを読み込むと例外を送出すること",
-              expects="org.libspark.gunyarapaint.framework.errors.InvalidSignatureError")]
+              expects="com.github.niji.framework.errors.InvalidSignatureError")]
         public function shouldThrowInvalidSignatureErrorIfLogInvalid():void
         {
             var bytes:ByteArray = new ByteArray();
@@ -74,7 +74,7 @@ package com.github.niji.framework
         }
         
         [Test(description="サポートしないバージョンのログを読み込むと例外を送出する",
-              expects="org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError")]
+              expects="com.github.niji.framework.errors.NotSupportedVersionError")]
         public function shouldThrowNotSupportedVersionErrorIfNotSupportedVersionSeen():void
         {
             var bytes:ByteArray = newPlayerLog("0.0.0");

@@ -8,8 +8,8 @@ package com.github.niji.framework.commands
     import org.flexunit.Assert;
     import com.github.niji.framework.FakePaintEngine;
     import com.github.niji.framework.FakePainter;
-    import org.libspark.gunyarapaint.framework.commands.ICommand;
-    import org.libspark.gunyarapaint.framework.commands.PenCommand;
+    import com.github.niji.framework.commands.ICommand;
+    import com.github.niji.framework.commands.PenCommand;
 
     public class PenCommandTest
     {

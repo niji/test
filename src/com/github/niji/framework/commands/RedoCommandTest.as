@@ -4,8 +4,8 @@ package com.github.niji.framework.commands
     
     import org.flexunit.Assert;
     import com.github.niji.framework.FakePainter;
-    import org.libspark.gunyarapaint.framework.commands.ICommand;
-    import org.libspark.gunyarapaint.framework.commands.RedoCommand;
+    import com.github.niji.framework.commands.ICommand;
+    import com.github.niji.framework.commands.RedoCommand;
 
     public class RedoCommandTest
     {

@@ -6,7 +6,7 @@ package com.github.niji.framework.commands.layer
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.FakePainter;
     import com.github.niji.framework.FakeLayerBitmapCollection;
-    import org.libspark.gunyarapaint.framework.commands.layer.RemoveLayerCommand;
+    import com.github.niji.framework.commands.layer.RemoveLayerCommand;
 
     public class RemoveLayerCommandTest
     {

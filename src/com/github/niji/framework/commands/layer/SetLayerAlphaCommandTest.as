@@ -6,7 +6,7 @@ package com.github.niji.framework.commands.layer
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.FakePainter;
     import com.github.niji.framework.FakePainter;
-    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerAlphaCommand;
+    import com.github.niji.framework.commands.layer.SetLayerAlphaCommand;
 
     public class SetLayerAlphaCommandTest
     {

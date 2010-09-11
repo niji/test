@@ -5,8 +5,8 @@ package com.github.niji.framework.commands
     import org.flexunit.Assert;
     import com.github.niji.framework.FakePainter;
     import com.github.niji.framework.Painter;
-    import org.libspark.gunyarapaint.framework.commands.CompatibilityCommand;
-    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import com.github.niji.framework.commands.CompatibilityCommand;
+    import com.github.niji.framework.commands.ICommand;
 
     public class CompatibilityCommandTest
     {

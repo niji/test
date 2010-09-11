@@ -3,7 +3,7 @@ package com.github.niji.framework
     import flash.display.BitmapData;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.framework.LayerCollection;
+    import com.github.niji.framework.LayerCollection;
 
     public class LayerContainerTest
     {
@@ -63,7 +63,7 @@ package com.github.niji.framework
         }
         
         [Test(description="両方のレイヤーが可視でなければ統合が失敗すること",
-              expects="org.libspark.gunyarapaint.framework.errors.MergeLayersError")]
+              expects="com.github.niji.framework.errors.MergeLayersError")]
         public function shouldThrowMergeLayersErrorIfInvisibleLayerFound():void
         {
             var lc:LayerCollection = newLayerCollection();
@@ -74,7 +74,7 @@ package com.github.niji.framework
         }
         
         [Test(description="レイヤーがひとつしか無ければ失敗すること",
-              expects="org.libspark.gunyarapaint.framework.errors.MergeLayersError")]
+              expects="com.github.niji.framework.errors.MergeLayersError")]
         public function shouldThrowMergeLayersErrorIfOnlyOneLayerFound():void
         {
             var lc:LayerCollection = newLayerCollection();
@@ -82,7 +82,7 @@ package com.github.niji.framework
         }
         
         [Test(description="規定数以上のレイヤーを作成すると例外を送出すること",
-              expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
+              expects="com.github.niji.framework.errors.AddLayerError")]
         public function shouldThrowAddLayerErrorIfCreateLayerOverMax():void
         {
             var lc:LayerCollection = newLayerCollection();
@@ -93,7 +93,7 @@ package com.github.niji.framework
         }
         
         [Test(description="規定数以上のレイヤーをコピーすると例外を送出すること",
-              expects="org.libspark.gunyarapaint.framework.errors.AddLayerError")]
+              expects="com.github.niji.framework.errors.AddLayerError")]
         public function shouldThrowAddLayerErrorIfCopyLayerOverMax():void
         {
             var lc:LayerCollection = newLayerCollection();
@@ -113,7 +113,7 @@ package com.github.niji.framework
         }
         
         [Test(description="レイヤーが1枚しか無い状態で削除すると例外を送出すること",
-              expects="org.libspark.gunyarapaint.framework.errors.RemoveLayerError")]
+              expects="com.github.niji.framework.errors.RemoveLayerError")]
         public function shouldThrowRemoveLayerErroIfRemoveBottomLayer():void
         {
             var lc:LayerCollection = newLayerCollection();
@@ -121,7 +121,7 @@ package com.github.niji.framework
         }
         
         [Test(description="投稿時にレイヤー画像が一定のピクセル数以上だと例外を送出すること",
-              expects="org.libspark.gunyarapaint.framework.errors.TooManyLayersError")]
+              expects="com.github.niji.framework.errors.TooManyLayersError")]
         public function shouldThrowTooManyLayersErorrIfLayerHaveMany():void
         {
             var lc:LayerCollection = new LayerCollection(12, 34);
