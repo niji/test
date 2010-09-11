@@ -8,8 +8,8 @@
             
             import org.flexunit.listeners.UIListener;
             import org.flexunit.runner.FlexUnitCore;
-            import org.libspark.gunyarapaint.framework.TestSuite;
-            import org.libspark.gunyarapaint.ui.v1.UITestSuite;
+            import com.github.niji.framework.TestSuite;
+            import com.github.niji.gunyarapaint.ui.v1.UITestSuite;
             
             private function onCreationComplete(event:FlexEvent):void
             {
