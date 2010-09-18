@@ -14,8 +14,8 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="..\compat\src" />
     <class path="..\framework\src" />
+    <class path="..\gunyarapaint\src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -85,6 +85,7 @@
     <hidden path="air" />
     <hidden path="CreateCertificate.bat" />
     <hidden path="PackageApplication.bat" />
+    <hidden path=".git" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
