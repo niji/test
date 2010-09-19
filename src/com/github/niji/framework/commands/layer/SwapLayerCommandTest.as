@@ -5,7 +5,7 @@ package com.github.niji.framework.commands.layer
     import org.flexunit.Assert;
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakeLayerBitmapCollection;
+    import com.github.niji.framework.FakeLayerList;
     import com.github.niji.framework.commands.layer.SwapLayerCommand;
 
     public class SwapLayerCommandTest
@@ -26,8 +26,8 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(SwapLayerCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.from, FakeLayerBitmapCollection.didSwapLayerFrom);
-            Assert.assertEquals(args.to, FakeLayerBitmapCollection.didSwapLayerTo);
+            Assert.assertEquals(args.from, FakeLayerList.didSwapLayerFrom);
+            Assert.assertEquals(args.to, FakeLayerList.didSwapLayerTo);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

@@ -28,7 +28,7 @@ package com.github.niji.framework
             layerBlendMode = BlendMode.NORMAL;
             fakePaintEngine = new FakePaintEngine();
             super(1, 1, Version.LOG_VERSION, fakePaintEngine);
-            m_layers = new FakeLayerBitmapCollection(1, 1);
+            m_layers = new FakeLayerList(1, 1);
             m_didUndo = false;
             m_didRedo = false;
             m_didPushUndo = false;

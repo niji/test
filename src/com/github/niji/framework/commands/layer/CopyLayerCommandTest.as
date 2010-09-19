@@ -5,7 +5,7 @@ package com.github.niji.framework.commands.layer
     import org.flexunit.Assert;
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakeLayerBitmapCollection;
+    import com.github.niji.framework.FakeLayerList;
     import com.github.niji.framework.commands.layer.CopyLayerCommand;
 
     public class CopyLayerCommandTest
@@ -22,7 +22,7 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(CopyLayerCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertTrue(FakeLayerBitmapCollection.didCopyLayer);
+            Assert.assertTrue(FakeLayerList.didCopyLayer);
             Assert.assertTrue(painter.didPushUndo);
         }
     }
