@@ -123,7 +123,7 @@ package com.github.niji.framework
             Assert.assertTrue(dst.locked);
             Assert.assertEquals(dst.name, src.name);
             Assert.assertFalse(dst.visible);
-            // BitmapLayerCollection#compositeAll is the internal method.
+            // BitmapLayerList#compositeAll is the internal method.
             painter2.layers.compositeAll();
             Assert.assertEquals(0xff0000, painter2.getPixel(0, 0));
             Assert.assertEquals(0x00ff00, painter2.getPixel(1, 0));

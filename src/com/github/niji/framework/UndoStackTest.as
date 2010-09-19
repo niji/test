@@ -3,7 +3,7 @@ package com.github.niji.framework
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.LayerCollection;
+    import com.github.niji.framework.LayerList;
     import com.github.niji.framework.UndoStack;
 
     public class UndoStackTest
@@ -11,7 +11,7 @@ package com.github.niji.framework
         [Test(description="UndoStackの情報を保存して後から読み込んで復元出来ること")]
         public function shouldUndoStackIsAbleToRestoreAfterSaving():void
         {
-            var layers:LayerCollection = new LayerCollection(100, 100);
+            var layers:LayerList = new LayerList(100, 100);
             var undo:UndoStack = new UndoStack(layers);
             for (var i:uint = 0; i < 4; i++) {
                 undo.push(layers);
@@ -38,7 +38,7 @@ package com.github.niji.framework
         [Test(description="UndoStack#saveを2回呼び出しても例外が発生しないこと")]
         public function shouldNotThrowExceptionAfterSaveTwice():void
         {
-            var layers:LayerCollection = new LayerCollection(100, 100);
+            var layers:LayerList = new LayerList(100, 100);
             var undo:UndoStack = new UndoStack(layers);
             var data:Object = {};
             undo.save(data);

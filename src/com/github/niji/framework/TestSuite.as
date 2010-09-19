@@ -123,7 +123,7 @@ package com.github.niji.framework
         
         public var transparentLineModule:TransparentLineTest;
         
-        public var layerBitmapContainer:LayerContainerTest;
+        public var layerBitmapContainer:LayerListTest;
         
         public var layerBitmap:BitmapLayerTest;
         

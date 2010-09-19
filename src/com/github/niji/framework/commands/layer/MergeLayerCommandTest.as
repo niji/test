@@ -5,7 +5,7 @@ package com.github.niji.framework.commands.layer
     import org.flexunit.Assert;
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakeLayerBitmapCollection;
+    import com.github.niji.framework.FakeLayerList;
     import com.github.niji.framework.commands.layer.MergeLayerCommand;
 
     public class MergeLayerCommandTest
@@ -22,7 +22,7 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(MergeLayerCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertTrue(FakeLayerBitmapCollection.didMergeLayer);
+            Assert.assertTrue(FakeLayerList.didMergeLayer);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

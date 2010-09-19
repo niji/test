@@ -4,7 +4,7 @@ package com.github.niji.framework
     
     import com.github.niji.framework.BitmapLayer;
     import com.github.niji.framework.ILayer;
-    import com.github.niji.framework.LayerCollection;
+    import com.github.niji.framework.LayerList;
     
 	/**
 	 * LayerBitmapCollection を継承したスタブクラス。実行したかのフラグ管理を行う。
@@ -12,9 +12,9 @@ package com.github.niji.framework
 	 * レイヤー関連のコマンドのテストで使う。本当は継承ではなく、インターフェースの実装とするべきではあるが、
 	 * 再設計が必要になってしまうので継承とした。
 	 */	
-    public class FakeLayerBitmapCollection extends LayerCollection
+    public class FakeLayerList extends LayerList
     {
-        public function FakeLayerBitmapCollection(width:int, height:int)
+        public function FakeLayerList(width:int, height:int)
         {
             super(width, height);
             didAddLayer = false;
