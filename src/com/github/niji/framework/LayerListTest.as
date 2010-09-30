@@ -1,10 +1,11 @@
 package com.github.niji.framework
 {
+    import com.github.niji.framework.LayerList;
+    
     import flash.display.BitmapData;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.LayerList;
-
+    
     public class LayerListTest
     {
         public const WIDTH:int = 123;
@@ -70,6 +71,13 @@ package com.github.niji.framework
             lc.add();
             lc.at(0).visible = false;
             lc.at(1).visible = false;
+            try {
+                lc.throwsError = false;
+                lc.merge();
+                lc.throwsError = true;
+            } catch (e:Error) {
+                Assert.fail("Should not throw an error with throwsError = false");
+            }
             lc.merge();
         }
         
@@ -78,6 +86,13 @@ package com.github.niji.framework
         public function shouldThrowMergeLayersErrorIfOnlyOneLayerFound():void
         {
             var lc:LayerList = newLayerList();
+            try {
+                lc.throwsError = false;
+                lc.merge();
+                lc.throwsError = true;
+            } catch (e:Error) {
+                Assert.fail("Should not throw an error with throwsError = false");
+            }
             lc.merge();
         }
         
@@ -87,9 +102,17 @@ package com.github.niji.framework
         {
             var lc:LayerList = newLayerList();
             var max:uint = LayerList.MAX;
-            for (var i:uint = 0; i < max; i++) {
+            for (var i:uint = 0; i < max - 1; i++) {
                 lc.add();
             }
+            try {
+                lc.throwsError = false;
+                lc.add();
+                lc.throwsError = true;
+            } catch(e:Error) {
+                Assert.fail("Should not throw an error with throwsError = false");
+            }
+            lc.add();
         }
         
         [Test(description="規定数以上のレイヤーをコピーすると例外を送出すること",
@@ -98,9 +121,17 @@ package com.github.niji.framework
         {
             var lc:LayerList = newLayerList();
             var max:uint = LayerList.MAX ;
-            for (var i:uint = 0; i < max; i++) {
+            for (var i:uint = 0; i < max - 1; i++) {
                 lc.copy();
             }
+            try {
+                lc.throwsError = false;
+                lc.copy();
+                lc.throwsError = true;
+            } catch (e:Error) {
+                Assert.fail("Should not throw an error with throwsError = false");
+            }
+            lc.copy();
         }
         
         [Test(description="レイヤーが削除されること")]
@@ -117,6 +148,13 @@ package com.github.niji.framework
         public function shouldThrowRemoveLayerErroIfRemoveBottomLayer():void
         {
             var lc:LayerList = newLayerList();
+            try {
+                lc.throwsError = false;
+                lc.remove();
+                lc.throwsError = true;
+            } catch (e:Error) {
+                Assert.fail("Should not throw an error with throwsError = false");
+            }
             lc.remove();
         }
         

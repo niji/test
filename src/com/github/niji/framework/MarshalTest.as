@@ -1,13 +1,15 @@
 package com.github.niji.framework
 {
+    import com.github.niji.framework.FakePaintEngine;
+    import com.github.niji.framework.Marshal;
+    import com.github.niji.framework.Recorder;
+    import com.github.niji.framework.ui.IController;
+    import com.github.niji.gunyarapaint.ui.v1.FakeController;
+    
+    import flash.geom.Rectangle;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePaintEngine;
-    import com.github.niji.framework.ui.IController;
-    import com.github.niji.gunyarapaint.ui.v1.FakeController;
-    import com.github.niji.framework.Marshal;
-    import com.github.niji.framework.Recorder;
 
     public class MarshalTest
     {
@@ -44,6 +46,25 @@ package com.github.niji.framework
             var bytes:ByteArray = new ByteArray();
             var toBytes:ByteArray = new ByteArray();
             bytes.writeByte(Marshal.VERSION + 1);
+            bytes.deflate();
+            marshal.load(bytes, toBytes);
+        }
+        
+        [Test(description = "異なる大きさの画像のログを読み込むと例外を送出すること",
+              expects="com.github.niji.framework.errors.MarshalRectError")]
+        public function shouldThrowMarshalRectError():void
+        {
+            var marshalData:Object = {};
+            var marshal:Marshal = newMarshal(marshalData);
+            var bytes:ByteArray = new ByteArray();
+            var toBytes:ByteArray = new ByteArray();
+            bytes.writeByte(Marshal.VERSION);
+            bytes.writeObject(new ByteArray());
+            bytes.writeObject(new Rectangle(0, 0, int.MAX_VALUE, int.MAX_VALUE));
+            bytes.writeObject(new Vector.<uint>());
+            bytes.writeObject({}); // metadata
+            bytes.writeObject({}); // undodata
+            bytes.writeObject({}); // controller
             bytes.deflate();
             marshal.load(bytes, toBytes);
         }
