@@ -60,9 +60,12 @@ package com.github.niji.framework
             var toBytes:ByteArray = new ByteArray();
             bytes.writeByte(Marshal.VERSION);
             bytes.writeObject(new ByteArray());
-            bytes.writeObject(new Rectangle(0, 0, int.MAX_VALUE, int.MAX_VALUE));
-            bytes.writeObject(new Vector.<uint>());
-            bytes.writeObject({}); // metadata
+            bytes.writeObject(new Rectangle(0, 0, 1, 1));
+            bytes.writeObject(Vector.<uint>([0]));
+            bytes.writeObject({
+                "width": int.MAX_VALUE,
+                "height": int.MAX_VALUE
+            }); // metadata
             bytes.writeObject({}); // undodata
             bytes.writeObject({}); // controller
             bytes.deflate();
@@ -75,10 +78,11 @@ package com.github.niji.framework
             var controllers:Vector.<IController> = data.controllers
                 || new Vector.<IController>(1, true);
             var controller:FakeController = new FakeController();
+            var metadata:Object = { };
             controllers[0] = controller;
             data.painter = recorder;
             data.controllers = controllers;
-            return new Marshal(recorder, controllers);
+            return new Marshal(recorder, controllers, metadata);
         }
         
         private static const VALUE:String = "This is a test.";
