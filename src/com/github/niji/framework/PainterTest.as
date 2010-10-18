@@ -40,14 +40,10 @@ package com.github.niji.framework
         [Test(description="drawRectは長方形の大きさに従って描写すること")]
         public function shouldDrawRectByRectangle():void
         {
-            var x:int = 42;
-            var y:int = 124;
             var width:int = 256;
             var height:int = 512;
             var painter:Painter = newPainter();
-            painter.drawRect(x, y, width, height);
-            Assert.assertStrictlyEquals(x, FakePaintEngine.rectangle.x);
-            Assert.assertStrictlyEquals(y, FakePaintEngine.rectangle.y);
+            painter.drawRect(width, height);
             Assert.assertStrictlyEquals(width, FakePaintEngine.rectangle.width);
             Assert.assertStrictlyEquals(height, FakePaintEngine.rectangle.height);
         }
@@ -55,14 +51,10 @@ package com.github.niji.framework
         [Test(description="drawEllipseは長方形の大きさに従って描写すること")]
         public function shouldDrawEllipseByRectangle():void
         {
-            var x:int = 512;
-            var y:int = 256;
             var width:int = 128;
             var height:int = 64;
             var painter:Painter = newPainter();
-            painter.drawEllipse(x, y, width, height);
-            Assert.assertStrictlyEquals(x, FakePaintEngine.rectangle.x);
-            Assert.assertStrictlyEquals(y, FakePaintEngine.rectangle.y);
+            painter.drawEllipse(width, height);
             Assert.assertStrictlyEquals(width, FakePaintEngine.rectangle.width);
             Assert.assertStrictlyEquals(height, FakePaintEngine.rectangle.height);
         }

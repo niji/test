@@ -5,6 +5,7 @@ package com.github.niji.framework
     import com.github.niji.framework.commands.CompatibilityCommandTest;
     import com.github.niji.framework.commands.CompositeCommandTest;
     import com.github.niji.framework.commands.DrawCircleCommandTest;
+    import com.github.niji.framework.commands.DrawRectangleCommandTest;
     import com.github.niji.framework.commands.EndFillComamndTest;
     import com.github.niji.framework.commands.FloodFillCommandTest;
     import com.github.niji.framework.commands.HorizontalMirrorCommandTest;
@@ -35,7 +36,7 @@ package com.github.niji.framework
     import com.github.niji.framework.module.FreeHandModuleTest;
     import com.github.niji.framework.module.LineModuleTest;
     import com.github.niji.framework.module.PixelModuleTest;
-    import com.github.niji.framework.module.RectModuleTest;
+    import com.github.niji.framework.module.RectangleModuleTest;
     import com.github.niji.framework.module.RoundRectModuleTest;
     import com.github.niji.framework.module.TransparentFloodFillTest;
     import com.github.niji.framework.module.TransparentLineTest;
@@ -77,6 +78,8 @@ package com.github.niji.framework
         
         public var drawCircleCommand:DrawCircleCommandTest;
         
+        public var drawRectangleCommand:DrawRectangleCommandTest;
+        
         public var endFillCommand:EndFillComamndTest;
         
         public var floodFillCommand:FloodFillCommandTest;
@@ -115,7 +118,7 @@ package com.github.niji.framework
         
         public var pixelModule:PixelModuleTest;
         
-        public var rectModule:RectModuleTest;
+        public var rectModule:RectangleModuleTest;
         
         public var roundRectModule:RoundRectModuleTest;
         

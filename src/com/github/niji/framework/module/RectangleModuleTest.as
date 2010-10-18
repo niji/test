@@ -7,9 +7,9 @@ package com.github.niji.framework.module
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.modules.CanvasModuleContext;
     import com.github.niji.framework.modules.ICanvasModule;
-    import com.github.niji.framework.modules.RectModule;
+    import com.github.niji.framework.modules.RectangleModule;
 
-    public final class RectModuleTest
+    public final class RectangleModuleTest
     {
         [Before]
         public function setup():void
@@ -17,14 +17,14 @@ package com.github.niji.framework.module
             m_bytes = new ByteArray();
             var recorder:Recorder = ModuleTestUtil.createRecorder(m_bytes);
             var context:CanvasModuleContext = new CanvasModuleContext(recorder);
-            m_module = context.getModule(RectModule.RECT);
+            m_module = context.getModule(RectangleModule.RECTANGLE);
         }
         
-        [Test(description="RectModuleであること")]
+        [Test(description="RectangleModuleであること")]
         public function shouldBeRectModule():void
         {
-            Assert.assertTrue(m_module is RectModule);
-            Assert.assertEquals(m_module.name, RectModule.RECT);
+            Assert.assertTrue(m_module is RectangleModule);
+            Assert.assertEquals(m_module.name, RectangleModule.RECTANGLE);
         }
         
         [Test(description="移動せずに描画すると何も起こらないこと")]
@@ -33,6 +33,15 @@ package com.github.niji.framework.module
             m_module.start(1, 1);
             m_module.stop(1, 1);
             ModuleTestUtil.assertCommands(0, m_bytes);
+        }
+        
+        [Test(description="移動して描画すると3つのコマンドが実行されること")]
+        public function shouldExecuteThreeCommandsWithMoving():void
+        {
+            m_module.start(1, 1);
+            m_module.move(2, 2);
+            m_module.stop(3, 3);
+            ModuleTestUtil.assertCommands(3, m_bytes);
         }
         
         [Test(description="移動位置が保存されること")]

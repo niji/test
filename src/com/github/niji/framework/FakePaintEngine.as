@@ -34,20 +34,16 @@ package com.github.niji.framework
             radius = rad;
         }
         
-        override public function drawRect(x:Number,
-                                          y:Number,
-                                          width:uint,
+        override public function drawRect(width:uint,
                                           height:uint):void
         {
-            rectangle = new Rectangle(x, y, width, height);
+            rectangle = new Rectangle(0, 0, width, height);
         }
         
-        override public function drawEllipse(x:Number,
-                                             y:Number,
-                                             width:uint,
+        override public function drawEllipse(width:uint,
                                              height:uint):void
         {
-            rectangle = new Rectangle(x, y, width, height);
+            rectangle = new Rectangle(0, 0, width, height);
         }
         
         override public function beginFill(c:uint, a:Number):void
