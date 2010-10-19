@@ -20,11 +20,11 @@ package com.github.niji.framework.commands
             var painter:FakePainter = new FakePainter();
             var args:Object = {
                 "width": 123,
-                "height": 321
+                "height": -321
             };
             command.write(bytes, args);
             Assert.assertStrictlyEquals(
-                "[DrawRectangleCommand width=123 height=321]",
+                "[DrawRectangleCommand width=123 height=-321]",
                 command.toString()
             );
             bytes.position = 0;

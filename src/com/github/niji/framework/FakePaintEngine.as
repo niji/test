@@ -34,8 +34,8 @@ package com.github.niji.framework
             radius = rad;
         }
         
-        override public function drawRect(width:uint,
-                                          height:uint):void
+        override public function drawRect(width:int,
+                                          height:int):void
         {
             rectangle = new Rectangle(0, 0, width, height);
         }
