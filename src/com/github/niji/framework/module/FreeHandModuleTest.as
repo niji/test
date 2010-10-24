@@ -1,13 +1,21 @@
 package com.github.niji.framework.module
 {
-    import flash.utils.ByteArray;
-    
-    import org.flexunit.Assert;
     import com.github.niji.framework.Recorder;
+    import com.github.niji.framework.commands.BeginFillCommand;
+    import com.github.niji.framework.commands.CompositeCommand;
+    import com.github.niji.framework.commands.DrawCircleCommand;
+    import com.github.niji.framework.commands.EndFillCommand;
     import com.github.niji.framework.commands.ICommand;
+    import com.github.niji.framework.commands.LineToCommand;
+    import com.github.niji.framework.commands.MoveToCommand;
+    import com.github.niji.framework.commands.PenCommand;
     import com.github.niji.framework.modules.CanvasModuleContext;
     import com.github.niji.framework.modules.FreeHandModule;
     import com.github.niji.framework.modules.ICanvasModule;
+    
+    import flash.utils.ByteArray;
+    
+    import org.flexunit.Assert;
 
     public final class FreeHandModuleTest
     {
@@ -30,18 +38,32 @@ package com.github.niji.framework.module
         [Test(description="移動せずに描画すると7つのコマンドが実行されること")]
         public function shouldExecuteSevenCommandsWithoutMoving():void
         {
+            var expected:Vector.<Class> = Vector.<Class>([
+                MoveToCommand,
+                PenCommand,
+                BeginFillCommand,
+                DrawCircleCommand,
+                EndFillCommand,
+                PenCommand,
+                CompositeCommand
+            ]);
             m_module.start(1, 1);
             m_module.stop(1, 1);
-            ModuleTestUtil.assertCommands(7, m_bytes);
+            ModuleTestUtil.assertCommands(expected, m_bytes);
         }
         
         [Test(description="移動して描画すると3つのコマンドが実行されること")]
         public function shouldExecuteThreeCommandsWithMoving():void
         {
+            var expected:Vector.<Class> = Vector.<Class>([
+                MoveToCommand,
+                LineToCommand,
+                CompositeCommand
+            ]);
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
-            ModuleTestUtil.assertCommands(3, m_bytes);
+            ModuleTestUtil.assertCommands(expected, m_bytes);
         }
         
         [Test(description="移動位置が保存されること")]

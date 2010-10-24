@@ -1,13 +1,14 @@
 package com.github.niji.framework.module
 {
-    import flash.utils.ByteArray;
-    
-    import org.flexunit.Assert;
     import com.github.niji.framework.Recorder;
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.modules.CanvasModuleContext;
     import com.github.niji.framework.modules.ICanvasModule;
     import com.github.niji.framework.modules.RoundRectModule;
+    
+    import flash.utils.ByteArray;
+    
+    import org.flexunit.Assert;
 
     public final class RoundRectModuleTest
     {
@@ -32,7 +33,7 @@ package com.github.niji.framework.module
         {
             m_module.start(1, 1);
             m_module.stop(1, 1);
-            ModuleTestUtil.assertCommands(0, m_bytes);
+            ModuleTestUtil.assertCommands(Vector.<Class>([]), m_bytes);
         }
         
         [Test(description="移動位置が保存されること")]

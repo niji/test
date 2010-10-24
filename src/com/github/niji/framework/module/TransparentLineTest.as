@@ -1,13 +1,18 @@
 package com.github.niji.framework.module
 {
+    import com.github.niji.framework.Recorder;
+    import com.github.niji.framework.commands.CompositeCommand;
+    import com.github.niji.framework.commands.LineToCommand;
+    import com.github.niji.framework.commands.MoveToCommand;
+    import com.github.niji.framework.commands.PenCommand;
+    import com.github.niji.framework.modules.CanvasModuleContext;
+    import com.github.niji.framework.modules.ICanvasModule;
+    import com.github.niji.framework.modules.TransparentLineModule;
+    
     import flash.display.BlendMode;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.Recorder;
-    import com.github.niji.framework.modules.CanvasModuleContext;
-    import com.github.niji.framework.modules.ICanvasModule;
-    import com.github.niji.framework.modules.TransparentLineModule;
 
     public final class TransparentLineTest
     {
@@ -33,18 +38,25 @@ package com.github.niji.framework.module
             m_recorder.pen.blendMode = BlendMode.ADD;
             m_module.start(1, 1);
             m_module.stop(1, 1);
-            ModuleTestUtil.assertCommands(0, m_bytes);
+            ModuleTestUtil.assertCommands(Vector.<Class>([]), m_bytes);
             Assert.assertStrictlyEquals(BlendMode.ADD, m_recorder.pen.blendMode);
         }
         
         [Test(description="移動して描画すると5つのコマンドが実行された上でブレンドモードが復帰されること")]
         public function shouldExecuteFiveCommandsAndRestoreBlendModeWithMoving():void
         {
+            var expected:Vector.<Class> = Vector.<Class>([
+                PenCommand,
+                MoveToCommand,
+                LineToCommand,
+                CompositeCommand,
+                PenCommand
+            ]);
             m_recorder.pen.blendMode = BlendMode.DARKEN;
             m_module.start(1, 1);
             m_module.move(2, 2);
             m_module.stop(3, 3);
-            ModuleTestUtil.assertCommands(5, m_bytes);
+            ModuleTestUtil.assertCommands(expected, m_bytes);
             Assert.assertStrictlyEquals(BlendMode.DARKEN, m_recorder.pen.blendMode);
         }
         
