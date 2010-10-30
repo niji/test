@@ -45,5 +45,20 @@ package com.github.niji.framework.commands.layer
 			command.execute(painter);
 			Assert.assertFalse(painter.didPushUndo);
 		}
+        
+        [Test(description="レイヤー0(背景レイヤー)が選択された場合記録されること")]
+        public function shouldCommitEvenIfLayer0IsSelected():void
+        {
+            var bytes:ByteArray = new ByteArray();
+            var command:ICommand = new SetLayerIndexCommand();
+            var painter:FakePainter = new FakePainter();
+            var args:Object = { "index": 0 };
+            command.write(bytes, args);
+            bytes.position = 0;
+            bytes.readByte();
+            command.read(bytes);
+            command.execute(painter);
+            Assert.assertEquals(args.index, painter.layers.currentIndex);
+        }
     }
 }
