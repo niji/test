@@ -1,10 +1,13 @@
 package com.github.niji.framework
 {
+    import com.github.niji.framework.LayerList;
+    import com.github.niji.framework.UndoStack;
+    import com.github.niji.framework.errors.RedoError;
+    import com.github.niji.framework.errors.UndoError;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.LayerList;
-    import com.github.niji.framework.UndoStack;
 
     public class UndoStackTest
     {
@@ -47,6 +50,44 @@ package com.github.niji.framework
                 undo.save(data2);
             } catch (e:Error) {
                 Assert.fail(e.getStackTrace());
+            }
+        }
+        
+        [Test(description="throwsErrorで巻き戻し出来ない場合に例外を送出するか制御出来ること")]
+        public function shouldControlUndoErrorByThrowsError():void
+        {
+            var layers:LayerList = new LayerList(100, 100);
+            var undo:UndoStack = new UndoStack(layers);
+            try {
+                undo.undo(layers);
+                Assert.fail("should not be here");
+            } catch (e:Error) {
+                Assert.assertTrue(e is UndoError);
+            }
+            undo.throwsError = false;
+            try {
+                undo.undo(layers);
+            } catch (e:Error) {
+                Assert.fail("should not be here");
+            }
+        }
+        
+        [Test(description="throwsErrorでやり直し出来ない場合に例外を送出するか制御出来ること")]
+        public function shouldControlRedoErrorByThrowsError():void
+        {
+            var layers:LayerList = new LayerList(100, 100);
+            var undo:UndoStack = new UndoStack(layers);
+            try {
+                undo.redo(layers);
+                Assert.fail("should not be here");
+            } catch (e:Error) {
+                Assert.assertTrue(e is RedoError);
+            }
+            undo.throwsError = false;
+            try {
+                undo.redo(layers);
+            } catch (e:Error) {
+                Assert.fail("should not be here");
             }
         }
     }

@@ -136,6 +136,8 @@ package com.github.niji.framework
             bytes.position = bytes.bytesAvailable;
             bytes.writeByte(UndoCommand.ID);
             var player:Player = Player.create(bytes);
+            // 本来は false だが巻き戻しで意図的に例外を起こすために true にしておく
+            player.undoStack.throwsError = true;
             player.addEventListener(PlayerErrorEvent.ERROR,
                 Async.asyncHandler(this, onPlayerError, 500));
             player.start();
