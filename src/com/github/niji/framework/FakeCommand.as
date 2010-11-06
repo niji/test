@@ -1,10 +1,9 @@
 package com.github.niji.framework
 {
+    import com.github.niji.framework.commands.ICommand;
+    
     import flash.utils.IDataInput;
     import flash.utils.IDataOutput;
-    
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.Painter;
 	
 	/**
 	 * ICommand を実装したスタブクラス。実行したかのフラグを管理する
@@ -16,32 +15,32 @@ package com.github.niji.framework
         
         public function FakeCommand()
         {
-            didExecute = false;
-            didWrite = false;
-            didRead = false;
-            didReset = false;
-            writeArgument = null;
+            m_didExecute = false;
+            m_didWrite = false;
+            m_didRead = false;
+            m_didReset = false;
+            m_writeArgument = null;
         }
         
         public function read(bytes:IDataInput):void
         {
-            didRead = true;
+            m_didRead = true;
         }
         
         public function write(bytes:IDataOutput, args:Object):void
         {
-            didWrite = true;
-            writeArgument = args;
+            m_didWrite = true;
+            m_writeArgument = args;
         }
         
         public function execute(painter:Painter):void
         {
-            didExecute = true;
+            m_didExecute = true;
         }
         
         public function reset():void
         {
-            didReset = true;
+            m_didReset = true;
         }
         
         public function toString():String
@@ -54,10 +53,35 @@ package com.github.niji.framework
             return ID;
         }
         
-        public static var didExecute:Boolean;
-        public static var didRead:Boolean;
-        public static var didReset:Boolean;
-        public static var didWrite:Boolean;
-        public static var writeArgument:Object;
+        public function get didExecute():Boolean
+        {
+            return m_didExecute;
+        }
+        
+        public function get didRead():Boolean
+        {
+            return m_didRead;
+        }
+        
+        public function get didReset():Boolean
+        {
+            return m_didReset;
+        }
+        
+        public function get didWrite():Boolean
+        {
+            return m_didWrite;
+        }
+        
+        public function get writeArgument():Object
+        {
+            return m_writeArgument;
+        }
+        
+        private var m_didExecute:Boolean;
+        private var m_didRead:Boolean;
+        private var m_didReset:Boolean;
+        private var m_didWrite:Boolean;
+        private var m_writeArgument:Object;
     }
 }

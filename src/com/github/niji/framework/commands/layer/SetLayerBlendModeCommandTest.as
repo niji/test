@@ -1,13 +1,12 @@
 package com.github.niji.framework.commands.layer
 {
+    import com.github.niji.framework.FakePainter;
+    import com.github.niji.framework.commands.ICommand;
+    
     import flash.display.BlendMode;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.layer.SetLayerBlendModeCommand;
 
     public class SetLayerBlendModeCommandTest
     {
@@ -27,7 +26,7 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(SetLayerBlendModeCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.blendMode, FakePainter.layerBlendMode);
+            Assert.assertEquals(args.blendMode, painter.layerBlendMode);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

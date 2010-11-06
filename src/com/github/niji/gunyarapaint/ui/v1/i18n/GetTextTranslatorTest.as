@@ -1,6 +1,5 @@
 package com.github.niji.gunyarapaint.ui.v1.i18n
 {
-    import com.github.niji.framework.i18n.ITranslator;
     import com.github.niji.framework.i18n.TranslatorRegistry;
     import com.github.niji.gunyarapaint.ui.i18n.GetTextTranslator;
     

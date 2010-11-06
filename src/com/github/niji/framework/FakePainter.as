@@ -2,8 +2,6 @@ package com.github.niji.framework
 {
     import flash.display.BlendMode;
     import flash.geom.Point;
-    import com.github.niji.framework.Painter;
-    import com.github.niji.framework.Version;
     
 	/**
 	 * Painter を継承するスタブクラス。実行したかのフラグ管理及び代入された値、描写位置を担当する。
@@ -17,22 +15,23 @@ package com.github.niji.framework
     {
         public function FakePainter()
         {
-            didComposite = false;
-            didFloodFill = false;
-            didStartDrawing = false;
-            didEndDrawing = false;
-            coordinate = new Point();
-            layerIndex = 0;
-            layerVisible = true;
-            layerAlpha = 0.0;
-            layerBlendMode = BlendMode.NORMAL;
-            fakePaintEngine = new FakePaintEngine();
-            super(1, 1, Version.LOG_VERSION, fakePaintEngine);
+            var engine:FakePaintEngine = new FakePaintEngine();
+            super(1, 1, Version.LOG_VERSION, engine);
+            m_didComposite = false;
+            m_didFloodFill = false;
+            m_didStartDrawing = false;
+            m_didEndDrawing = false;
+            m_coordinate = new Point();
+            m_layerIndex = 0;
+            m_layerVisible = true;
+            m_layerAlpha = 0.0;
+            m_layerBlendMode = BlendMode.NORMAL;
             m_layers = new FakeLayerList(1, 1);
             m_didUndo = false;
             m_didRedo = false;
             m_didPushUndo = false;
             m_didPushUndoIfNeed = false;
+            m_paintEngine = engine;
         }
         
         public override function undo():void
@@ -57,53 +56,53 @@ package com.github.niji.framework
         
         public override function composite():void
         {
-            didComposite = true;
+            m_didComposite = true;
         }
         
         public override function floodFill():void
         {
-            didFloodFill = true;
+            m_didFloodFill = true;
         }
         
         public override function setPixel(x:int, y:int):void
         {
-            coordinate = new Point(x, y);
+            m_coordinate = new Point(x, y);
         }
         
         public override function setVisibleAt(index:int, visible:Boolean):void
         {
-            layerIndex = index;
-            layerVisible = visible;
+            m_layerIndex = index;
+            m_layerVisible = visible;
         }
         
         public override function transformWithHorizontalMirrorAt(index:int):void
         {
-            layerIndex = index;
+            m_layerIndex = index;
         }
         
         public override function transformWithVerticalMirrorAt(index:int):void
         {
-            layerIndex = index;
+            m_layerIndex = index;
         }
         
         public override function move(x:int, y:int):void
         {
-            coordinate = new Point(x, y);
+            m_coordinate = new Point(x, y);
         }
         
         public override function scale(x:int, y:int):void
         {
-            coordinate = new Point(x, y);
+            m_coordinate = new Point(x, y);
         }
         
         public override function startDrawing():void
         {
-            didStartDrawing = true;
+            m_didStartDrawing = true;
         }
         
         public override function stopDrawing():void
         {
-            didEndDrawing = true;
+            m_didEndDrawing = true;
         }
         
         public function get didUndo():Boolean
@@ -128,24 +127,74 @@ package com.github.niji.framework
         
         public override function set currentLayerAlpha(alpha:Number):void
         {
-            layerAlpha = alpha;
+            m_layerAlpha = alpha;
         }
         
         public override function set currentLayerBlendMode(blendMode:String):void
         {
-            layerBlendMode = blendMode;
+            m_layerBlendMode = blendMode;
         }
         
-        public static var didComposite:Boolean;
-        public static var didFloodFill:Boolean;
-        public static var coordinate:Point;
-        public static var layerIndex:int;
-        public static var layerVisible:Boolean;
-        public static var didStartDrawing:Boolean;
-        public static var didEndDrawing:Boolean;
-        public static var layerAlpha:Number;
-        public static var layerBlendMode:String;
-        public static var fakePaintEngine:FakePaintEngine;
+        public function get didComposite():Boolean
+        {
+            return m_didComposite;
+        }
+        
+        public function get didFloodFill():Boolean
+        {
+            return m_didFloodFill;
+        }
+        
+        public function get point():Point
+        {
+            return m_coordinate;
+        }
+        
+        public function get layerIndex():int
+        {
+            return m_layerIndex;
+        }
+        
+        public function get layerVisible():Boolean
+        {
+            return m_layerVisible;
+        }
+        
+        public function get didStartDrawing():Boolean
+        {
+            return m_didStartDrawing;
+        }
+        
+        public function get didEndDrawing():Boolean
+        {
+            return m_didEndDrawing;
+        }
+        
+        public function get layerAlpha():Number
+        {
+            return m_layerAlpha;
+        }
+        
+        public function get layerBlendMode():String
+        {
+            return m_layerBlendMode;
+        }
+        
+        public function get fakePaintEngine():FakePaintEngine
+        {
+            return m_paintEngine;
+        }
+        
+        private var m_didComposite:Boolean;
+        private var m_didFloodFill:Boolean;
+        private var m_coordinate:Point;
+        private var m_layerIndex:int;
+        private var m_layerVisible:Boolean;
+        private var m_didStartDrawing:Boolean;
+        private var m_didEndDrawing:Boolean;
+        private var m_layerAlpha:Number;
+        private var m_layerBlendMode:String;
+        private var m_paintEngine:FakePaintEngine;
         private var m_didUndo:Boolean;
         private var m_didRedo:Boolean;
         private var m_didPushUndo:Boolean;

@@ -9,11 +9,6 @@ package com.github.niji.framework
     import flash.geom.Point;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.BitmapLayer;
-    import com.github.niji.framework.PaintEngine;
-    import com.github.niji.framework.Painter;
-    import com.github.niji.framework.UndoStack;
-    import com.github.niji.framework.Version;
 
     public class PainterTest
     {
@@ -22,19 +17,21 @@ package com.github.niji.framework
         {
             var x:int = 42;
             var y:int = 124;
-            var painter:Painter = newPainter();
+            var engine:FakePaintEngine = new FakePaintEngine();
+            var painter:Painter = newPainter(engine);
             painter.moveTo(x, y);
-            Assert.assertStrictlyEquals(x, FakePaintEngine.point.x);
-            Assert.assertStrictlyEquals(y, FakePaintEngine.point.y);
+            Assert.assertStrictlyEquals(x, engine.point.x);
+            Assert.assertStrictlyEquals(y, engine.point.y);
         }
         
         [Test(description="drawCircleは半径を元に円を描写すること")]
         public function shouldDrawCircleByRadius():void
         {
             var radius:Number = 3.14;
-            var painter:Painter = newPainter();
+            var engine:FakePaintEngine = new FakePaintEngine();
+            var painter:Painter = newPainter(engine);
             painter.drawCircle(radius);
-            Assert.assertStrictlyEquals(radius, FakePaintEngine.radius);
+            Assert.assertStrictlyEquals(radius, engine.radius);
         }
         
         [Test(description="drawRectは長方形の大きさに従って描写すること")]
@@ -42,10 +39,11 @@ package com.github.niji.framework
         {
             var width:int = 256;
             var height:int = 512;
-            var painter:Painter = newPainter();
+            var engine:FakePaintEngine = new FakePaintEngine();
+            var painter:Painter = newPainter(engine);
             painter.drawRect(width, height);
-            Assert.assertStrictlyEquals(width, FakePaintEngine.rectangle.width);
-            Assert.assertStrictlyEquals(height, FakePaintEngine.rectangle.height);
+            Assert.assertStrictlyEquals(width, engine.rectangle.width);
+            Assert.assertStrictlyEquals(height, engine.rectangle.height);
         }
         
         [Test(description="drawEllipseは長方形の大きさに従って描写すること")]
@@ -53,10 +51,11 @@ package com.github.niji.framework
         {
             var width:int = 128;
             var height:int = 64;
-            var painter:Painter = newPainter();
+            var engine:FakePaintEngine = new FakePaintEngine();
+            var painter:Painter = newPainter(engine);
             painter.drawEllipse(width, height);
-            Assert.assertStrictlyEquals(width, FakePaintEngine.rectangle.width);
-            Assert.assertStrictlyEquals(height, FakePaintEngine.rectangle.height);
+            Assert.assertStrictlyEquals(width, engine.rectangle.width);
+            Assert.assertStrictlyEquals(height, engine.rectangle.height);
         }
         
         [Test(description="floodFillは色と不透明度によって描写すること")]
@@ -64,19 +63,20 @@ package com.github.niji.framework
         {
             var color:uint = uint.MAX_VALUE;
             var alpha:Number = 0.5;
-            var painter:Painter = newPainter();
+            var engine:FakePaintEngine = new FakePaintEngine();
+            var painter:Painter = newPainter(engine);
             painter.beginFill(color, alpha);
             painter.endFill();
-            Assert.assertStrictlyEquals(color, FakePaintEngine.color);
-            Assert.assertStrictlyEquals(alpha, FakePaintEngine.alpha);
-            Assert.assertTrue(FakePaintEngine.filled);
+            Assert.assertStrictlyEquals(color, engine.color);
+            Assert.assertStrictlyEquals(alpha, engine.alpha);
+            Assert.assertTrue(engine.filled);
         }
         
         [Test(description="startDrawingによって描写レイヤーの追加、stopDrawingで削除が行われること")]
         public function shouldStartDrawingAddsDrawingLayerAndStopDrawingRemovesIt():void
         {
             var child:DisplayObject;
-            var painter:Painter = newPainter();
+            var painter:Painter = newPainter(new FakePaintEngine());
             // 描写セッションの開始されると一時 Sprite が作成される
             // その為、上に現在のレイヤーが、下に描写バッファが入る
             painter.startDrawing();
@@ -95,7 +95,7 @@ package com.github.niji.framework
         public function shouldRestoreLayersAfterSaving():void
         {
             var metadata:Object = {};
-            var painter:Painter = newPainterForSave();
+            var painter:Painter = newPainterForSave(new FakePaintEngine());
             var src:BitmapLayer = BitmapLayer(painter.layers.at(2));
             var layers:BitmapData = painter.layers.newLayerBitmapData;
             painter.layers.save(layers, metadata);
@@ -160,7 +160,7 @@ package com.github.niji.framework
         [Test(description="enableUndoLayerが設定されていればpushUndoIfでもUndoStackが積まれること")]
         public function shouldPushUndoIfEnableUndoLayerIsTrue():void
         {
-            var painter:Painter = newPainter();
+            var painter:Painter = newPainter(new FakePaintEngine());
             var undo:UndoStack = new UndoStack(painter.layers);
             painter.setUndoStack(undo);
             painter.pushUndoIfNeed();
@@ -173,7 +173,7 @@ package com.github.niji.framework
         [Test(description="versionが21以上であればpushUndoIfでもUndoStackが積まれること")]
         public function shouldPushUndoIfVersionIsGreaterThan21():void
         {
-            var painter:Painter = newPainter();
+            var painter:Painter = newPainter(new FakePaintEngine());
             var undo:UndoStack = new UndoStack(painter.layers);
             painter.setUndoStack(undo);
             painter.pushUndoIfNeed();
@@ -183,9 +183,9 @@ package com.github.niji.framework
             Assert.assertEquals(1, undo.undoCount);
         }
         
-        private function newPainter():Painter
+        private function newPainter(engine:PaintEngine):Painter
         {
-            return new Painter(1, 1, Version.LOG_VERSION, new FakePaintEngine());
+            return new Painter(1, 1, Version.LOG_VERSION, engine);
         }
         
         private function assertCorrectedPoint(engine:PaintEngine,
@@ -194,16 +194,15 @@ package com.github.niji.framework
                                               inputX:Number,
                                               inputY:Number):void
         {
-            input.x = inputX;
-            input.y = inputY;
+            var input:Point = new Point(inputX, inputY);
             engine.correctCoordinate(input);
             Assert.assertEquals(expectedX, input.x);
             Assert.assertEquals(expectedY, input.x);
         }
         
-        private function newPainterForSave():Painter
+        private function newPainterForSave(engine:PaintEngine):Painter
         {
-            var painter:Painter = new Painter(3, 1, Version.LOG_VERSION, new FakePaintEngine());
+            var painter:Painter = new Painter(3, 1, Version.LOG_VERSION, engine);
             painter.pen.color = 0xff0000;
             painter.setPixel(0, 0);
             painter.layers.add();
@@ -220,7 +219,5 @@ package com.github.niji.framework
             src.visible = false;
             return painter;
         }
-        
-        private static var input:Point = new Point();
     }
 }

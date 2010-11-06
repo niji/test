@@ -1,8 +1,8 @@
 package com.github.niji.gunyarapaint.ui.v1.net
 {
-    import flash.utils.ByteArray;
-    
     import com.github.niji.framework.net.IParameters;
+    
+    import flash.utils.ByteArray;
     
     internal final class FakeParameters implements IParameters
     {

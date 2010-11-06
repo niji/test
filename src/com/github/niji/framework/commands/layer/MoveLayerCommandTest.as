@@ -1,12 +1,12 @@
 package com.github.niji.framework.commands.layer
 {
+    import com.github.niji.framework.FakePainter;
+    import com.github.niji.framework.commands.ICommand;
+    
     import flash.geom.Point;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.commands.layer.MoveLayerCommand;
 
     public final class MoveLayerCommandTest
     {
@@ -27,7 +27,7 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(MoveLayerCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertTrue(point.equals(FakePainter.coordinate));
+            Assert.assertTrue(point.equals(painter.point));
             Assert.assertTrue(painter.didPushUndo);
         }
     }

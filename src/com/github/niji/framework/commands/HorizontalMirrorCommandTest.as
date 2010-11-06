@@ -1,12 +1,10 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.HorizontalMirrorCommand;
-    import com.github.niji.framework.commands.ICommand;
 
     public class HorizontalMirrorCommandTest
     {
@@ -26,7 +24,7 @@ package com.github.niji.framework.commands
             Assert.assertEquals(HorizontalMirrorCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.index, FakePainter.layerIndex);
+            Assert.assertEquals(args.index, painter.layerIndex);
             Assert.assertFalse(painter.didPushUndo);
         }
     }

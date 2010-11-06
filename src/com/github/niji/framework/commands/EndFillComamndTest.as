@@ -1,12 +1,10 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePaintEngine;
-    import com.github.niji.framework.commands.EndFillCommand;
-    import com.github.niji.framework.commands.ICommand;
 
     public class EndFillComamndTest
     {
@@ -22,7 +20,7 @@ package com.github.niji.framework.commands
             Assert.assertEquals(EndFillCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertTrue(FakePaintEngine.filled);
+            Assert.assertTrue(painter.fakePaintEngine.filled);
             Assert.assertFalse(painter.didPushUndo);
         }
     }

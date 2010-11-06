@@ -2,7 +2,6 @@ package com.github.niji.framework.module
 {
     import com.github.niji.framework.Recorder;
     import com.github.niji.framework.commands.FloodFillCommand;
-    import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.commands.MoveToCommand;
     import com.github.niji.framework.modules.CanvasModuleContext;
     import com.github.niji.framework.modules.FloodFillModule;

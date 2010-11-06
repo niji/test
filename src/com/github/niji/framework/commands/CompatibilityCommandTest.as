@@ -1,12 +1,11 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    import com.github.niji.framework.Painter;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.Painter;
-    import com.github.niji.framework.commands.CompatibilityCommand;
-    import com.github.niji.framework.commands.ICommand;
 
     public class CompatibilityCommandTest
     {

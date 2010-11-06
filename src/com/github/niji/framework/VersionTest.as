@@ -1,7 +1,6 @@
 package com.github.niji.framework
 {
     import org.flexunit.Assert;
-    import com.github.niji.framework.Version;
     
     public final class VersionTest
     {

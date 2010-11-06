@@ -10,7 +10,6 @@ package com.github.niji.framework.module
     import flash.errors.IllegalOperationError;
     import flash.geom.Point;
     import flash.utils.ByteArray;
-    import flash.utils.getQualifiedClassName;
     
     import org.flexunit.Assert;
 

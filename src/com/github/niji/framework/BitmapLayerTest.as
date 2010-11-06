@@ -2,11 +2,8 @@ package com.github.niji.framework
 {
     import flash.display.BitmapData;
     import flash.display.BlendMode;
-    import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.BitmapLayer;
-    import com.github.niji.framework.ILayer;
 
     // BitmapLayer#compositeTo is tested in PainterTest#レイヤー情報の保存と復帰
     public class BitmapLayerTest

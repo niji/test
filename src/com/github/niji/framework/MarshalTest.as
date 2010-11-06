@@ -1,8 +1,5 @@
 package com.github.niji.framework
 {
-    import com.github.niji.framework.FakePaintEngine;
-    import com.github.niji.framework.Marshal;
-    import com.github.niji.framework.Recorder;
     import com.github.niji.framework.ui.IController;
     import com.github.niji.gunyarapaint.ui.v1.FakeController;
     

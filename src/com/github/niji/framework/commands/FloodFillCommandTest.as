@@ -1,12 +1,10 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.FloodFillCommand;
-    import com.github.niji.framework.commands.ICommand;
 
     public class FloodFillCommandTest
     {
@@ -22,8 +20,8 @@ package com.github.niji.framework.commands
             Assert.assertEquals(FloodFillCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertTrue(FakePainter.didFloodFill);
-            Assert.assertTrue(FakePainter.didEndDrawing);
+            Assert.assertTrue(painter.didFloodFill);
+            Assert.assertTrue(painter.didEndDrawing);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

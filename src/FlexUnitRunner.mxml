@@ -4,12 +4,13 @@
                 width="1024" height="600" creationComplete="onCreationComplete(event)">
     <mx:Script>
         <![CDATA[
+            import com.github.niji.framework.TestSuite;
+            import com.github.niji.gunyarapaint.ui.v1.UITestSuite;
+            
             import mx.events.FlexEvent;
             
             import org.flexunit.listeners.UIListener;
             import org.flexunit.runner.FlexUnitCore;
-            import com.github.niji.framework.TestSuite;
-            import com.github.niji.gunyarapaint.ui.v1.UITestSuite;
             
             private function onCreationComplete(event:FlexEvent):void
             {

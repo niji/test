@@ -1,17 +1,15 @@
 package com.github.niji.framework
 {
-    import flash.utils.ByteArray;
-    
-    import org.flexunit.Assert;
-    import org.flexunit.async.Async;
     import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.commands.LineToCommand;
-    import com.github.niji.framework.commands.MoveToCommand;
     import com.github.niji.framework.commands.RedoCommand;
     import com.github.niji.framework.commands.UndoCommand;
     import com.github.niji.framework.commands.layer.CopyLayerCommand;
     import com.github.niji.framework.events.CommandEvent;
-    import com.github.niji.framework.Parser;
+    
+    import flash.utils.ByteArray;
+    
+    import org.flexunit.Assert;
+    import org.flexunit.async.Async;
 
     public class ParserTest
     {

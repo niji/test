@@ -5,7 +5,6 @@ package com.github.niji.framework.module
     import com.github.niji.framework.commands.CompositeCommand;
     import com.github.niji.framework.commands.DrawCircleCommand;
     import com.github.niji.framework.commands.EndFillCommand;
-    import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.commands.LineToCommand;
     import com.github.niji.framework.commands.MoveToCommand;
     import com.github.niji.framework.commands.PenCommand;

@@ -1,12 +1,11 @@
 package com.github.niji.framework.commands.layer
 {
+    import com.github.niji.framework.FakePainter;
+    import com.github.niji.framework.commands.ICommand;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.layer.SetLayerAlphaCommand;
 
     public class SetLayerAlphaCommandTest
     {
@@ -26,7 +25,7 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(SetLayerAlphaCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.alpha, FakePainter.layerAlpha);
+            Assert.assertEquals(args.alpha, painter.layerAlpha);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

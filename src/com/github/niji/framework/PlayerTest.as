@@ -1,16 +1,16 @@
 package com.github.niji.framework
 {
-    import flash.utils.ByteArray;
-    
-    import org.flexunit.Assert;
-    import org.flexunit.async.Async;
     import com.github.niji.framework.commands.CompositeCommand;
     import com.github.niji.framework.commands.UndoCommand;
     import com.github.niji.framework.errors.UndoError;
     import com.github.niji.framework.events.CommandEvent;
     import com.github.niji.framework.events.PlayerErrorEvent;
     import com.github.niji.framework.events.PlayerEvent;
-    import com.github.niji.framework.Player;
+    
+    import flash.utils.ByteArray;
+    
+    import org.flexunit.Assert;
+    import org.flexunit.async.Async;
 
     public class PlayerTest
     {

@@ -1,12 +1,10 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.CompositeCommand;
-    import com.github.niji.framework.commands.ICommand;
 
     public class CompositeCommandTest
     {
@@ -22,8 +20,8 @@ package com.github.niji.framework.commands
             Assert.assertEquals(CompositeCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertTrue(FakePainter.didComposite);
-            Assert.assertTrue(FakePainter.didEndDrawing);
+            Assert.assertTrue(painter.didComposite);
+            Assert.assertTrue(painter.didEndDrawing);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

@@ -1,11 +1,11 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
+    import flash.geom.Point;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePaintEngine;
-    import com.github.niji.framework.commands.MoveToCommand;
 
     public class MoveToCommandTest
     {
@@ -42,8 +42,9 @@ package com.github.niji.framework.commands
                 Assert.assertEquals(MoveToCommand.ID, byte);
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.x, FakePaintEngine.point.x);
-            Assert.assertEquals(args.y, FakePaintEngine.point.y);
+            var point:Point = painter.fakePaintEngine.point;
+            Assert.assertEquals(args.x, point.x);
+            Assert.assertEquals(args.y, point.y);
         }
     }
 }

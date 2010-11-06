@@ -1,7 +1,5 @@
 package com.github.niji.framework
 {
-    import com.github.niji.framework.LayerList;
-    
     import flash.display.BitmapData;
     
     import org.flexunit.Assert;

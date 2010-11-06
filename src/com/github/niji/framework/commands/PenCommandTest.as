@@ -1,15 +1,13 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
     import flash.display.CapsStyle;
     import flash.display.JointStyle;
     import flash.display.LineScaleMode;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePaintEngine;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.commands.PenCommand;
 
     public class PenCommandTest
     {
@@ -82,7 +80,7 @@ package com.github.niji.framework.commands
             Assert.assertEquals(PenCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args[key], FakePainter.fakePaintEngine.pen[key]);
+            Assert.assertEquals(args[key], painter.fakePaintEngine.pen[key]);
             Assert.assertFalse(painter.didPushUndo);
         }
     }

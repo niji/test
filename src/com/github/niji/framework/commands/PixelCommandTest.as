@@ -1,12 +1,11 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
+    import flash.geom.Point;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.commands.PixelCommand;
 
     public class PixelCommandTest
     {
@@ -26,8 +25,9 @@ package com.github.niji.framework.commands
             Assert.assertEquals(PixelCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.x, FakePainter.coordinate.x);
-            Assert.assertEquals(args.y, FakePainter.coordinate.y);
+            var point:Point = painter.point;
+            Assert.assertEquals(args.x, point.x);
+            Assert.assertEquals(args.y, point.y);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

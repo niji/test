@@ -1,12 +1,10 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePaintEngine;
-    import com.github.niji.framework.commands.BeginFillCommand;
-    import com.github.niji.framework.commands.ICommand;
 
     public class BeginFillCommandTest
     {
@@ -29,8 +27,8 @@ package com.github.niji.framework.commands
             Assert.assertEquals(BeginFillCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.alpha, FakePaintEngine.alpha);
-            Assert.assertEquals(args.color, FakePaintEngine.color);
+            Assert.assertEquals(args.alpha, painter.fakePaintEngine.alpha);
+            Assert.assertEquals(args.color, painter.fakePaintEngine.color);
             Assert.assertFalse(painter.didPushUndo);
         }
     }

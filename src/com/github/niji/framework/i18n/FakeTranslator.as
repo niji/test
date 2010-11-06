@@ -1,7 +1,5 @@
 package com.github.niji.framework.i18n
 {
-    import com.github.niji.framework.i18n.ITranslator;
-
 	/**
 	 * ITranslator を実装したスタブクラス。TranslatorRegistry#install で使うために作られたので、
 	 * 本当に何もしない。

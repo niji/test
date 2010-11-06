@@ -1,12 +1,10 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePaintEngine;
-    import com.github.niji.framework.commands.DrawCircleCommand;
-    import com.github.niji.framework.commands.ICommand;
 
     public class DrawCircleCommandTest
     {
@@ -28,7 +26,7 @@ package com.github.niji.framework.commands
             Assert.assertEquals(DrawCircleCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.radius, FakePaintEngine.radius);
+            Assert.assertEquals(args.radius, painter.fakePaintEngine.radius);
             Assert.assertFalse(painter.didPushUndo);
         }
     }

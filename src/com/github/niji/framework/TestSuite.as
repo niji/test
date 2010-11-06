@@ -40,7 +40,6 @@ package com.github.niji.framework
     import com.github.niji.framework.module.RoundRectModuleTest;
     import com.github.niji.framework.module.TransparentFloodFillTest;
     import com.github.niji.framework.module.TransparentLineTest;
-    import com.github.niji.framework.modules.TransparentLineModule;
 
     [Suite]
     [RunWith("org.flexunit.runners.Suite")]

@@ -1,12 +1,12 @@
 package com.github.niji.framework.commands.layer
 {
+    import com.github.niji.framework.FakeLayerList;
+    import com.github.niji.framework.FakePainter;
+    import com.github.niji.framework.commands.ICommand;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakeLayerList;
-    import com.github.niji.framework.commands.layer.RemoveLayerCommand;
 
     public class RemoveLayerCommandTest
     {
@@ -22,7 +22,7 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(RemoveLayerCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertTrue(FakeLayerList.didRemoveLayer);
+            Assert.assertTrue(FakeLayerList(painter.layers).didRemoveLayer);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

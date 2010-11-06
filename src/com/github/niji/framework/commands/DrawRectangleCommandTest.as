@@ -1,9 +1,6 @@
 package com.github.niji.framework.commands
 {
-    import com.github.niji.framework.FakePaintEngine;
     import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.DrawCircleCommand;
-    import com.github.niji.framework.commands.ICommand;
     
     import flash.geom.Rectangle;
     import flash.utils.ByteArray;
@@ -31,7 +28,7 @@ package com.github.niji.framework.commands
             Assert.assertEquals(DrawRectangleCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            var rect:Rectangle = FakePaintEngine.rectangle;
+            var rect:Rectangle = painter.fakePaintEngine.rectangle;
             Assert.assertEquals(args.width, rect.width);
             Assert.assertEquals(args.height, rect.height);
             Assert.assertFalse(painter.didPushUndo);

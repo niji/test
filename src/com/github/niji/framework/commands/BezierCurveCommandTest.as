@@ -1,11 +1,10 @@
 package com.github.niji.framework.commands
 {
+    import com.github.niji.framework.FakePainter;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.BezierCurveCommand;
-    import com.github.niji.framework.commands.ICommand;
 
     public final class BezierCurveCommandTest
     {

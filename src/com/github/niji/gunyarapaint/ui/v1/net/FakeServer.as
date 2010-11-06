@@ -1,6 +1,5 @@
 package com.github.niji.gunyarapaint.ui.v1.net
 {
-    import flash.errors.IOError;
     import flash.events.Event;
     import flash.events.EventDispatcher;
     import flash.events.IOErrorEvent;

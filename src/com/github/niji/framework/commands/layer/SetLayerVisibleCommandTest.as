@@ -1,12 +1,11 @@
 package com.github.niji.framework.commands.layer
 {
+    import com.github.niji.framework.FakePainter;
+    import com.github.niji.framework.commands.ICommand;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.commands.layer.SetLayerVisibleCommand;
 
     public class SetLayerVisibleCommandTest
     {
@@ -26,7 +25,7 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(SetLayerVisibleCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertEquals(args.visible, FakePainter.layerVisible);
+            Assert.assertEquals(args.visible, painter.layerVisible);
         }
     }
 }

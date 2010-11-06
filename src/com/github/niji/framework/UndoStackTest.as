@@ -1,7 +1,5 @@
 package com.github.niji.framework
 {
-    import com.github.niji.framework.LayerList;
-    import com.github.niji.framework.UndoStack;
     import com.github.niji.framework.errors.RedoError;
     import com.github.niji.framework.errors.UndoError;
     

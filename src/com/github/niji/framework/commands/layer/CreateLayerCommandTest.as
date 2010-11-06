@@ -1,12 +1,12 @@
 package com.github.niji.framework.commands.layer
 {
+    import com.github.niji.framework.FakeLayerList;
+    import com.github.niji.framework.FakePainter;
+    import com.github.niji.framework.commands.ICommand;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.FakePainter;
-    import com.github.niji.framework.FakeLayerList;
-    import com.github.niji.framework.commands.layer.CreateLayerCommand;
 
     public class CreateLayerCommandTest
     {
@@ -22,7 +22,7 @@ package com.github.niji.framework.commands.layer
             Assert.assertEquals(CreateLayerCommand.ID, bytes.readByte());
             command.read(bytes);
             command.execute(painter);
-            Assert.assertTrue(FakeLayerList.didAddLayer);
+            Assert.assertTrue(FakeLayerList(painter.layers).didAddLayer);
             Assert.assertTrue(painter.didPushUndo);
         }
     }

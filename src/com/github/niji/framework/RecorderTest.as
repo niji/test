@@ -1,16 +1,13 @@
 package com.github.niji.framework
 {
+    import com.github.niji.framework.commands.CompositeCommand;
+    import com.github.niji.framework.events.CommandEvent;
+    import com.github.niji.framework.events.UndoEvent;
+    
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
     import org.flexunit.async.Async;
-    import com.github.niji.framework.commands.CompositeCommand;
-    import com.github.niji.framework.commands.ICommand;
-    import com.github.niji.framework.events.CommandEvent;
-    import com.github.niji.framework.events.UndoEvent;
-    import com.github.niji.framework.CommandContext;
-    import com.github.niji.framework.Recorder;
-    import com.github.niji.framework.UndoStack;
 
     public class RecorderTest
     {
@@ -40,14 +37,14 @@ package com.github.niji.framework
             var commands:CommandContext = new CommandContext();
             var bytes:ByteArray = new ByteArray();
             var recorder:Recorder = new Recorder(bytes, 1, 1, commands);
-            var command:ICommand = new FakeCommand();
+            var command:FakeCommand = new FakeCommand();
             commands.registerCommand(command);
             recorder.addEventListener(CommandEvent.COMMITTED,
                 Async.asyncHandler(this, onCommitCommand, 100));
             recorder.commitCommand(FakeCommand.ID, command);
-            Assert.assertTrue(FakeCommand.didExecute);
-            Assert.assertTrue(FakeCommand.didWrite);
-            Assert.assertEquals(command, FakeCommand.writeArgument);
+            Assert.assertTrue(command.didExecute);
+            Assert.assertTrue(command.didWrite);
+            Assert.assertEquals(command, command.writeArgument);
         }
         
         [Test(async, description="巻き戻しを追加するとUndoEvent.PUSHが呼ばれること")]

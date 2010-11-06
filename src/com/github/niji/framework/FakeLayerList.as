@@ -2,10 +2,6 @@ package com.github.niji.framework
 {
     import flash.display.BitmapData;
     
-    import com.github.niji.framework.BitmapLayer;
-    import com.github.niji.framework.ILayer;
-    import com.github.niji.framework.LayerList;
-    
 	/**
 	 * LayerBitmapCollection を継承したスタブクラス。実行したかのフラグ管理を行う。
 	 * 
@@ -17,52 +13,87 @@ package com.github.niji.framework
         public function FakeLayerList(width:int, height:int)
         {
             super(width, height);
-            didAddLayer = false;
-            didCopyLayer = false;
-            didSwapLayerFrom = 0;
-            didSwapLayerTo = 0;
-            didMergeLayer = false;
-            didRemoveLayer = false;
-            layerBitmap = new BitmapLayer(new BitmapData(1, 1));
+            m_didAddLayer = false;
+            m_didCopyLayer = false;
+            m_didSwapLayerFrom = 0;
+            m_didSwapLayerTo = 0;
+            m_didMergeLayer = false;
+            m_didRemoveLayer = false;
+            m_layerBitmap = new BitmapLayer(new BitmapData(1, 1));
         }
         
         public override function add():void
         {
-            didAddLayer = true;
+            m_didAddLayer = true;
         }
         
         public override function copy():void
         {
-            didCopyLayer = true;
+            m_didCopyLayer = true;
         }
         
         public override function swap(from:int, to:int):void
         {
-            didSwapLayerFrom = from;
-            didSwapLayerTo = to;
+            m_didSwapLayerFrom = from;
+            m_didSwapLayerTo = to;
         }
         
         public override function merge():void
         {
-            didMergeLayer = true;
+            m_didMergeLayer = true;
         }
         
         public override function remove():void
         {
-            didRemoveLayer = true;
+            m_didRemoveLayer = true;
         }
         
         public override function get currentLayer():ILayer
         {
-            return layerBitmap;
+            return m_layerBitmap;
         }
         
-        public static var didAddLayer:Boolean;
-        public static var didCopyLayer:Boolean;
-        public static var didSwapLayerFrom:uint;
-        public static var didSwapLayerTo:uint;
-        public static var didMergeLayer:Boolean;
-        public static var didRemoveLayer:Boolean;
-        public static var layerBitmap:BitmapLayer;
+        public function get didAddLayer():Boolean
+        {
+            return m_didAddLayer;
+        }
+        
+        public function get didCopyLayer():Boolean
+        {
+            return m_didCopyLayer;
+        }
+        
+        public function get didSwapLayerFrom():uint
+        {
+            return m_didSwapLayerFrom;
+        }
+        
+        public function get didSwapLayerTo():uint
+        {
+            return m_didSwapLayerTo;
+        }
+        
+        public function get didMergeLayer():Boolean
+        {
+            return m_didMergeLayer;
+        }
+        
+        public function get didRemoveLayer():Boolean
+        {
+            return m_didRemoveLayer;
+        }
+        
+        public function get layerBitmap():BitmapLayer
+        {
+            return m_layerBitmap;
+        }
+        
+        private var m_didAddLayer:Boolean;
+        private var m_didCopyLayer:Boolean;
+        private var m_didSwapLayerFrom:uint;
+        private var m_didSwapLayerTo:uint;
+        private var m_didMergeLayer:Boolean;
+        private var m_didRemoveLayer:Boolean;
+        private var m_layerBitmap:BitmapLayer;
     }
 }

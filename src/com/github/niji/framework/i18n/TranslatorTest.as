@@ -1,8 +1,6 @@
 package com.github.niji.framework.i18n
 {
     import org.flexunit.Assert;
-    import com.github.niji.framework.i18n.NullTranslator;
-    import com.github.niji.framework.i18n.TranslatorRegistry;
 
     public class TranslatorTest
     {
